@@ -1,0 +1,295 @@
+@startuml entrega_0_diagrama_clases
+
+skinparam classAttributeIconSize 0
+skinparam style strictuml
+skinparam monochrome false
+
+title Diagrama de Clases General
+
+Juego *-- Tablero
+Juego *-- RedElectrica
+Juego *-- ControladorTurnos
+
+Tablero *-- Terreno
+Terreno o-- Unidad
+Terreno *-- Posicion
+
+Terreno <|-- TerrenoTransitable
+Terreno <|-- TerrenoIntransitable
+
+TerrenoTransitable <|-- Suelo
+TerrenoTransitable <|-- Agua
+TerrenoTransitable <|-- Acido
+
+TerrenoIntransitable <|-- Edificio
+TerrenoIntransitable <|-- Montaña
+
+Unidad <|-- Mech
+Unidad <|-- Vek
+
+Vek <|-- Saltador
+Vek <|-- Luciernaga
+Vek <|-- Avispon
+
+Mech <|-- MechDeCombate
+Mech <|-- MechCañón
+Mech <|-- MechDeArtilleria
+
+Mech *-- Arma
+
+Arma <|.. Puño
+Arma <|.. Cañon
+Arma <|.. Artilleria
+
+Vek *-- Ataque
+
+ControladorTurnos o-- FaseTurno
+ControladorTurnos *-- CondicionVictoria
+ControladorTurnos *-- CondicionDerrota
+FaseTurno <|.. FaseEmergencia
+FaseTurno <|.. FaseVek
+FaseTurno <|.. FaseJugador
+FaseTurno <|.. FaseResolucion
+
+Verificable <|.. CondicionVictoria
+Verificable <|.. CondicionDerrota
+
+EstadisticasFinal <.. Juego
+
+class Juego {
+    + obtenerTablero(): Tablero
+    + obtenerRedElectrica(): RedElectrica
+}
+
+
+class ControladorTurnos {
+    - turnoActual: int
+    - maxTurnos: int
+    - faseActual: Fase
+   
+    + ControladorTurnos(maxTurnos: int)
+    + iniciarTurno()
+    + ejecutarFaseActual(juego: Juego)
+
+    + avanzarFase()
+    + finalizarFase()
+   
+}
+
+interface FaseTurno {
+    + iniciar(juego: Juego)
+    + ejecutar(juego: Juego)
+    + finalizar()
+    + estaFinalizada(): boolean
+}
+class FaseEmergencia {
+    + emerger(juego: Juego)
+}
+class FaseJugador {
+    + moverMech(mech: Mech, destino: Posicion)
+    + atacarCon(mech: Mech, objetivo: Posicion)
+    + terminarTurnoJugador()
+}
+class FaseVek {
+    + moverVeks(juego: Juego)
+    + anunciarAtaques(juego: Juego)
+    + marcarEmergencia(juego: Juego)
+}
+class FaseResolucion {
+
+    - condicionVictoria: CondicionVictoria
+    - condicionDerrota: CondicionDerrota
+   
+    + verificarFinPartida()
+    + resolverAtaques(juego: Juego)
+}
+class Emergencia {
+    - posicion: Posicion
+    - vek: Vek
+    + Emergencia(posicion: Posicion, vek: Vek)
+    + ejecutar(tablero: Tablero): boolean
+
+}
+
+interface Verificable {
+    + verificar(juego: Juego): boolean
+}
+
+class CondicionVictoria {
+    + verificar(juego: Juego): boolean
+}
+
+class CondicionDerrota {
+    + verificar(juego: Juego): boolean
+
+}
+
+class EstadisticasFinal {
+    + calcularEstadisticas()
+}
+
+class RedElectrica {
+    - punto: int
+   
+    + RedElectrica(punto: int)
+    + obtenerEnergiaRestante(): int
+ aplicarDaño(tablero: Tablero)
+}
+class Posicion {
+    - fila: int
+    - columna: int
+    + Posicion(fila: int, columna: int)
+    + getFila(): int
+    + getColumna(): int
+}
+
+class Tablero {
+    - fila: int
+    - columna: int
+    + Tablero(fila: int, columna: int)
+    - inicializarTerrenos()
+    + obtenerTerreno(posicion: Posicion): Terreno
+    + estaDentroDelTablero(posicion: Posicion): boolean
+    + colocarUnidad(unidad: Unidad, posicion: Posicion)
+    + obtenerTerrenosAdyacentes(posicion: Posicion): List<Terreno>
+}
+
+abstract class Terreno {
+    # posicion: Posicion
+    # unidadEnTerreno: Unidad
+    + Terreno(posicion: Posicion)
+    + agregarUnidad(unidad: Unidad)
+    + quitarUnidad(unidad: Unidad)
+    + estaOcupado(): boolean
+    + obtenerPosicion(): Posicion
+    + obtenerUnidad(): Unidad
+}
+
+class Suelo {
+    + agregarUnidad(unidad: Unidad)
+}
+
+class Edificio {
+    - vida: int
+    + recibirDaño(dano: int)
+}
+
+class Montaña {
+    + agregarUnidad(unidad: Unidad)
+}
+
+class Agua {
+    + agregarUnidad(unidad: Unidad)
+}
+
+class Acido {
+    + agregarUnidad(unidad: Unidad)
+}
+
+abstract class Unidad {
+    # posicion: Posicion
+    # vida: int
+    # contaminada: boolean
+
+    + Unidad(vida: int)
+    + obtenerPosicion(): Posicion
+    + setPosicion(posicion: Posicion)
+    + obtenerVida(): int
+    + recibirDaño(daño: int)
+    + estaDestruida(): boolean
+    + estaContaminada(): boolean
+    + contaminar()
+    + esVoladora(): boolean
+    + empujar(direccion: Direccion, tablero: Tablero)
+    + moverA(destino: Posicion, tablero: Tablero)
+}
+
+class Mech {
+    - movimiento: int
+    - arma: Arma
+    - yaSeMovio: boolean
+    - yaAtaco: boolean
+    - posicionAnterior: Posicion
+    - estabaContaminada: boolean
+
+    + Mech(vida: int, movimiento: int, arma: Arma)
+    + mover(destino: Posicion, tablero: Tablero)
+    + atacar(destino: Posicion, tablero: Tablero): Ataque
+    + puedeMoverse(): boolean
+    + puedeAtacar(): boolean
+    + yaSeMovio(): boolean
+    + yaAtaco(): boolean
+    + reiniciarTurno()
+    + obtenerPosicionesAlcanzables(tablero: Tablero): List<Posicion>
+}
+
+
+class MechDeCombate {
+    + MechDeCombate()
+}
+
+class MechCañon {
+    + MechCañon()
+}
+
+class MechDeArtilleria {
+    + MechDeArtilleria()
+}
+
+abstract class Vek {
+    - movimiento: int
+    - ataqueAnunciado: Ataque
+
+    + Vek(vida: int, movimiento: int)
+    + decidirAccion(juego: Juego)
+    + mover(destino: Posicion, tablero: Tablero)
+    + anunciarAtaque(direccion: Direccion)
+    + obtenerAtaqueAnunciado(): Ataque
+    + tieneAtaqueAnunciado(): boolean
+    + ejecutarAtaque(tablero: Tablero)
+    + obtenerMovimiento(): int
+    + obtenerPosicionesAlcanzables(tablero: Tablero): List<Posicion>
+    # {abstract} generarAtaque(direccion: Direccion): Ataque
+}
+
+class Saltador {
+    + Saltador()
+    # generarAtaque(direccion: Direccion): Ataque
+}
+
+class Luciernaga {
+    + Luciernaga()
+    # generarAtaque(direccion: Direccion): Ataque
+}
+
+class Avispon {
+    + Avispon()
+    + esVoladora(): boolean
+    + obtenerPosicionesAlcanzables(tablero: Tablero): List<Posicion>
+    # generarAtaque(direccion: Direccion): Ataque
+}
+
+interface Arma {
+    + generarAtaques(origen: Posicion, objetivo: Posicion, tablero: Tablero): Ataque
+}
+
+class Puño {
+    + generarAtaques(origen: Posicion, objetivo: Posicion, tablero: Tablero): Ataque
+}
+
+class Cañon {
+    + generarAtaques(origen: Posicion, objetivo: Posicion, tablero: Tablero): Ataque
+}
+
+class Artilleria {
+    + generarAtaques(origen: Posicion, objetivo: Posicion, tablero: Tablero): Ataque
+}
+
+class Ataque {
+    - origen: Posicion
+    - destino: Posicion
+    - daño: int
+
+    + aplicarDaño(tablero: Tablero)
+}
+@enduml
