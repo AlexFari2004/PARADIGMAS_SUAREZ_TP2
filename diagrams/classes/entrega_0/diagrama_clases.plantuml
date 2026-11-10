@@ -32,7 +32,7 @@ Vek <|-- Luciernaga
 Vek <|-- Avispon
 
 Mech <|-- MechDeCombate
-Mech <|-- MechCañón
+Mech <|-- MechCañon
 Mech <|-- MechDeArtilleria
 
 Mech *-- Arma
@@ -42,7 +42,6 @@ Arma <|.. Cañon
 Arma <|.. Artilleria
 
 Vek *-- Ataque
-
 ControladorTurnos o-- FaseTurno
 ControladorTurnos *-- CondicionVictoria
 ControladorTurnos *-- CondicionDerrota
@@ -56,9 +55,19 @@ Verificable <|.. CondicionDerrota
 
 EstadisticasFinal <.. Juego
 
+FaseVek ..> Emergencia : <<crea>>
+FaseEmergencia ..> Emergencia : <<ejecuta>>
+Emergencia --> Posicion
+Emergencia --> Vek
+Emergencia ..> Tablero
+
 class Juego {
+
+    + Juego()
+    + armarTablero(): Tablero
     + obtenerTablero(): Tablero
     + obtenerRedElectrica(): RedElectrica
+    + generarEstadistica()
 }
 
 
@@ -68,59 +77,64 @@ class ControladorTurnos {
     - faseActual: Fase
    
     + ControladorTurnos(maxTurnos: int)
-    + iniciarTurno()
-    + ejecutarFaseActual(juego: Juego)
-
-    + avanzarFase()
-    + finalizarFase()
+    + ejecutarFaseActual(tablero: Tablero)
+    - avanzarFase(tablero: Tablero)
+    + finalizarTurno()
    
 }
 
 interface FaseTurno {
-    + iniciar(juego: Juego)
-    + ejecutar(juego: Juego)
+    + ejecutar()
     + finalizar()
     + estaFinalizada(): boolean
 }
 class FaseEmergencia {
-    + emerger(juego: Juego)
+    + emerger(tablero: Tablero): Emergencia
 }
 class FaseJugador {
+    - tablero: Tablero
+
+    + FaseJugador(tablero: Tablero)
+
     + moverMech(mech: Mech, destino: Posicion)
     + atacarCon(mech: Mech, objetivo: Posicion)
-    + terminarTurnoJugador()
 }
 class FaseVek {
-    + moverVeks(juego: Juego)
-    + anunciarAtaques(juego: Juego)
-    + marcarEmergencia(juego: Juego)
+    - tablero: Tablero
+    + FaseVek(tablero: Tablero)
+    + moverVeks()
+    + anunciarAtaques(): List<Ataque>
+    + marcarEmergencia(): List<Emergencia>
 }
 class FaseResolucion {
-
     - condicionVictoria: CondicionVictoria
     - condicionDerrota: CondicionDerrota
-   
-    + verificarFinPartida()
-    + resolverAtaques(juego: Juego)
+    - tablero: Tablero
+
+    + FaseResolucion(cv: CondicionVictoria, cd: CondicionDerrota, t: Tablero)
+    + verificarFinPartida():
+    + resolverAtaques()
 }
 class Emergencia {
     - posicion: Posicion
     - vek: Vek
     + Emergencia(posicion: Posicion, vek: Vek)
-    + ejecutar(tablero: Tablero): boolean
-
+    + ejecutar(tablero: Tablero)
 }
 
 interface Verificable {
-    + verificar(juego: Juego): boolean
+    + verificar(tablero: Tablero): boolean
 }
 
 class CondicionVictoria {
-    + verificar(juego: Juego): boolean
+    + verificar(tablero: Tablero): boolean
 }
 
 class CondicionDerrota {
-    + verificar(juego: Juego): boolean
+    - tablero: Tablero
+    - red: RedElectrica
+    + CondicionDerrota(tablero: Tablero, red: RedElectrica)
+    + verificar(tablero: Tablero): boolean
 
 }
 
@@ -133,8 +147,8 @@ class RedElectrica {
    
     + RedElectrica(punto: int)
     + obtenerEnergiaRestante(): int
- aplicarDaño(tablero: Tablero)
 }
+
 class Posicion {
     - fila: int
     - columna: int
