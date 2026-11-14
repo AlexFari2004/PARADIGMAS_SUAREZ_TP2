@@ -6,8 +6,8 @@
   <version>0.0.1</version>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
     <junit.jupiter.version>5.4.0</junit.jupiter.version>
     <mockito-mockito-core-version>3.3.0</mockito-mockito-core-version>
     <maven-surefire-version>3.0.0-M3</maven-surefire-version>
@@ -103,7 +103,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.0</version>
         <configuration>
-          <release>11</release>
+          <release>17</release>
         </configuration>
       </plugin>
       <plugin>

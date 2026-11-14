@@ -1,0 +1,74 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+class Tablero {
+    - FILAS : int
+    - COLUMNAS : int
+    - casillas : Casilla[][]
+    - TABLERO : TipoCasilla[][]
+
+    + Tablero()
+    - crearCasilla(tipo : TipoCasilla) : Casilla
+    - inicializarTablero() : void
+    + obtenerCasilla(posicion : Posicion) : Casilla
+    + obtenerCasillasOrtogonales(posicion : Posicion) : List<Casilla>
+}
+
+class Posicion {
+    - LIMITE_INICIAL : int
+    - fila : int
+    - columna : int
+
+    + Posicion(fila : int, columna : int)
+    + obtenerPosicionesOrtogonales(filas : int, columnas : int) : List<Posicion>
+    - calcularPosicionOrtogonal(posicion : Posicion) : Posicion
+    + estaEnElTablero(filas : int, columnas : int) : boolean
+    + getFila() : int
+    + getColumna() : int
+    + toString() : String
+}
+
+abstract class Casilla {
+    + {abstract} getTipo() : TipoCasilla
+}
+
+class Suelo {
+    + getTipo() : TipoCasilla
+}
+
+class Agua {
+    + getTipo() : TipoCasilla
+}
+
+class Acido {
+    + getTipo() : TipoCasilla
+}
+
+class Edificio {
+    + getTipo() : TipoCasilla
+}
+
+class Montaña {
+    + getTipo() : TipoCasilla
+}
+
+enum TipoCasilla {
+    SUELO
+    EDIFICIO
+    MONTAÑA
+    AGUA
+    ACIDO
+}
+
+Casilla <|-- Suelo
+Casilla <|-- Agua
+Casilla <|-- Acido
+Casilla <|-- Edificio
+Casilla <|-- Montaña
+
+Tablero "1" *-- "64" Casilla 
+Tablero ..> Posicion 
+Tablero ..> TipoCasilla 
+Casilla ..> TipoCasilla 
+@enduml
