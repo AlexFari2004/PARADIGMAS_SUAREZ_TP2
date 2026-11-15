@@ -6,11 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import edu.fiuba.algo3.modelo.unidad.errors.MovimientoEnPosicionOcupadaException;
+import edu.fiuba.algo3.modelo.unidad.errors.MovimientoFueraDeRangoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.unidad.Mech;
+import edu.fiuba.algo3.modelo.unidad.mech.Mech;
 
 
 public class MechMovimientoTest {
@@ -59,7 +61,7 @@ public class MechMovimientoTest {
     public void mechPuedeMoverseEnPosicionValida() {
         Posicion posicionValida = new Posicion(3, 3);
 
-        assertDoesNotThrow(() -> mech1.moverseA(valida, tablero));
+        assertDoesNotThrow(() -> mech1.moverseA(posicionValida, tablero));
         assertEquals(posicionValida, mech1.obtenerPosicion());
     }
 }
