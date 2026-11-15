@@ -2,8 +2,8 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.mock.TableroStub;
-import edu.fiuba.algo3.modelo.unidad.mech.MechCañon;
-import edu.fiuba.algo3.modelo.unidad.mech.arma.Cañon;
+import edu.fiuba.algo3.modelo.unidad.mech.MechCanion;
+import edu.fiuba.algo3.modelo.unidad.mech.arma.Canion;
 import edu.fiuba.algo3.modelo.unidad.vek.Saltador;
 
 import org.junit.jupiter.api.BeforeEach;
