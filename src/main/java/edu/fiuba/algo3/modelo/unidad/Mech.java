@@ -1,50 +1,63 @@
 package edu.fiuba.algo3.modelo.unidad;
 
-import edu.fiuba.algo3.modelo.AccionesDisponibles;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.EnumSet;
+import java.util.Set;
+
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
-
-import edu.fiuba.algo3.modelo.unidad.Accion;
-import java.util.Deque;
-import java.util.ArrayDeque;
 import edu.fiuba.algo3.modelo.unidad.errors.AccionNoPermitidaException;
 
-abstract public class Mech {
-    private Posicion posicion;
-    private final AccionesDisponibles acciones;
+
+abstract public class Mech extends Unidad {
+    private final AccionesDisponibles acciones = new AccionesDisponibles();;
     private final Deque<Posicion> posicionesAnteriores = new ArrayDeque<>();
 
-    protected Mech(AccionesDisponibles acciones) {
-        this.acciones = acciones;
+    public Mech(int vida, Movible movimiento) {
+        super(vida, movimiento);
+
+        acciones.permitirAccion(Accion.MOVERSE, 1);
+        acciones.permitirAccion(Accion.ATACAR, 1);
+        acciones.permitirAccion(Accion.DESHACER, 1);
+
+        Set<Accion> accionesAgotablesPorAtaque = EnumSet.of(Accion.MOVERSE, Accion.DESHACER);
+        acciones.bloquear(Accion.ATACAR, accionesAgotablesPorAtaque);
     }
 
-    public void moverseA(Posicion destino, Tablero tablero) {
-        acciones.consumir(Accion.MOVERSE);
-        Posicion origen = posicion;
-        tablero.mover(this, destino);
+    // METODOS EJECUTAR
+
+    private void ejecutarDeshacerMovimiento(Tablero tablero) {
+        ejecutarMovimiento(posicionesAnteriores.pop(), tablero);
+        acciones.reestablecerAccion(Accion.MOVERSE);
+    }
+
+    private void ejecutarMovimiento(Posicion posicionDestino, Tablero tablero) {
+        Posicion origen = this.posicion;
+        this.movimiento.mover(this, posicionDestino, tablero);
         posicionesAnteriores.push(origen);
     }
 
+    abstract protected void ejecutarAtaque(Posicion objetivo, Tablero tablero);
+
+    // METODOS PRINCIPALES
+
     public void atacar(Posicion objetivo, Tablero tablero) {
-        acciones.consumir(Accion.ATACAR);
-        ejecutarAtaque(objetivo, tablero);
-        acciones.agotar(Accion.MOVERSE);
-        acciones.agotar(Accion.DESHACER);
+        acciones.ejecutar(Accion.ATACAR, () -> ejecutarAtaque(objetivo, tablero));
     }
 
-    public void deshacerMovimiento(Tablero tablero) {
-        if (posicionesAnteriores.isEmpty()) {
-            throw new AccionNoPermitidaException(Accion.DESHACER);
+    public void deshacerMovimiento(Tablero tablero) throws AccionNoPermitidaException {
+        if (!posicionesAnteriores.isEmpty()) {
+            acciones.ejecutar(Accion.DESHACER, () -> ejecutarDeshacerMovimiento(tablero));
         }
-        acciones.consumir(Accion.DESHACER);
-        tablero.mover(this, posicionesAnteriores.pop());
-        acciones.devolver(Accion.MOVERSE);
     }
 
-    public void iniciarTurno() {
-        acciones.reiniciar();
+    public void reestablecerEstado() {
+        acciones.reestablecerAcciones();
         posicionesAnteriores.clear();
     }
 
-    abstract public void ejecutarAtaque(Posicion objetivo, Tablero tablero);
+    public void mover(Posicion posicionDestino, Tablero tablero){
+        acciones.ejecutar(Accion.MOVERSE, () -> ejecutarMovimiento(posicionDestino, tablero));
+    }
 }

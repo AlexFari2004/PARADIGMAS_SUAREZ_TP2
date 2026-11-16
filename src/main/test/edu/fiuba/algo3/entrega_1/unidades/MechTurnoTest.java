@@ -1,14 +1,16 @@
 package edu.fiuba.algo3.entrega_1.unidades;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.unidad.Mech;
+import edu.fiuba.algo3.modelo.unidad.errors.AccionNoPermitidaException;
+
 
 public class MechTurnoTest {
     private static final Posicion ORIGEN = new Posicion(4, 3);
@@ -19,8 +21,8 @@ public class MechTurnoTest {
     @BeforeEach
     void setUp() {
         tablero = new Tablero();
-        mech = new Mech();
-        tablero.colocarUnidad(mech, ORIGEN);
+        mech = new MechPrueba(3);
+        tablero.colocar(mech, ORIGEN);
     }
 
     @Test
@@ -28,13 +30,13 @@ public class MechTurnoTest {
         Posicion destinoSiguiente1 = new Posicion(3, 3);
         Posicion destinoSiguiente2 = new Posicion(3, 4);
 
-        mech.moverseA(destinoSiguiente1, tablero);
+        mech.mover(destinoSiguiente1, tablero);
 
         assertThrows(
-            LimiteDeAccionesAlcanzadaException.class,
-            () -> mech.moverseA(destinoSiguiente2, tablero)
+            AccionNoPermitidaException.class,
+            () -> mech.mover(destinoSiguiente2, tablero)
         );
-        assertEquals(destinoSiguiente1, mech.obtenerPosicion());
+        assertEquals(destinoSiguiente1, mech.getPosicion());
     }
 
     @Test
@@ -44,7 +46,7 @@ public class MechTurnoTest {
         mech.atacar(posicionAtaque, tablero);
 
         assertThrows(
-            LimiteDeAccionesAlcanzadaException.class,
+            AccionNoPermitidaException.class,
             () -> mech.atacar(posicionAtaque, tablero)
         );
     }
@@ -52,36 +54,36 @@ public class MechTurnoTest {
     @Test
     public void mechPuedeDeshacerMovimientoAntesDeAtacar() {
         Posicion destinoSiguiente = new Posicion(3, 3);
-        mech.moverseA(destinoSiguiente, tablero);
+        mech.mover(destinoSiguiente, tablero);
 
         assertDoesNotThrow(() -> mech.deshacerMovimiento(tablero));
-        assertEquals(destinoSiguiente, mech.obtenerPosicion());
+        assertEquals(ORIGEN, mech.getPosicion());
     }
 
     @Test
     public void mechNoPuedeDeshacerMovientoDosVecesEnElMismoTurno() {
         Posicion destinoSiguiente = new Posicion(3, 3);
-        mech.moverseA(destinoSiguiente, tablero);
+        mech.mover(destinoSiguiente, tablero);
         mech.deshacerMovimiento(tablero);
 
         assertThrows(
-            LimiteDeAccionesAlcanzadaException.class,
+            AccionNoPermitidaException.class,
             () -> mech.deshacerMovimiento(tablero)
         );
-        assertEquals(ORIGEN, mech.obtenerPosicion());
+        assertEquals(ORIGEN, mech.getPosicion());
     }
 
     @Test
     public void mechNoPuedeDeshacerMovientoDespuesDeAtacar() {
         Posicion destinoSiguiente = new Posicion(3, 3);
         Posicion posicionAtaque = new Posicion(4, 6);
-        mech.moverseA(destinoSiguiente, tablero);
+        mech.mover(destinoSiguiente, tablero);
         mech.atacar(posicionAtaque, tablero);
 
         assertThrows(
-            LimiteDeAccionesAlcanzadaException.class,
+            AccionNoPermitidaException.class,
             () -> mech.deshacerMovimiento(tablero)
         );
-        assertEquals(destinoSiguiente, mech.obtenerPosicion());
+        assertEquals(destinoSiguiente, mech.getPosicion());
     }
 }

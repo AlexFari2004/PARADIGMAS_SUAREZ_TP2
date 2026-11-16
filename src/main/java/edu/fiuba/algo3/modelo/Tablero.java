@@ -1,7 +1,14 @@
 package edu.fiuba.algo3.modelo;
-import static edu.fiuba.algo3.modelo.TipoCasilla.*;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+import static edu.fiuba.algo3.modelo.TipoCasilla.ACIDO;
+import static edu.fiuba.algo3.modelo.TipoCasilla.AGUA;
+import static edu.fiuba.algo3.modelo.TipoCasilla.EDIFICIO;
+import static edu.fiuba.algo3.modelo.TipoCasilla.MONTAÑA;
+import static edu.fiuba.algo3.modelo.TipoCasilla.SUELO;
+import edu.fiuba.algo3.modelo.errors.UnidadYaColocadaException;
+import edu.fiuba.algo3.modelo.unidad.Unidad;
 
 
 public class Tablero {
@@ -77,4 +84,17 @@ public class Tablero {
 
         return casillasOrtogonales;
     }
+
+    public void colocar(Unidad unidad, Posicion posicion) {
+
+        if (unidad.getPosicion() != null) {
+            throw new UnidadYaColocadaException();
+        }
+
+        Casilla casilla = obtenerCasilla(posicion);
+
+        casilla.ocupar(unidad);
+        unidad.actualizarPosicion(posicion);
+    }
+
 }

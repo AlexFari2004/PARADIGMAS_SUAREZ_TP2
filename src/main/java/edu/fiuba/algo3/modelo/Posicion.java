@@ -53,6 +53,10 @@ public class Posicion {
         return columna;
     }
 
+    public int distanciaA(Posicion otra) {
+        return Math.abs(this.fila - otra.getFila()) + Math.abs(this.columna - otra.getColumna());
+    }
+
     @Override
     public String toString() {
         return "Posicion{" + "fila=" + fila + ", columna=" + columna + '}';
