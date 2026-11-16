@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.entrega_1.unidades;
-/*
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -21,7 +21,7 @@ public class MechTurnoTest {
     @BeforeEach
     void setUp() {
         tablero = new Tablero();
-        mech = new MechPrueba();
+        mech = new MechPrueba(3);
         tablero.colocar(mech, ORIGEN);
     }
 
@@ -30,13 +30,13 @@ public class MechTurnoTest {
         Posicion destinoSiguiente1 = new Posicion(3, 3);
         Posicion destinoSiguiente2 = new Posicion(3, 4);
 
-        mech.moverseA(destinoSiguiente1, tablero);
+        mech.mover(destinoSiguiente1, tablero);
 
         assertThrows(
             AccionNoPermitidaException.class,
-            () -> mech.moverseA(destinoSiguiente2, tablero)
+            () -> mech.mover(destinoSiguiente2, tablero)
         );
-        assertEquals(destinoSiguiente1, mech.obtenerPosicion());
+        assertEquals(destinoSiguiente1, mech.getPosicion());
     }
 
     @Test
@@ -54,37 +54,36 @@ public class MechTurnoTest {
     @Test
     public void mechPuedeDeshacerMovimientoAntesDeAtacar() {
         Posicion destinoSiguiente = new Posicion(3, 3);
-        mech.moverseA(destinoSiguiente, tablero);
+        mech.mover(destinoSiguiente, tablero);
 
         assertDoesNotThrow(() -> mech.deshacerMovimiento(tablero));
-        assertEquals(destinoSiguiente, mech.obtenerPosicion());
+        assertEquals(ORIGEN, mech.getPosicion());
     }
 
     @Test
     public void mechNoPuedeDeshacerMovientoDosVecesEnElMismoTurno() {
         Posicion destinoSiguiente = new Posicion(3, 3);
-        mech.moverseA(destinoSiguiente, tablero);
+        mech.mover(destinoSiguiente, tablero);
         mech.deshacerMovimiento(tablero);
 
         assertThrows(
             AccionNoPermitidaException.class,
             () -> mech.deshacerMovimiento(tablero)
         );
-        assertEquals(ORIGEN, mech.obtenerPosicion());
+        assertEquals(ORIGEN, mech.getPosicion());
     }
 
     @Test
     public void mechNoPuedeDeshacerMovientoDespuesDeAtacar() {
         Posicion destinoSiguiente = new Posicion(3, 3);
         Posicion posicionAtaque = new Posicion(4, 6);
-        mech.moverseA(destinoSiguiente, tablero);
+        mech.mover(destinoSiguiente, tablero);
         mech.atacar(posicionAtaque, tablero);
 
         assertThrows(
             AccionNoPermitidaException.class,
             () -> mech.deshacerMovimiento(tablero)
         );
-        assertEquals(destinoSiguiente, mech.obtenerPosicion());
+        assertEquals(destinoSiguiente, mech.getPosicion());
     }
 }
-*/
