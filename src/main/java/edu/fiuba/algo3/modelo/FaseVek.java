@@ -1,12 +1,12 @@
 package edu.fiuba.algo3.modelo;
 
-public class FaseVek extends Fase{
-    private Emergencia emergencia;
-    private Tablero tablero;
+import edu.fiuba.algo3.modelo.unidad.Vek;
 
-    public FaseVek(Tablero tablero, Emergencia emergencia) {
+public class FaseVek extends Fase{
+    private final Tablero tablero;
+
+    public FaseVek(Tablero tablero) {
         this.tablero = tablero;
-        this.emergencia = emergencia;
     }
 
     @Override
@@ -14,13 +14,11 @@ public class FaseVek extends Fase{
         return fabrica.crearFaseJugador();
     };
 
-
     @Override
     public void ejecutar() {
         for (Vek vek : tablero.obtenerVeks()) {
             vek.planificarAccion(tablero);
         }
-        emergencia.marcarProxima(tablero);
         finalizada = true;
     }
 }

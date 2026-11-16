@@ -11,11 +11,10 @@ public class FaseEmergencia extends Fase {
 
     @Override
     public void ejecutar() {
-        emergencia.aplicarEn(tablero);
-        finalizada = true;
+        emergencia.emeger(tablero);
     }
 
     @Override
-    public Fase avanzarFase(FabricaFase fabrica) { return fabrica.crearVek(); }
+    public Fase avanzar(FabricaFase fabrica) { return fabrica.crearFaseVek(); }
 
 }

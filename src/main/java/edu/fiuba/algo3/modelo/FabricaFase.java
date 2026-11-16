@@ -1,22 +1,20 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.List;
+import edu.fiuba.algo3.modelo.Tablero;
 
 public class FabricaFase {
 
-    public FaseVek crearFaseVek() {
-        return new FaseVek();
+    private final Tablero tablero;
+    private final GestorEmergencia gestor;
+
+    public FabricaFase(Tablero tablero,  GestorEmergencia gestor) {
+        this.tablero = tablero;
+        this.gestor = gestor;
     }
 
-    public FaseResolucion crearFaseResolucion() {
-        return new FaseResolucion();
-    }
-
-    public FaseJugador crearFaseJugador() {
-        return new FaseJugador();
-    }
-
-    public FaseEmergencia crearFaseEmergencia() {
-        return new FaseEmergencia();
-    }
+    public Fase crearFaseVek()        { return new FaseVek(tablero); }
+    public Fase crearFaseJugador()    { return new FaseJugador(tablero); }
+    public Fase crearFaseResolucion() { return new FaseResolucion(tablero); }
+    public Fase crearFaseEmergencia() { return new FaseEmergencia(tablero, gestor.generarEmergencia() ); }
 }

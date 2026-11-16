@@ -1,27 +1,38 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.unidad.Mech;
+import java.util.List;
 
-import java.util.HashMap;
 
 public class FaseJugador extends Fase {
-    private final Map<Mech, MovimientoMech> movimientos = new HashMap<>();
     private boolean deshacerAccion = false;
     private Tablero tablero;
+    private List<Mech> mechDisponible;
     public FaseJugador(Tablero tablero) {
         this.tablero = tablero;
-        // obtener los mech vivos
+        mechDisponible = tablero.obtenerMechsVivos();
     }
 
-    public void moverMechA(Mech mech, Posicion destino) {
-        MovimientoMech mov = mech.mover(tablero, destino);   // lanza excepcion si ya se movio
-        movimientos.put(mech, mov);
+    @Override
+    public void ejecutar() {
+        // Nada automático: espera las acciones del jugador.
     }
 
-    public void atacarCon(Mech mech, Posicion objetivo) {
-        mech.atacarA(tablero, objetivo);   // daño inmediato
-        // lanza excepcion si ya ataco
+    public void mover(Mech mech,Posicion destino, Tablero tablero) {
+        //
     }
+
+    public void atacar(Mech mech, Posicion objetivo) {
+        //
+    }
+
+    public void finalizarTurno() {
+        finalizada = true;
+    }
+    public void deshacer() {
+        //
+    }
+
 
     @Override
     public Fase avanzar(FabricaFase fabricaFase) {
