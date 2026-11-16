@@ -5,10 +5,10 @@ import edu.fiuba.algo3.modelo.Tablero;
 
 public abstract class Unidad {
 
-    private Posicion posicion;
     private int vida;
     private Dañable daño;
-    private final Movible movimiento;
+    protected Posicion posicion;
+    protected final Movible movimiento;
 
     protected Unidad(int vida, Movible movimiento){
         this.vida = vida;
