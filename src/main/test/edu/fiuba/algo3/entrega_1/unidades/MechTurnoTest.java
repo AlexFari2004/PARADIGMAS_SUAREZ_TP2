@@ -57,7 +57,7 @@ public class MechTurnoTest {
         mech.moverseA(destinoSiguiente, tablero);
 
         assertDoesNotThrow(() -> mech.deshacerMovimiento(tablero));
-        assertEquals(destinoSiguiente, mech.obtenerPosicion());
+        assertEquals(ORIGEN, mech.obtenerPosicion());
     }
 
     @Test
