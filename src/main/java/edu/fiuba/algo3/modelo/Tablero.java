@@ -8,13 +8,17 @@ import static edu.fiuba.algo3.modelo.TipoCasilla.EDIFICIO;
 import static edu.fiuba.algo3.modelo.TipoCasilla.MONTAÑA;
 import static edu.fiuba.algo3.modelo.TipoCasilla.SUELO;
 import edu.fiuba.algo3.modelo.errors.UnidadYaColocadaException;
+import edu.fiuba.algo3.modelo.unidad.Mech;
 import edu.fiuba.algo3.modelo.unidad.Unidad;
+import edu.fiuba.algo3.modelo.unidad.Vek;
 
 
 public class Tablero {
 
     private static final int FILAS = 8;
     private static final int COLUMNAS = 8;
+    private final List<Mech> mechs = new ArrayList<>();
+    private final List<Vek> veks = new ArrayList<>();
 
     private final Casilla [][] casillas;
 
@@ -97,4 +101,19 @@ public class Tablero {
         unidad.actualizarPosicion(posicion);
     }
 
+    public void registrarMech(Mech mech) {
+        mechs.add(mech);
+    }
+
+    public void registrarVek(Vek vek) {
+        veks.add(vek);
+    }
+
+    public List<Mech> obtenerMechsVivos() {
+        return mechs.stream().filter(Mech::estaMuerta).toList();
+    }
+
+    public List<Vek> obtenerVeks() {
+        return veks.stream().filter(Vek::estaMuerta).toList();
+    }
 }

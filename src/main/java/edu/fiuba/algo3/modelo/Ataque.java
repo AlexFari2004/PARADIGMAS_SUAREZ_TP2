@@ -1,23 +1,25 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Tablero;
+import edu.fiuba.algo3.modelo.Casilla;
+import edu.fiuba.algo3.modelo.unidad.Dañable;
+import edu.fiuba.algo3.modelo.unidad.DañoContaminada;
+
 public class Ataque {
     private final Posicion destino;
-    private final Posicion origen
-    private final int daño;
-
-    public Ataque(Posicion origen, Posicion destino, int daño) {
+    private final Posicion origen;
+    private final Dañable daño;
+    private final int dañoCausado;
+    public Ataque(Posicion origen, Posicion destino, Dañable daño) {
         this.origen = origen;
         this.destino = destino;
         this.daño = daño;
     }
 
     public void aplicar(Tablero tablero) {
-        Casilla casilla = tablero.obtenerTerreno(destino);
-        if (casilla.estaOcupado()) {
-            //Edificio tiene que recibir el daño
-            casilla.obtenerUnidad().recibirDaño(daño);
+        Casilla casilla = tablero.obtenerCasilla(destino);
+        if (casilla.estaOcupada()) {
+            casilla.recibirDaño(daño.calcularDaño(this.dañoCausado));
         }
-        casilla.recibirDaño(daño);
     }
-
 }
