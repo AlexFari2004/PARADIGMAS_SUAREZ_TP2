@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.unidad.errors.MovimientoEnPosicionOcupadaException;
+import edu.fiuba.algo3.modelo.unidad.errors.MovimientoFueraDeRangoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
