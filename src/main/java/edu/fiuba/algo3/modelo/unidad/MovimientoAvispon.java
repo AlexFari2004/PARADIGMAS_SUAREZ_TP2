@@ -4,53 +4,28 @@ import edu.fiuba.algo3.modelo.Casilla;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.TipoCasilla;
-import edu.fiuba.algo3.modelo.errors.CasillaNoTransitableException;
 import edu.fiuba.algo3.modelo.errors.MovimientoFueraDeRangoException;
-import edu.fiuba.algo3.modelo.unidad.errors.MovimientoEnPosicionOcupadaException;
-import edu.fiuba.algo3.modelo.unidad.errors.PosicionFueraDelTableroException;
 
 import java.util.EnumSet;
-import java.util.Set;
 
-public class MovimientoAvispon implements Movible{
-    private static final int RANGO_MOVIMIENTO = 4;
-    public static final int FILAS = 8;
-    public static final int COLUMNAS = 8;
-
-    private static final Set<TipoCasilla> TRANSITABLES =
-            EnumSet.of(
-                    TipoCasilla.SUELO,
-                    TipoCasilla.AGUA,
-                    TipoCasilla.ACIDO
-            );
+public class MovimientoAvispon extends MovimientoVek{
+    public MovimientoAvispon() {
+        super(4, EnumSet.of(TipoCasilla.SUELO, TipoCasilla.AGUA, TipoCasilla.ACIDO));
+    }
 
     @Override
-    public void mover(Unidad unidad, Posicion posicionFinal, Tablero tablero) {
-
-        if (!posicionFinal.estaEnElTablero(FILAS, COLUMNAS)) {
-            throw new PosicionFueraDelTableroException();
-        }
-
-        Casilla casillaDestino = tablero.obtenerCasilla(posicionFinal);
-        TipoCasilla tipoCasillaDestino = casillaDestino.getTipo();
-
-        if (!TRANSITABLES.contains(tipoCasillaDestino)) {
-            throw new CasillaNoTransitableException();
-        }
-
-        if (casillaDestino.estaOcupada()) {
-            throw new MovimientoEnPosicionOcupadaException();
-        }
-
-        if (unidad.getPosicion().distanciaA(posicionFinal) > RANGO_MOVIMIENTO) {
-            throw new MovimientoFueraDeRangoException("Movimiento fuera del rango de la unidad");
-        }
-
-        Posicion posicionAnterior = unidad.getPosicion();
-
-        tablero.obtenerCasilla(posicionAnterior).liberar();
-        casillaDestino.ocupar(unidad);
-        unidad.actualizarPosicion(posicionFinal);
-
+    protected boolean puedeLlegar(Unidad unidad, Posicion destino, Tablero tablero) {
+        // vuela: solo importa la distancia
+        return unidad.getPosicion().distanciaA(destino) <= this.rangoMovimiento;
     }
+
+    @Override
+    public void mover(Unidad unidad, Posicion destino, Tablero tablero) {
+        validadDestino(destino, tablero);
+        if (!puedeLlegar(unidad, destino, tablero))
+            throw new MovimientoFueraDeRangoException("Movimiento fuera del rango de la unidad");
+        desplazar(unidad, destino, tablero);
+    }
+
+
 }

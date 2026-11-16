@@ -12,44 +12,21 @@ import edu.fiuba.algo3.modelo.unidad.errors.PosicionFueraDelTableroException;
 import java.util.EnumSet;
 import java.util.Set;
 
-public class MovimientoSaltador implements Movible{
-    private static final int RANGO_MOVIMIENTO = 3;
-    public static final int FILAS = 8;
-    public static final int COLUMNAS = 8;
-
-    private static final Set<TipoCasilla> TRANSITABLES =
-            EnumSet.of(
-                    TipoCasilla.SUELO,
-                    TipoCasilla.ACIDO
-            );
+public class MovimientoSaltador extends MovimientoVek{
+    public MovimientoSaltador() {
+        super(3, EnumSet.of(TipoCasilla.SUELO, TipoCasilla.ACIDO));
+    }
 
     @Override
-    public void mover(Unidad unidad, Posicion posicionFinal, Tablero tablero) {
+    protected boolean puedeLlegar(Unidad unidad, Posicion destino, Tablero tablero) {
+        return existeCaminoLibre(unidad, destino, tablero);
+    }
 
-        if (!posicionFinal.estaEnElTablero(FILAS, COLUMNAS)) {
-            throw new PosicionFueraDelTableroException();
-        }
-
-        Casilla casillaDestino = tablero.obtenerCasilla(posicionFinal);
-        TipoCasilla tipoCasillaDestino = casillaDestino.getTipo();
-
-        if (!TRANSITABLES.contains(tipoCasillaDestino)) {
-            throw new CasillaNoTransitableException();
-        }
-
-        if (casillaDestino.estaOcupada()) {
-            throw new MovimientoEnPosicionOcupadaException();
-        }
-
-        if (unidad.getPosicion().distanciaA(posicionFinal) > RANGO_MOVIMIENTO) {
+    @Override
+    public void mover(Unidad unidad, Posicion destino, Tablero tablero) {
+        validadDestino(destino, tablero);
+        if (!puedeLlegar(unidad, destino, tablero))
             throw new MovimientoFueraDeRangoException("Movimiento fuera del rango de la unidad");
-        }
-
-        Posicion posicionAnterior = unidad.getPosicion();
-
-        tablero.obtenerCasilla(posicionAnterior).liberar();
-        casillaDestino.ocupar(unidad);
-        unidad.actualizarPosicion(posicionFinal);
-
+        desplazar(unidad, destino, tablero);
     }
 }
