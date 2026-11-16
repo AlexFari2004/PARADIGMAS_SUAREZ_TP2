@@ -13,11 +13,11 @@ public class Destruida implements EstadoUnidad {
 
     @Override
     public EstadoUnidad destruir() {
-        return new Destruida();
+        return this;
     }
 
     @Override
     public EstadoUnidad actualizar(int vidaRestante) {
-        return vidaRestante <= 0 ? destruir() : this;
+        return this;
     }
 }

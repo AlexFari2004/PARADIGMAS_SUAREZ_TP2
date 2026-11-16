@@ -5,6 +5,9 @@ import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.unidad.estado.Destruida;
 import edu.fiuba.algo3.modelo.unidad.estado.EstadoUnidad;
 import edu.fiuba.algo3.modelo.unidad.estado.Operativa;
+import edu.fiuba.algo3.modelo.unidad.movilidad.Movilidad;
+import edu.fiuba.algo3.modelo.unidad.movilidad.Terrestre;
+
 
 public abstract class Unidad {
 
@@ -12,11 +15,13 @@ public abstract class Unidad {
     private EstadoUnidad estado;
     protected Posicion posicion;
     protected final Movible movimiento;
+    protected final Movilidad movilidad;
 
     protected Unidad(int vida, Movible movimiento){
         this.vida = vida;
         this.estado = new Operativa ();
         this.movimiento = movimiento;
+        this.movilidad = new Terrestre();
     }
 
     public Posicion getPosicion() {
@@ -40,6 +45,14 @@ public abstract class Unidad {
 
     public void destruir() {
         estado = estado.destruir();
+    }
+
+    public void caerAlAgua(){
+        movilidad.caerAlAgua(this);
+    }
+
+    public void pisarAcido(){
+        movilidad.pisarAcido(this);
     }
 
     public boolean estaMuerta(){

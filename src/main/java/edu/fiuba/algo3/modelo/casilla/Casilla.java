@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.casilla;
 import edu.fiuba.algo3.modelo.unidad.Unidad;
 import edu.fiuba.algo3.modelo.unidad.errors.MovimientoEnPosicionOcupadaException;
 
@@ -12,7 +12,10 @@ public abstract class Casilla {
         }
 
         this.unidad = unidad;
+        aplicarEfecto(unidad);
     }
+
+    public void aplicaEfecto(Unidad unidad){}
 
     public boolean estaOcupada() {
         return this.unidad != null;

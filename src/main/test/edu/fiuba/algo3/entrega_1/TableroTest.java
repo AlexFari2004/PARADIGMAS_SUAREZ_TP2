@@ -2,10 +2,10 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.TipoCasilla;
+import edu.fiuba.algo3.modelo.casilla.TipoCasilla;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import static edu.fiuba.algo3.modelo.TipoCasilla.*;
+import static edu.fiuba.algo3.modelo.casilla.TipoCasilla.*;
 
 public class TableroTest {
 
