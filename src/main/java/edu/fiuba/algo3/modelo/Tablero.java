@@ -7,9 +7,8 @@ import static edu.fiuba.algo3.modelo.TipoCasilla.AGUA;
 import static edu.fiuba.algo3.modelo.TipoCasilla.EDIFICIO;
 import static edu.fiuba.algo3.modelo.TipoCasilla.MONTAÑA;
 import static edu.fiuba.algo3.modelo.TipoCasilla.SUELO;
-import edu.fiuba.algo3.modelo.errors.MovimientoFueraDeRangoException;
 import edu.fiuba.algo3.modelo.errors.UnidadYaColocadaException;
-import edu.fiuba.algo3.modelo.unidad.Mech;
+import edu.fiuba.algo3.modelo.unidad.Unidad;
 
 
 public class Tablero {
@@ -86,30 +85,16 @@ public class Tablero {
         return casillasOrtogonales;
     }
 
-    public void colocar(Mech mech, Posicion posicion) {
-        if (mech.obtenerPosicion() != null) {
+    public void colocar(Unidad unidad, Posicion posicion) {
+
+        if (unidad.getPosicion() != null) {
             throw new UnidadYaColocadaException();
         }
-        obtenerCasilla(posicion).ocupar(mech);
-        mech.establecerPosicion(posicion);
+
+        Casilla casilla = obtenerCasilla(posicion);
+
+        casilla.ocupar(unidad);
+        unidad.actualizarPosicion(posicion);
     }
 
-    public void mover(Mech mech, Posicion destino) throws MovimientoFueraDeRangoException{
-        int rangoUnidad = mech.obtenerRangoMovimiento();
-        Posicion posicionActual = mech.obtenerPosicion();
-        int distancia = posicionActual.distanciaA(destino);
-
-        if (rangoUnidad < distancia) {
-            throw new MovimientoFueraDeRangoException(
-                "La distancia supera el rango de movimiento: distancia " + distancia
-                + ", rango " + rangoUnidad
-            );
-        }
-
-        Casilla casillaDestino = obtenerCasilla(destino);
-        Casilla casillaOrigen = obtenerCasilla(posicionActual);
-        casillaDestino.ocupar(mech);
-        mech.establecerPosicion(destino);
-        casillaOrigen.liberar();
-    }
 }

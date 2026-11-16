@@ -10,7 +10,7 @@ import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.TipoCasilla;
 import edu.fiuba.algo3.modelo.unidad.errors.AccionNoPermitidaException;
 
-
+/*
 abstract public class Mech {
     private Posicion posicion;
     private final int rangoMovimiento;
@@ -84,3 +84,4 @@ abstract public class Mech {
         return transitables.contains(tipoCasilla);
     }
 }
+*/

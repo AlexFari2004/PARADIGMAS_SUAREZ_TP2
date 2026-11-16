@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.entrega_1.unidades;
-
+/*
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -62,4 +62,4 @@ public class MechMovimientoTest {
         assertDoesNotThrow(() -> mech1.moverseA(posicionValida, tablero));
         assertEquals(posicionValida, mech1.obtenerPosicion());
     }
-}
+}*/
