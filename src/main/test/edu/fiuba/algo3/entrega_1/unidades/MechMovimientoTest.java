@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
+import edu.fiuba.algo3.modelo.errors.CasillaNoTransitableException;
 import edu.fiuba.algo3.modelo.errors.MovimientoFueraDeRangoException;
 import edu.fiuba.algo3.modelo.unidad.Mech;
 import edu.fiuba.algo3.modelo.unidad.errors.MovimientoEnPosicionOcupadaException;
@@ -50,7 +51,7 @@ public class MechMovimientoTest {
     public void mechNoPuedeMoverseEnPosicionConObstaculo() {
         Posicion posicionConObstaculo = new Posicion(5, 3);
         
-        assertThrows(MovimientoEnPosicionOcupadaException.class,
+        assertThrows(CasillaNoTransitableException.class,
             () -> mech1.moverseA(posicionConObstaculo, tablero));
         assertEquals(ORIGEN, mech1.obtenerPosicion());
     }
