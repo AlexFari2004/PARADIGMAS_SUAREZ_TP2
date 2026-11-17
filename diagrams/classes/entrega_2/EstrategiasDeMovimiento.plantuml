@@ -1,0 +1,32 @@
+@startuml name EstrategiasDeMovimiento
+skinparam classAttributeIconSize 0
+hide circle
+top to bottom direction
+
+interface Movible {
+  + mover(unidad: Unidad, nuevaPosicion: Posicion, tablero: Tablero): void
+}
+
+class MovimientoMech implements Movible {
+  - {static} RANGO_MOVIMIENTO: int = 3
+  - {static} TRANSITABLES: Set<TipoCasilla>
+  + mover(unidad: Unidad, posicionFinal: Posicion, tablero: Tablero): void
+}
+
+abstract class MovimientoVek implements Movible {
+  # transitables: Set<TipoCasilla>
+  # rangoMovimiento: int
+  + desplazar(unidad: Unidad, posicionFinal: Posicion, tablero: Tablero): void
+  + puedeMoverA(unidad: Unidad, destino: Posicion, tablero: Tablero): boolean
+  + posicionesAlcanzables(unidad: Unidad, tablero: Tablero): List<Posicion>
+  # existeCaminoLibre(unidad: Unidad, destino: Posicion, tablero: Tablero): boolean
+  # {abstract} puedeLlegar(unidad: Unidad, destino: Posicion, tablero: Tablero): boolean
+}
+
+class MovimientoSaltador extends MovimientoVek
+class MovimientoLuciernaga extends MovimientoVek
+class MovimientoAvispon extends MovimientoVek
+
+Unidad --> "1" Movible : movimiento
+Vek --> "1" MovimientoVek : movimiento
+@enduml

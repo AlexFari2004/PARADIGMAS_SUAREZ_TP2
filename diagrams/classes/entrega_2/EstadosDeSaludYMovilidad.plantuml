@@ -1,0 +1,38 @@
+@startuml name EstadosDeSaludYMovilidad
+skinparam classAttributeIconSize 0
+hide circle
+left to right direction
+
+abstract class Unidad {
+  - vida: int
+  + recibirDaño(cantidadDaño: int): void
+  + contaminar(): void
+  + destruir(): void
+  + caerAlAgua(): void
+  + pisarAcido(): void
+}
+
+interface EstadoUnidad {
+  + calcularDaño(daño: int): int
+  + contaminar(): EstadoUnidad
+  + destruir(): EstadoUnidad
+  + actualizar(vidaRestante: int): EstadoUnidad
+}
+
+class Operativa implements EstadoUnidad
+class Contaminada implements EstadoUnidad {
+  - {static} MULTIPLICADOR_CONTAMINACION: int = 2
+}
+class Destruida implements EstadoUnidad
+
+interface Movilidad {
+  + caerAlAgua(unidad: Unidad): void
+  + pisarAcido(unidad: Unidad): void
+}
+
+class Terrestre implements Movilidad
+class Voladora implements Movilidad
+
+Unidad --> "1" EstadoUnidad : estado
+Unidad --> "1" Movilidad : movilidad
+@enduml
