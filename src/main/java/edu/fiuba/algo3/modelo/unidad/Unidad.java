@@ -20,6 +20,10 @@ public abstract class Unidad {
         return posicion;
     }
 
+    public int obtenerVida() {
+        return vida;
+    }
+
     public void actualizarPosicion(Posicion nuevaPosicion) {
         this.posicion = nuevaPosicion;
     }
