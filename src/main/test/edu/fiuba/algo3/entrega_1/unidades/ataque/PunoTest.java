@@ -18,25 +18,41 @@ public class PunoTest {
         tablero = new Tablero();
     }
 
-    @Test
-    public void testPunoCausa2DeDanioAUnidadAdyacenteYLaEmpuja1Casilla() {
-        Puno puno = new Puno();
-        MechCombate mech = new MechCombate(puno);
-        VekLuciernaga vek = new VekLuciernaga();
+@Test
+public void testPunoCausa2DeDanioAUnidadAdyacente() {
+    Puno puno = new Puno();
+    MechCombate mech = new MechCombate(puno);
+    VekLuciernaga vek = new VekLuciernaga();
 
-        Posicion posMech = new Posicion(3, 2);
-        Posicion posVek = new Posicion(3, 3);
-        Posicion posEmpujado = new Posicion(3, 4);
+    Posicion posMech = new Posicion(3, 2);
+    Posicion posVek = new Posicion(3, 3);
 
-        tablero.colocar(mech, posMech);
-        tablero.colocar(vek, posVek);
+    tablero.colocar(mech, posMech);
+    tablero.colocar(vek, posVek);
 
-        mech.atacar(posVek, tablero);
+    mech.atacar(posVek, tablero);
 
-        assertEquals(1, vek.obtenerVida(), "El Puño debe causar exactamente 2 puntos de daño.");
-        assertFalse(tablero.obtenerCasilla(posVek).estaOcupada(), "La casilla original del Vek debe quedar vacía.");
-        assertEquals(vek, tablero.obtenerCasilla(posEmpujado).getUnidad(), "El Vek debió ser empujado 1 casilla.");
-        assertEquals(posEmpujado.getFila(), vek.getPosicion().getFila());
-        assertEquals(posEmpujado.getColumna(), vek.getPosicion().getColumna());
-    }
+    assertEquals(1, vek.obtenerVida());
 }
+
+@Test
+public void testPunoEmpujaUnaCasillaAUnidadAdyacente() {
+    Puno puno = new Puno();
+    MechCombate mech = new MechCombate(puno);
+    VekLuciernaga vek = new VekLuciernaga();
+
+    Posicion posMech = new Posicion(3, 2);
+    Posicion posVek = new Posicion(3, 3);
+    Posicion posEmpujado = new Posicion(3, 4);
+
+    tablero.colocar(mech, posMech);
+    tablero.colocar(vek, posVek);
+
+    mech.atacar(posVek, tablero);
+
+    assertFalse(tablero.obtenerCasilla(posVek).estaOcupada());
+    assertEquals(vek, tablero.obtenerCasilla(posEmpujado).getUnidad());
+    assertEquals(posEmpujado.getFila(), vek.getPosicion().getFila());
+    assertEquals(posEmpujado.getColumna(), vek.getPosicion().getColumna());
+}
+    }
