@@ -22,5 +22,9 @@ public abstract class Casilla {
         this.unidad = null;
     }
 
+    public Unidad getUnidad() {
+       return this.unidad;
+    }
+
     public abstract TipoCasilla getTipo();
 }
