@@ -3,7 +3,10 @@ package edu.fiuba.algo3.modelo.unidad.arma;
 import edu.fiuba.algo3.modelo.casilla.Casilla;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
+import edu.fiuba.algo3.modelo.casilla.TipoCasilla;
 import edu.fiuba.algo3.modelo.unidad.Unidad;
+
+
 
 public class Puno {
 
@@ -32,7 +35,16 @@ public class Puno {
         }
 
         Casilla casillaEmpuje = tablero.obtenerCasilla(posicionEmpujada);
-        if (casillaEmpuje.estaOcupada()) {
+
+        if (casillaEmpuje.getTipo() == TipoCasilla.MONTAÑA ||
+                casillaEmpuje.estaOcupada()) {
+
+            unidad.recibirDaño(1);
+
+            if (casillaEmpuje.estaOcupada()) {
+                casillaEmpuje.recibirDaño(1);
+            }
+
             return;
         }
 
