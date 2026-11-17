@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Posicion {
 
@@ -60,5 +61,17 @@ public class Posicion {
     @Override
     public String toString() {
         return "Posicion{" + "fila=" + fila + ", columna=" + columna + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Posicion)) return false;
+        Posicion otra = (Posicion) o;
+        return fila == otra.fila && columna == otra.columna;
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(fila, columna);
     }
 }

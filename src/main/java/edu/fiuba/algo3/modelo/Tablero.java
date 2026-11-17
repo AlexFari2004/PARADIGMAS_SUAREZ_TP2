@@ -7,6 +7,7 @@ import static edu.fiuba.algo3.modelo.casilla.TipoCasilla.AGUA;
 import static edu.fiuba.algo3.modelo.casilla.TipoCasilla.EDIFICIO;
 import static edu.fiuba.algo3.modelo.casilla.TipoCasilla.MONTAÑA;
 import static edu.fiuba.algo3.modelo.casilla.TipoCasilla.SUELO;
+import static java.util.stream.Collectors.toList;
 
 import edu.fiuba.algo3.modelo.casilla.*;
 import edu.fiuba.algo3.modelo.errors.UnidadYaColocadaException;
@@ -46,7 +47,7 @@ public class Tablero {
             case SUELO:
                 return new Suelo();
             case EDIFICIO:
-                return new Edificio();
+                return new Edificio(new RedElectrica(5));
             case MONTAÑA:
                 return new Montaña();
             case AGUA:
@@ -103,6 +104,7 @@ public class Tablero {
 
         casilla.ocupar(unidad);
         unidad.actualizarPosicion(posicion);
+        unidad.registrarEn(this);
     }
 
     public void registrarMech(Mech mech) {
@@ -114,11 +116,11 @@ public class Tablero {
     }
 
     public List<Mech> obtenerMechsVivos() {
-        return mechs.stream().filter(Mech::estaMuerta).toList();
+        return mechs.stream().filter(Mech::estaVivo).toList();
     }
 
     public List<Vek> obtenerVeks() {
-        return veks.stream().filter(Vek::estaMuerta).toList();
+        return veks.stream().filter(Vek::estaVivo).toList();
     }
 
     public List<Posicion> obtenerPosicionEdificios() {
@@ -134,5 +136,6 @@ public class Tablero {
 
         return edificios;
     }
+    public TipoCasilla obtenerEdificio(Posicion posicion) {return EDIFICIO;}
 
 }

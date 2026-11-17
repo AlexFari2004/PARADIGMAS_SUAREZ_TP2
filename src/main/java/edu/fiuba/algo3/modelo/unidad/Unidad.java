@@ -71,5 +71,7 @@ public abstract class Unidad {
         movimiento.mover(this, posicionDestino, tablero);
     }
 
+    public boolean estaVivo() { return !estaMuerta(); }
+
     public abstract void registrarEn(Tablero tablero);
 }

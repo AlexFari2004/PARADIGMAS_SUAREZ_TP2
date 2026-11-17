@@ -11,5 +11,7 @@ public class RedElectrica {
         energia = Math.max(0, energia - cantidad);
     }
 
-    public boolean energiaDisponible() { return energia == 0; }
+    public boolean energiaDisponible() { return energia > 0; }
+
+    public int obtenerEnergia() { return energia; }
 }

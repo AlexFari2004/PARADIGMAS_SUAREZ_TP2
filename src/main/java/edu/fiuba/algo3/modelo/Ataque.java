@@ -20,7 +20,8 @@ public class Ataque {
     public void aplicar(Tablero tablero) {
         Casilla casilla = tablero.obtenerCasilla(destino);
         if (casilla.estaOcupada()) {
-            casilla.recibirAtaque(dañoDeAtaque,efecto);
+
+            casilla.recibirAtaque(dañoDeAtaque, efecto);
         }
     }
 }

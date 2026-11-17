@@ -52,6 +52,7 @@ public abstract class Vek extends Unidad{
     }
 
     public void mover(Tablero tablero, Posicion destino) {
+        if (destino.equals(getPosicion())) { return; }
         movimiento.mover(this, destino, tablero);
     }
 
