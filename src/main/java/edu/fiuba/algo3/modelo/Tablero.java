@@ -42,27 +42,10 @@ public class Tablero {
         inicializarTablero();
     }
 
-    private Casilla crearCasilla(TipoCasilla tipo) {
-        switch (tipo) {
-            case SUELO:
-                return new Suelo();
-            case EDIFICIO:
-                return new Edificio(new RedElectrica(5));
-            case MONTAÑA:
-                return new Montaña();
-            case AGUA:
-                return new Agua();
-            case ACIDO:
-                return new Acido();
-            default:
-                throw new IllegalArgumentException("Tipo de casilla desconocido: " + tipo);
-        }
-    }
-
     private void inicializarTablero() {
         for(int fila = 0; fila < FILAS; fila++){
             for(int columna = 0; columna < COLUMNAS; columna++){
-                casillas[fila][columna] = crearCasilla(TABLERO[fila][columna]);
+                casillas[fila][columna] = TABLERO[fila][columna].crearCasilla();
             }
         }
     }
