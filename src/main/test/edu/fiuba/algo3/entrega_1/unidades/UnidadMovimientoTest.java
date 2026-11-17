@@ -26,6 +26,8 @@ public class UnidadMovimientoTest {
             public UnidadDePrueba() {
                 super(3, new MovimientoMech());
             }
+
+            public void registrarEn(Tablero tablero) {};
         }
 
         @BeforeEach

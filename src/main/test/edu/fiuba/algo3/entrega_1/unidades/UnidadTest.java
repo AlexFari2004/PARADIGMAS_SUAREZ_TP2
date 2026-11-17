@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_1.unidades;
 
+import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.unidad.MovimientoMech;
 import  edu.fiuba.algo3.modelo.unidad.Unidad;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,8 @@ public class UnidadTest {
         public UnidadATestear(int vida){
             super(vida, new MovimientoMech());
         }
+
+        public void registrarEn(Tablero tablero) {};
     }
 
     @Test
