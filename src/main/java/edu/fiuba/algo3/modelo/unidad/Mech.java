@@ -74,7 +74,5 @@ abstract public class Mech extends Unidad {
     public void registrarEn(Tablero tablero) { tablero.registrarMech(this); }
 
     @Override
-    public void hundirse() {
-        // Un Mech en el Agua no se destruye: solo pierde la capacidad de atacar (ver Agua).
-    }
+    public void hundirse() {}
 }
