@@ -77,7 +77,9 @@ public abstract class Unidad {
 
     public boolean estaVivo() { return !estaMuerta(); }
 
-    public abstract void registrarEn(Tablero tablero);    protected EstadoUnidad obtenerEstado() {
+    public abstract void registrarEn(Tablero tablero);
+
+    protected EstadoUnidad obtenerEstado() {
         return estado;
     }
 
