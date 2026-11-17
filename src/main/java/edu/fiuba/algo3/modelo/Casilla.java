@@ -27,4 +27,8 @@ public abstract class Casilla {
     }
 
     public abstract TipoCasilla getTipo();
+
+    public void recibirDaño(int daño) {
+        this.unidad.recibirDaño(daño);
+    }
 }

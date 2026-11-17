@@ -8,13 +8,17 @@ import static edu.fiuba.algo3.modelo.TipoCasilla.EDIFICIO;
 import static edu.fiuba.algo3.modelo.TipoCasilla.MONTAÑA;
 import static edu.fiuba.algo3.modelo.TipoCasilla.SUELO;
 import edu.fiuba.algo3.modelo.errors.UnidadYaColocadaException;
+import edu.fiuba.algo3.modelo.unidad.Mech;
 import edu.fiuba.algo3.modelo.unidad.Unidad;
+import edu.fiuba.algo3.modelo.unidad.Vek;
 
 
 public class Tablero {
 
     private static final int FILAS = 8;
     private static final int COLUMNAS = 8;
+    private final List<Mech> mechs = new ArrayList<>();
+    private final List<Vek> veks = new ArrayList<>();
 
     private final Casilla [][] casillas;
 
@@ -73,16 +77,18 @@ public class Tablero {
     }
 
     public List<Casilla> obtenerCasillasOrtogonales(Posicion posicion) {
-        List<Posicion> posiciones = posicion.obtenerPosicionesOrtogonales(FILAS, COLUMNAS);
-
         List<Casilla> casillasOrtogonales = new ArrayList<>();
 
-        for (Posicion posicionAdyacenteOrtogonal : posiciones) {
+        for (Posicion posicionAdyacenteOrtogonal : obtenerPosicionesOrtogonales(posicion)) {
             Casilla casillaAdyacenteOrtogonal = obtenerCasilla(posicionAdyacenteOrtogonal);
             casillasOrtogonales.add(casillaAdyacenteOrtogonal);
         }
 
         return casillasOrtogonales;
+    }
+
+    public List<Posicion> obtenerPosicionesOrtogonales(Posicion posicion) {
+        return posicion.obtenerPosicionesOrtogonales(FILAS, COLUMNAS);
     }
 
     public void colocar(Unidad unidad, Posicion posicion) {
@@ -95,6 +101,36 @@ public class Tablero {
 
         casilla.ocupar(unidad);
         unidad.actualizarPosicion(posicion);
+    }
+
+    public void registrarMech(Mech mech) {
+        mechs.add(mech);
+    }
+
+    public void registrarVek(Vek vek) {
+        veks.add(vek);
+    }
+
+    public List<Mech> obtenerMechsVivos() {
+        return mechs.stream().filter(Mech::estaMuerta).toList();
+    }
+
+    public List<Vek> obtenerVeks() {
+        return veks.stream().filter(Vek::estaMuerta).toList();
+    }
+
+    public List<Posicion> obtenerPosicionEdificios() {
+        List<Posicion> edificios = new ArrayList<>();
+
+        for (int fila = 0; fila < FILAS; fila++) {
+            for (int columna = 0; columna < COLUMNAS; columna++) {
+                if (casillas[fila][columna].getTipo() == TipoCasilla.EDIFICIO) {
+                    edificios.add(new Posicion(fila, columna));
+                }
+            }
+        }
+
+        return edificios;
     }
 
 }

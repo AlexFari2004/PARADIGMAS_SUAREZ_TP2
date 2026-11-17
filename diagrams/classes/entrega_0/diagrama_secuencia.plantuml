@@ -1,0 +1,45 @@
+@startuml entrega_0_diagrama_secuencia
+
+actor Jugador
+
+participant FaseJugador
+participant "mech: MechDeArtilleria" as Mech
+participant "arma: Artilleria" as Arma
+participant "ataque: Ataque" as Ataque
+participant Tablero
+participant "objetivo: Terreno" as Terreno
+participant "vek: Vek" as Vek
+participant "adyacente: Unidad" as Unidad
+participant "edificio: Edificio" as Edificio
+participant RedElectrica
+
+Jugador -> FaseJugador : atacarCon(mech, objetivo)
+FaseJugador -> Mech : atacar(objetivo, tablero)
+Mech -> Arma : generarAtaques(origen, objetivo, tablero)
+Arma --> Mech : ataque
+Mech --> FaseJugador : ataque
+
+FaseJugador -> Ataque : aplicarDaño(tablero)
+
+Ataque -> Tablero : obtenerTerreno(objetivo)
+Tablero --> Ataque : terreno
+Ataque -> Terreno : obtenerUnidad()
+Terreno --> Ataque : vek
+Ataque -> Vek : recibirDaño(1)
+
+Ataque -> Tablero : obtenerTerrenosAdyacentes(objetivo)
+Tablero --> Ataque : terrenos
+
+loop por cada terreno adyacente ocupado
+    Ataque -> Unidad : empujar(direccion, tablero)
+    Unidad -> Tablero : obtenerTerreno(posicionSiguiente)
+
+    alt la casilla siguiente es un edificio
+        Unidad -> Edificio : recibirDaño(1)
+        Edificio -> RedElectrica : restarEnergia(1)
+        Unidad -> Unidad : recibirDaño(1)
+    end
+end
+
+FaseJugador --> Jugador : ataque resuelto
+@enduml

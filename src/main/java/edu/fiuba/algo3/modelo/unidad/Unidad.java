@@ -45,4 +45,6 @@ public abstract class Unidad {
     public void mover(Posicion posicionDestino, Tablero tablero){
         movimiento.mover(this, posicionDestino, tablero);
     }
+
+    public abstract void registrarEn(Tablero tablero);
 }
