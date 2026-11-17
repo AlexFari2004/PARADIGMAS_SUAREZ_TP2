@@ -8,11 +8,12 @@ import java.util.Set;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.unidad.errors.AccionNoPermitidaException;
+import edu.fiuba.algo3.modelo.unidad.errors.SinMovimientoParaDeshacerException;
 
 
 abstract public class Mech extends Unidad {
-    private final AccionesDisponibles acciones = new AccionesDisponibles();;
-    private final Deque<Posicion> posicionesAnteriores = new ArrayDeque<>();
+    private final AccionesDisponibles acciones = new AccionesDisponibles();
+    private final Deque<MovimientoRealizado> movimientosRealizados = new ArrayDeque<>();
 
     public Mech(int vida, Movible movimiento) {
         super(vida, movimiento);
@@ -28,14 +29,24 @@ abstract public class Mech extends Unidad {
     // METODOS EJECUTAR
 
     private void ejecutarDeshacerMovimiento(Tablero tablero) {
-        ejecutarMovimiento(posicionesAnteriores.pop(), tablero);
+        if (movimientosRealizados.isEmpty()) {
+            throw new SinMovimientoParaDeshacerException();
+        }
+        MovimientoRealizado ultimo = movimientosRealizados.pop();
+        this.movimiento.mover(this, ultimo.origen(), tablero);
+        restaurarEstado(ultimo.estadoPrevio());
         acciones.reestablecerAccion(Accion.MOVERSE);
     }
 
     private void ejecutarMovimiento(Posicion posicionDestino, Tablero tablero) {
-        Posicion origen = this.posicion;
+        MovimientoRealizado movimientoRealizado = new MovimientoRealizado(this.posicion, obtenerEstado());
         this.movimiento.mover(this, posicionDestino, tablero);
-        posicionesAnteriores.push(origen);
+        movimientosRealizados.push(movimientoRealizado);
+    }
+
+    private void ejecutarAtaqueDesde(Posicion objetivo, Tablero tablero) {
+        tablero.obtenerCasilla(this.posicion).validarAtaqueDesdeAca();
+        ejecutarAtaque(objetivo, tablero);
     }
 
     abstract protected void ejecutarAtaque(Posicion objetivo, Tablero tablero);
@@ -43,18 +54,16 @@ abstract public class Mech extends Unidad {
     // METODOS PRINCIPALES
 
     public void atacar(Posicion objetivo, Tablero tablero) {
-        acciones.ejecutar(Accion.ATACAR, () -> ejecutarAtaque(objetivo, tablero));
+        acciones.ejecutar(Accion.ATACAR, () -> ejecutarAtaqueDesde(objetivo, tablero));
     }
 
     public void deshacerMovimiento(Tablero tablero) throws AccionNoPermitidaException {
-        if (!posicionesAnteriores.isEmpty()) {
-            acciones.ejecutar(Accion.DESHACER, () -> ejecutarDeshacerMovimiento(tablero));
-        }
+        acciones.ejecutar(Accion.DESHACER, () -> ejecutarDeshacerMovimiento(tablero));
     }
 
     public void reestablecerEstado() {
         acciones.reestablecerAcciones();
-        posicionesAnteriores.clear();
+        movimientosRealizados.clear();
     }
 
     public void mover(Posicion posicionDestino, Tablero tablero){
@@ -63,4 +72,9 @@ abstract public class Mech extends Unidad {
 
     @Override
     public void registrarEn(Tablero tablero) { tablero.registrarMech(this); }
+
+    @Override
+    public void hundirse() {
+        // Un Mech en el Agua no se destruye: solo pierde la capacidad de atacar (ver Agua).
+    }
 }
