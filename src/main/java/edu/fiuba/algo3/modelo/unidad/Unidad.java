@@ -18,10 +18,14 @@ public abstract class Unidad {
     protected final Movilidad movilidad;
 
     protected Unidad(int vida, Movible movimiento){
+        this(vida, movimiento, new Terrestre());
+    }
+
+    protected Unidad(int vida, Movible movimiento, Movilidad movilidad){
         this.vida = vida;
         this.estado = new Operativa ();
         this.movimiento = movimiento;
-        this.movilidad = new Terrestre();
+        this.movilidad = movilidad;
     }
 
     public Posicion getPosicion() {
@@ -64,7 +68,7 @@ public abstract class Unidad {
     }
 
     public boolean hundirse() {
-        return estado instanceof Destruida;
+        destruir();
     }
 
     public void mover(Posicion posicionDestino, Tablero tablero){
@@ -73,5 +77,14 @@ public abstract class Unidad {
 
     public boolean estaVivo() { return !estaMuerta(); }
 
-    public abstract void registrarEn(Tablero tablero);
+    public abstract void registrarEn(Tablero tablero);    protected EstadoUnidad obtenerEstado() {
+        return estado;
+    }
+
+    protected void restaurarEstado(EstadoUnidad estadoAnterior) {
+        this.estado = estadoAnterior;
+    }
+}
+
+
 }
