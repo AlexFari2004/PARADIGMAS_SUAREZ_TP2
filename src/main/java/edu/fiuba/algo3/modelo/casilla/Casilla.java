@@ -18,6 +18,10 @@ public abstract class Casilla {
 
     protected void aplicarEfecto(Unidad unidad){}
 
+
+    public void validarAtaqueDesdeAca() {
+    }
+
     public boolean estaOcupada() {
         return this.unidad != null;
     }
