@@ -11,7 +11,7 @@ public class FaseEmergencia extends Fase {
 
     @Override
     public void ejecutar() {
-        emergencia.emeger(tablero);
+        emergencia.emerger(tablero);
     }
 
     @Override

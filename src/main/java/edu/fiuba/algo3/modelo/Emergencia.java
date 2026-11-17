@@ -13,9 +13,10 @@ public class Emergencia {
         this.posicion = posicion;
     }
 
-    public void emeger(Tablero tablero) {
+    public void emerger(Tablero tablero) {
         Casilla casillaEmergencia = tablero.obtenerCasilla(posicion);
         if (casillaEmergencia.estaOcupada()) {
+            casillaEmergencia.recibirDaño(1);
             throw new CasillaNoTransitableException();
         }
         casillaEmergencia.ocupar(vekPorEmerger);
