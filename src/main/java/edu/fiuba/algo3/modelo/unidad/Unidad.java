@@ -67,7 +67,7 @@ public abstract class Unidad {
         return estado instanceof Destruida;
     }
 
-    public boolean hundirse() {
+    public void hundirse() {
         destruir();
     }
 
