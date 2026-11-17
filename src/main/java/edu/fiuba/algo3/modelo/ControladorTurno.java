@@ -1,17 +1,19 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorTurno {
 
     private final Tablero tablero;
     private final RedElectrica redElectrica;
-    private final List<Ataque> ataques;
-    private final List<Emergencia> emergencias;
-    private final int turnoRestante;
+    private final List<Ataque> ataques = new ArrayList<>();
+    private final List<Emergencia> emergencias = new ArrayList<>();
+    private int turnoRestante;
     private int turnoActual = 1;
     private final FabricaFase fabrica;
     private Fase faseActual;
+
     public ControladorTurno(Tablero tablero, RedElectrica redElectrica,FabricaFase fabrica ,int turnoRestante) {
         this.tablero = tablero;
         this.fabrica = fabrica;
@@ -20,7 +22,10 @@ public class ControladorTurno {
         this.faseActual = fabrica.crearFaseVek();
     }
 
-    public Fase iniciarTurno(FabricaFase fabricaFase) {};
+    public Fase iniciarTurno(FabricaFase fabricaFase) {
+        faseActual = fabricaFase.crearFaseVek();
+        return faseActual;
+    };
 
     public void ejecutarFaseActual() {
 
