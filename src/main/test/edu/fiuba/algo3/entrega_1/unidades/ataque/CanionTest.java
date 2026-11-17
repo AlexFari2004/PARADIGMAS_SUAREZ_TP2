@@ -29,21 +29,32 @@ public class CanionTest {
         Posicion posMech = new Posicion(3, 1);
         Posicion posVekDelante = new Posicion(3, 3);
         Posicion posVekDetras = new Posicion(3, 5);
+        Posicion destino = new Posicion(3, 6);
 
-        tablero.obtenerCasilla(posMech).ocupar(mech);
-        mech.setPosicion(posMech);
+        tablero.colocar(mech, posMech);
+        tablero.colocar(vekDelante, posVekDelante);
+        tablero.colocar(vekDetras, posVekDetras);
 
-        tablero.obtenerCasilla(posVekDelante).ocupar(vekDelante);
-        vekDelante.setPosicion(posVekDelante);
+        mech.atacar(destino, tablero);
 
-        tablero.obtenerCasilla(posVekDetras).ocupar(vekDetras);
-        vekDetras.setPosicion(posVekDetras);
+        assertEquals(1, vekDelante.obtenerVida());
+        assertEquals(2, vekDetras.obtenerVida());
+    }
 
-        // Act: Disparamos en dirección al primer vek
-        mech.atacar(posVekDelante, tablero);
+    @Test
+    public void test02CanionSeDetieneEnObstaculo() {
+        MechCanion mech = new MechCanion(new Canion());
+        Saltador vekDetras = new Saltador();
+        Posicion posMech = new Posicion(0, 1);
+        Posicion posObstaculo = new Posicion(0, 3);
+        Posicion posVekDetras = new Posicion(0, 4);
 
-        // Assert
-        assertTrue(vekDelante.obtenerVida() < 2);
+        tablero.colocar(mech, posMech);
+        tablero.colocar(vekDetras, posVekDetras);
+
+        mech.atacar(new Posicion(0, 5), tablero);
+
+        assertEquals(TipoCasilla.MONTAÑA, tablero.obtenerCasilla(posObstaculo).getTipo());
         assertEquals(2, vekDetras.obtenerVida());
     }
 }

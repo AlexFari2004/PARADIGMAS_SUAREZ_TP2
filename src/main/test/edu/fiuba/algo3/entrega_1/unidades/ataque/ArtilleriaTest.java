@@ -26,7 +26,7 @@ public class ArtilleriaTest {
         Posicion posMech = new Posicion(3, 3);
         Posicion posAdyacente = new Posicion(3, 4); // Casilla adyacente (prohibido para artillería)
 
-        mech.mover(posMech, tablero);
+        tablero.colocar(mech, posMech);
 
         assertThrows(IllegalArgumentException.class, () -> {
             mech.atacar(posAdyacente, tablero);
@@ -52,21 +52,39 @@ public class ArtilleriaTest {
         Posicion posIzquierda = new Posicion(4, 2);
         Posicion posDerecha = new Posicion(4, 4);
 
-        mech.mover(posMech, tablero);
-        vekObjetivo.mover(posObjetivo, tablero);
-        vekArriba.mover(posArriba, tablero);
-        vekAbajo.mover(posAbajo, tablero);
-        vekIzquierda.mover(posIzquierda, tablero);
-        vekDerecha.mover(posDerecha, tablero);
+        tablero.colocar(mech, posMech);
+        tablero.colocar(vekObjetivo, posObjetivo);
+        tablero.colocar(vekArriba, posArriba);
+        tablero.colocar(vekAbajo, posAbajo);
+        tablero.colocar(vekIzquierda, posIzquierda);
+        tablero.colocar(vekDerecha, posDerecha);
 
-        // Act
         mech.atacar(posObjetivo, tablero);
 
-        // Assert
         assertTrue(vekObjetivo.obtenerVida() < 2, "La casilla objetivo principal debe recibir daño.");
         assertFalse(tablero.obtenerCasilla(posArriba).estaOcupada(), "La adyacente superior debe quedar vacía por el empuje.");
         assertFalse(tablero.obtenerCasilla(posAbajo).estaOcupada(), "La adyacente inferior debe quedar vacía por el empuje.");
         assertFalse(tablero.obtenerCasilla(posIzquierda).estaOcupada(), "La adyacente izquierda debe quedar vacía por el empuje.");
         assertFalse(tablero.obtenerCasilla(posDerecha).estaOcupada(), "La adyacente derecha debe quedar vacía por el empuje.");
+        assertEquals(vekArriba, tablero.obtenerCasilla(new Posicion(2, 3)).getUnidad());
+        assertEquals(vekAbajo, tablero.obtenerCasilla(new Posicion(6, 3)).getUnidad());
+        assertEquals(vekIzquierda, tablero.obtenerCasilla(new Posicion(4, 1)).getUnidad());
+        assertEquals(vekDerecha, tablero.obtenerCasilla(new Posicion(4, 5)).getUnidad());
+    }
+
+    @Test
+    public void test03ArtilleriaAtacaPorEncimaDeObstaculos() {
+        MechDeArtilleria mech = new MechDeArtilleria(new Artilleria());
+        Saltador vekObjetivo = new Saltador();
+        Posicion posMech = new Posicion(0, 2);
+        Posicion posObjetivo = new Posicion(0, 4);
+
+        tablero.colocar(mech, posMech);
+        tablero.colocar(vekObjetivo, posObjetivo);
+
+        mech.atacar(posObjetivo, tablero);
+
+        assertEquals(TipoCasilla.MONTAÑA, tablero.obtenerCasilla(new Posicion(0, 3)).getTipo());
+        assertEquals(1, vekObjetivo.obtenerVida());
     }
 }
