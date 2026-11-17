@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
+import edu.fiuba.algo3.modelo.unidad.movilidad.Movilidad;
+import edu.fiuba.algo3.modelo.unidad.movilidad.Terrestre;
 
 public abstract class Vek extends Unidad{
     private Ataque ataqueAnunciado;
@@ -18,7 +20,11 @@ public abstract class Vek extends Unidad{
     private EfectoAtaque efectoAtaque;
 
     protected Vek(int vida, int dañoDeAtaque, EfectoAtaque efecto,MovimientoVek movimiento) {
-        super(vida,movimiento);
+        this(vida, dañoDeAtaque, efecto, movimiento, new Terrestre());
+    }
+
+    protected Vek(int vida, int dañoDeAtaque, EfectoAtaque efecto, MovimientoVek movimiento, Movilidad movilidad) {
+        super(vida, movimiento, movilidad);
         this.movimiento = movimiento;
         this.efectoAtaque = efecto;
         this.dañoDeAtaque = dañoDeAtaque;
