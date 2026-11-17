@@ -66,6 +66,7 @@ public abstract class Unidad {
     public boolean hundirse() {
         return estado instanceof Destruida;
     }
+
     public void mover(Posicion posicionDestino, Tablero tablero){
         movimiento.mover(this, posicionDestino, tablero);
     }

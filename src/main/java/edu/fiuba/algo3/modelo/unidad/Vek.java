@@ -15,10 +15,12 @@ public abstract class Vek extends Unidad{
     private Ataque ataqueAnunciado;
     private final int dañoDeAtaque;
     private final MovimientoVek movimiento;
+    private EfectoAtaque efectoAtaque;
 
-    protected Vek(int vida, int dañoDeAtaque, MovimientoVek movimiento) {
+    protected Vek(int vida, int dañoDeAtaque, EfectoAtaque efecto,MovimientoVek movimiento) {
         super(vida,movimiento);
         this.movimiento = movimiento;
+        this.efectoAtaque = efecto;
         this.dañoDeAtaque = dañoDeAtaque;
     }
     protected abstract List<Posicion> posicionesAtacables(Posicion desde, Tablero tablero);
@@ -54,7 +56,7 @@ public abstract class Vek extends Unidad{
     }
 
     public void atacarA(Posicion objetivo) {
-        ataqueAnunciado = new Ataque(this.getPosicion(),objetivo, dañoDeAtaque);
+        ataqueAnunciado = new Ataque(this.getPosicion(),objetivo, dañoDeAtaque, efectoAtaque);
     }
 
     private boolean intentarAtacar(List<Posicion> candidatas, Tablero tablero,
@@ -63,7 +65,7 @@ public abstract class Vek extends Unidad{
             for (Posicion objetivo : posicionesAtacables(desde, tablero)) {
                 if (esObjetivo.test(objetivo)) {
                     mover(tablero, desde);
-                    ataqueAnunciado = new Ataque(this.getPosicion(),objetivo,dañoDeAtaque);
+                    ataqueAnunciado = new Ataque(this.getPosicion(),objetivo,dañoDeAtaque, efectoAtaque);
                     return true;
                 }
             }

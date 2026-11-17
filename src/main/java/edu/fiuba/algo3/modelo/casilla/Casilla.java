@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.modelo.casilla;
+import edu.fiuba.algo3.modelo.unidad.EfectoAtaque;
 import edu.fiuba.algo3.modelo.unidad.Unidad;
 import edu.fiuba.algo3.modelo.unidad.errors.MovimientoEnPosicionOcupadaException;
 
@@ -31,7 +32,15 @@ public abstract class Casilla {
 
     public abstract TipoCasilla getTipo();
 
-    public void recibirDaño(int daño) {
-        this.unidad.recibirDaño(daño);
+    public void recibirDaño(int daño ) { this.unidad.recibirDaño(daño); }
+
+    public void recibirAtaque(int daño, EfectoAtaque efecto) {
+        if (!estaOcupada()) return;
+
+        Unidad ocupante = this.unidad;
+        recibirDaño(daño);
+        if (ocupante != null) {
+            efecto.aplicar(ocupante);
+        }
     }
 }

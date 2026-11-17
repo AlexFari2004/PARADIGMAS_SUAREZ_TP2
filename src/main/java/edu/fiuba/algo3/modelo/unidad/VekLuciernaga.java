@@ -8,7 +8,7 @@ import java.util.List;
 public class VekLuciernaga extends Vek{
 
     public VekLuciernaga(){
-        super(3,1,new MovimientoLuciernaga());
+        super(3,1,new EfectoACido(),new MovimientoLuciernaga());
     }
     @Override
     protected List<Posicion> posicionesAtacables(Posicion actual, Tablero tablero) {

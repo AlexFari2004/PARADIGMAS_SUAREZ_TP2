@@ -8,7 +8,7 @@ import java.util.List;
 public class VekAvispon extends Vek{
 
     public VekAvispon(){
-        super(2,1,new MovimientoAvispon());
+        super(2,1, new SinEfecto(),new MovimientoAvispon());
     }
 
     @Override
