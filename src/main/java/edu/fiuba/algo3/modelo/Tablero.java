@@ -2,11 +2,13 @@ package edu.fiuba.algo3.modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-import static edu.fiuba.algo3.modelo.TipoCasilla.ACIDO;
-import static edu.fiuba.algo3.modelo.TipoCasilla.AGUA;
-import static edu.fiuba.algo3.modelo.TipoCasilla.EDIFICIO;
-import static edu.fiuba.algo3.modelo.TipoCasilla.MONTAÑA;
-import static edu.fiuba.algo3.modelo.TipoCasilla.SUELO;
+import static edu.fiuba.algo3.modelo.casilla.TipoCasilla.ACIDO;
+import static edu.fiuba.algo3.modelo.casilla.TipoCasilla.AGUA;
+import static edu.fiuba.algo3.modelo.casilla.TipoCasilla.EDIFICIO;
+import static edu.fiuba.algo3.modelo.casilla.TipoCasilla.MONTAÑA;
+import static edu.fiuba.algo3.modelo.casilla.TipoCasilla.SUELO;
+
+import edu.fiuba.algo3.modelo.casilla.*;
 import edu.fiuba.algo3.modelo.errors.UnidadYaColocadaException;
 import edu.fiuba.algo3.modelo.unidad.Mech;
 import edu.fiuba.algo3.modelo.unidad.Unidad;
@@ -20,7 +22,7 @@ public class Tablero {
     private final List<Mech> mechs = new ArrayList<>();
     private final List<Vek> veks = new ArrayList<>();
 
-    private final Casilla [][] casillas;
+    private final Casilla[][] casillas;
 
     private static final TipoCasilla [][] TABLERO = {
             {SUELO, AGUA, SUELO, MONTAÑA, SUELO, SUELO, SUELO, SUELO},
