@@ -46,7 +46,7 @@ public class CanionTest {
     public void test02CanionSeDetieneEnObstaculo() {
         MechCanion mech = new MechCanion(new Canion());
         VekSaltador vekDetras = new VekSaltador();
-        Posicion posMech = new Posicion(0, 1);
+        Posicion posMech = new Posicion(0, 2);
         Posicion posObstaculo = new Posicion(0, 3);
         Posicion posVekDetras = new Posicion(0, 4);
 
