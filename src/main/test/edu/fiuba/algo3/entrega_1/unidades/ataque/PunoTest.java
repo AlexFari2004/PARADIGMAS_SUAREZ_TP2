@@ -3,7 +3,7 @@ package edu.fiuba.algo3.entrega_1.unidades.ataque;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.unidad.mech.MechCombate;
 import edu.fiuba.algo3.modelo.unidad.arma.Puno;
-import edu.fiuba.algo3.modelo.unidad.VekLuciernaga;
+import edu.fiuba.algo3.modelo.unidad.VekSaltador;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class PunoTest {
 public void testPunoCausa2DeDanioAUnidadAdyacente() {
     Puno puno = new Puno();
     MechCombate mech = new MechCombate(puno);
-    VekLuciernaga vek = new VekLuciernaga();
+    VekSaltador vek = new VekSaltador();
 
     Posicion posMech = new Posicion(3, 2);
     Posicion posVek = new Posicion(3, 3);
@@ -32,14 +32,14 @@ public void testPunoCausa2DeDanioAUnidadAdyacente() {
 
     mech.atacar(posVek, tablero);
 
-    assertEquals(1, vek.obtenerVida());
+    assertEquals(0, vek.obtenerVida());
 }
 
 @Test
 public void testPunoEmpujaUnaCasillaAUnidadAdyacente() {
     Puno puno = new Puno();
     MechCombate mech = new MechCombate(puno);
-    VekLuciernaga vek = new VekLuciernaga();
+    VekSaltador vek = new VekSaltador();
 
     Posicion posMech = new Posicion(3, 2);
     Posicion posVek = new Posicion(3, 3);

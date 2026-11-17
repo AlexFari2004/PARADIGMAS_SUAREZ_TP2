@@ -1,0 +1,60 @@
+@startuml name ControlDeTurnosYFases
+skinparam classAttributeIconSize 0
+hide circle
+top to bottom direction
+
+class Juego {
+  - controladorTurno: ControladorTurno
+  - tablero: Tablero
+}
+
+class ControladorTurno {
+  - turnoRestante: int
+  - turnoActual: int
+  + iniciarTurno(fabricaFase: FabricaFase): Fase
+  + ejecutarFaseActual(): void
+  + finalizarTurnos(): void
+}
+
+class FabricaFase {
+  + crearFaseVek(): Fase
+  + crearFaseJugador(): Fase
+  + crearFaseResolucion(): Fase
+  + crearFaseEmergencia(): Fase
+}
+
+abstract class Fase {
+  # finalizada: boolean
+  + {abstract} ejecutar(): void
+  + estaFinalizada(): boolean
+  + {abstract} avanzar(fabrica: FabricaFase): Fase
+}
+
+class FaseVek extends Fase
+class FaseJugador extends Fase {
+  - deshacerAccion: boolean
+  + mover(mech: Mech, destino: Posicion, tablero: Tablero): void
+  + atacar(mech: Mech, objetivo: Posicion): void
+  + finalizarTurno(): void
+  + deshacer(): void
+}
+class FaseResolucion extends Fase
+class FaseEmergencia extends Fase
+
+class GestorEmergencia {
+  + generarEmergencia(): Emergencia
+}
+
+class Emergencia {
+  - posicion: Posicion
+  + emerger(tablero: Tablero): void
+}
+
+Juego --> "1" ControladorTurno
+Juego --> "1" Tablero
+ControladorTurno --> "1" FabricaFase
+ControladorTurno --> "1" Fase : faseActual
+FabricaFase ..> Fase : <<creates>>
+FaseEmergencia --> "1" Emergencia
+GestorEmergencia ..> Emergencia : <<creates>>
+@enduml

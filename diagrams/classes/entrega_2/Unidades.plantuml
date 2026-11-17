@@ -1,0 +1,46 @@
+@startuml name Unidades
+skinparam classAttributeIconSize 0
+hide circle
+top to bottom direction
+
+abstract class Unidad {
+  - vida: int
+  # posicion: Posicion
+  + recibirDaño(cantidadDaño: int): void
+  + contaminar(): void
+  + destruir(): void
+  + caerAlAgua(): void
+  + pisarAcido(): void
+  + estaMuerta(): boolean
+  + mover(posicionDestino: Posicion, tablero: Tablero): void
+  + {abstract} registrarEn(tablero: Tablero): void
+}
+
+abstract class Mech extends Unidad {
+  - posicionesAnteriores: Deque<Posicion>
+  + atacar(objetivo: Posicion, tablero: Tablero): void
+  + deshacerMovimiento(tablero: Tablero): void
+  + reestablecerEstado(): void
+  + mover(posicionDestino: Posicion, tablero: Tablero): void
+  # {abstract} ejecutarAtaque(objetivo: Posicion, tablero: Tablero): void
+}
+
+class MechCombate extends Mech
+class MechCanion extends Mech
+class MechDeArtilleria extends Mech
+
+abstract class Vek extends Unidad {
+  - dañoDeAtaque: int
+  + planificarAccion(tablero: Tablero): void
+  + resolverAtaque(tablero: Tablero): void
+  + mover(tablero: Tablero, destino: Posicion): void
+  + atacarA(objetivo: Posicion): void
+  # {abstract} posicionesAtacables(desde: Posicion, tablero: Tablero): List<Posicion>
+}
+
+class VekSaltador extends Vek
+class VekAvispon extends Vek
+class VekLuciernaga extends Vek
+
+Mech --> "1" AccionesDisponibles : acciones
+@enduml

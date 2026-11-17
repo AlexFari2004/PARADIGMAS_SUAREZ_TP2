@@ -1,0 +1,78 @@
+@startuml name TableroCasillasYRedEléctrica
+skinparam classAttributeIconSize 0
+hide circle
+top to bottom direction
+
+class Tablero {
+  - {static} FILAS: int = 8
+  - {static} COLUMNAS: int = 8
+  - casillas: Casilla[][]
+  + obtenerCasilla(posicion: Posicion): Casilla
+  + obtenerCasillasOrtogonales(posicion: Posicion): List<Casilla>
+  + obtenerPosicionesOrtogonales(posicion: Posicion): List<Posicion>
+  + colocar(unidad: Unidad, posicion: Posicion): void
+  + registrarMech(mech: Mech): void
+  + registrarVek(vek: Vek): void
+  + obtenerMechsVivos(): List<Mech>
+  + obtenerVeks(): List<Vek>
+  + obtenerPosicionEdificios(): List<Posicion>
+}
+
+class Posicion {
+  - fila: int
+  - columna: int
+  + obtenerPosicionesOrtogonales(filas: int, columnas: int): List<Posicion>
+  + estaEnElTablero(filas: int, columnas: int): boolean
+  + distanciaA(otra: Posicion): int
+}
+
+enum TipoCasilla {
+  SUELO
+  AGUA
+  EDIFICIO
+  MONTAÑA
+  ACIDO
+}
+
+abstract class Casilla {
+  + getTipo(): TipoCasilla
+  + ocupar(unidad: Unidad): void
+  + liberar(): void
+  + estaOcupada(): boolean
+  + getUnidad(): Unidad
+  + recibirDaño(cantidad: int): void
+  + recibirAtaque(daño: int, efecto: EfectoAtaque): void
+  + {abstract} aplicarEfecto(unidad: Unidad): void
+}
+
+class Suelo extends Casilla {
+  + aplicarEfecto(unidad: Unidad): void
+}
+
+class Agua extends Casilla {
+  + aplicarEfecto(unidad: Unidad): void
+}
+
+class Edificio extends Casilla {
+  + aplicarEfecto(unidad: Unidad): void
+}
+
+class Montaña extends Casilla {
+  + aplicarEfecto(unidad: Unidad): void
+}
+
+class Acido extends Casilla {
+  + aplicarEfecto(unidad: Unidad): void
+}
+
+class RedElectrica {
+  - energia: int
+  + consumirEnergia(cantidad: int): void
+  + energiaDisponible(): boolean
+}
+
+Tablero *-- "64" Casilla
+Tablero ..> TipoCasilla
+Tablero ..> Posicion
+Casilla --> "0..1" Unidad : ocupante
+@enduml

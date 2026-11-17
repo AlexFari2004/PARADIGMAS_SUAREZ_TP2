@@ -3,8 +3,8 @@ package edu.fiuba.algo3.entrega_1.unidades.ataque;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.casilla.TipoCasilla;
 import edu.fiuba.algo3.modelo.unidad.mech.MechDeArtilleria;
+import edu.fiuba.algo3.modelo.unidad.VekSaltador;
 import edu.fiuba.algo3.modelo.unidad.arma.Artilleria;
-import edu.fiuba.algo3.modelo.unidad.vek.Saltador;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,8 +37,8 @@ public void test02ArtilleriaEmpujaHaciaArribaLaUnidadAdyacenteHaciaArribaYHace2D
     Artilleria artilleria = new Artilleria();
     MechDeArtilleria mech = new MechDeArtilleria(artilleria);
 
-    Saltador vekObjetivo = new Saltador();
-    Saltador vekArriba = new Saltador();
+    VekSaltador vekObjetivo = new VekSaltador();
+    VekSaltador vekArriba = new VekSaltador();
 
     Posicion posMech = new Posicion(1, 3);
     Posicion posObjetivo = new Posicion(4, 3);
@@ -60,8 +60,8 @@ public void test03ArtilleriaEmpujaHaciaAbajoLaUnidadAdyacenteHaciaAbajoYHace2DeD
     Artilleria artilleria = new Artilleria();
     MechDeArtilleria mech = new MechDeArtilleria(artilleria);
 
-    Saltador vekObjetivo = new Saltador();
-    Saltador vekAbajo = new Saltador();
+    VekSaltador vekObjetivo = new VekSaltador();
+    VekSaltador vekAbajo = new VekSaltador();
 
     Posicion posMech = new Posicion(1, 3);
     Posicion posObjetivo = new Posicion(4, 3);
@@ -83,8 +83,8 @@ public void test04ArtilleriaEmpujaHaciaLaIzquierdaLaUnidadAdyacenteALaIzquierdaY
     Artilleria artilleria = new Artilleria();
     MechDeArtilleria mech = new MechDeArtilleria(artilleria);
 
-    Saltador vekObjetivo = new Saltador();
-    Saltador vekIzquierda = new Saltador();
+    VekSaltador vekObjetivo = new VekSaltador();
+    VekSaltador vekIzquierda = new VekSaltador();
 
     Posicion posMech = new Posicion(1, 3);
     Posicion posObjetivo = new Posicion(4, 3);
@@ -106,8 +106,8 @@ public void test05ArtilleriaEmpujaHaciaLaDerechaLaUnidadAdyacenteALaDerechaYHace
     Artilleria artilleria = new Artilleria();
     MechDeArtilleria mech = new MechDeArtilleria(artilleria);
 
-    Saltador vekObjetivo = new Saltador();
-    Saltador vekDerecha = new Saltador();
+    VekSaltador vekObjetivo = new VekSaltador();
+    VekSaltador vekDerecha = new VekSaltador();
 
     Posicion posMech = new Posicion(1, 3);
     Posicion posObjetivo = new Posicion(4, 3);
@@ -127,7 +127,7 @@ public void test05ArtilleriaEmpujaHaciaLaDerechaLaUnidadAdyacenteALaDerechaYHace
     @Test
     public void test06ArtilleriaAtacaPorEncimaDeObstaculos() {
         MechDeArtilleria mech = new MechDeArtilleria(new Artilleria());
-        Saltador vekObjetivo = new Saltador();
+        VekSaltador vekObjetivo = new VekSaltador();
         Posicion posMech = new Posicion(0, 2);
         Posicion posObjetivo = new Posicion(0, 4);
 

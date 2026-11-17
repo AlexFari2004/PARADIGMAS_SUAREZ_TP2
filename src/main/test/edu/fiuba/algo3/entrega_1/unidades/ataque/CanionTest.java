@@ -3,8 +3,8 @@ package edu.fiuba.algo3.entrega_1.unidades.ataque;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.casilla.TipoCasilla;
 import edu.fiuba.algo3.modelo.unidad.mech.MechCanion;
+import edu.fiuba.algo3.modelo.unidad.VekSaltador;
 import edu.fiuba.algo3.modelo.unidad.arma.Canion;
-import edu.fiuba.algo3.modelo.unidad.vek.Saltador;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,8 +24,8 @@ public class CanionTest {
         Canion canion = new Canion();
         MechCanion mech = new MechCanion(canion);
 
-        Saltador vekDelante = new Saltador();
-        Saltador vekDetras = new Saltador();
+        VekSaltador vekDelante = new VekSaltador();
+        VekSaltador vekDetras = new VekSaltador();
 
         Posicion posMech = new Posicion(3, 1);
         Posicion posVekDelante = new Posicion(3, 3);
@@ -45,7 +45,7 @@ public class CanionTest {
     @Test
     public void test02CanionSeDetieneEnObstaculo() {
         MechCanion mech = new MechCanion(new Canion());
-        Saltador vekDetras = new Saltador();
+        VekSaltador vekDetras = new VekSaltador();
         Posicion posMech = new Posicion(0, 1);
         Posicion posObstaculo = new Posicion(0, 3);
         Posicion posVekDetras = new Posicion(0, 4);

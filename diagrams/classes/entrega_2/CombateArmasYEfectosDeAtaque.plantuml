@@ -1,0 +1,55 @@
+@startuml name CombateArmasYEfectosDeAtaque
+skinparam classAttributeIconSize 0
+hide circle
+top to bottom direction
+
+abstract class Mech {
+  # {abstract} ejecutarAtaque(objetivo: Posicion, tablero: Tablero): void
+}
+
+class MechCombate extends Mech {
+  # ejecutarAtaque(objetivo: Posicion, tablero: Tablero): void
+}
+
+class MechCanion extends Mech {
+  # ejecutarAtaque(objetivo: Posicion, tablero: Tablero): void
+}
+
+class MechDeArtilleria extends Mech {
+  # ejecutarAtaque(objetivo: Posicion, tablero: Tablero): void
+}
+
+class Puno {
+  + atacar(origen: Posicion, destino: Posicion, tablero: Tablero): void
+}
+
+class Canion {
+  + atacar(origen: Posicion, destino: Posicion, tablero: Tablero): void
+}
+
+class Artilleria {
+  + atacar(origen: Posicion, destino: Posicion, tablero: Tablero): void
+}
+
+class Ataque {
+  - origen: Posicion
+  - destino: Posicion
+  - dañoDeAtaque: int
+  + aplicar(tablero: Tablero): void
+}
+
+interface EfectoAtaque {
+  + aplicar(objetivo: Unidad): void
+}
+
+class SinEfecto implements EfectoAtaque
+class EfectoAcido implements EfectoAtaque
+
+MechCombate --> "1" Puno : puno
+MechCanion --> "1" Canion : canion
+MechDeArtilleria --> "1" Artilleria : arma
+
+Vek --> "0..1" Ataque : ataqueAnunciado
+Vek --> "1" EfectoAtaque : efectoAtaque
+Ataque --> "1" EfectoAtaque : efecto
+@enduml
