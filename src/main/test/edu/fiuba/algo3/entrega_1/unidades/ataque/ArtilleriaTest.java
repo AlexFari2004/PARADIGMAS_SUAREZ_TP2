@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_1.unidades.ataque;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.casilla.TipoCasilla;
 import edu.fiuba.algo3.modelo.unidad.mech.MechDeArtilleria;
 import edu.fiuba.algo3.modelo.unidad.arma.Artilleria;
 import edu.fiuba.algo3.modelo.unidad.vek.Saltador;

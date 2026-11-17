@@ -14,14 +14,12 @@ import edu.fiuba.algo3.modelo.Tablero;
 public abstract class Vek extends Unidad{
     private Ataque ataqueAnunciado;
     private final int dañoDeAtaque;
-    private final Dañable daño;
     private final MovimientoVek movimiento;
 
-    protected Vek(int vida, int dañoDeAtaque,Dañable daño, MovimientoVek movimiento) {
+    protected Vek(int vida, int dañoDeAtaque, MovimientoVek movimiento) {
         super(vida,movimiento);
         this.movimiento = movimiento;
         this.dañoDeAtaque = dañoDeAtaque;
-        this.daño = daño;
     }
     protected abstract List<Posicion> posicionesAtacables(Posicion desde, Tablero tablero);
 
@@ -56,7 +54,7 @@ public abstract class Vek extends Unidad{
     }
 
     public void atacarA(Posicion objetivo) {
-        ataqueAnunciado = new Ataque(this.getPosicion(),objetivo, this.daño,this.dañoDeAtaque);
+        ataqueAnunciado = new Ataque(this.getPosicion(),objetivo, dañoDeAtaque);
     }
 
     private boolean intentarAtacar(List<Posicion> candidatas, Tablero tablero,
@@ -65,7 +63,7 @@ public abstract class Vek extends Unidad{
             for (Posicion objetivo : posicionesAtacables(desde, tablero)) {
                 if (esObjetivo.test(objetivo)) {
                     mover(tablero, desde);
-                    ataqueAnunciado = new Ataque(this.getPosicion(),objetivo, daño,dañoDeAtaque);
+                    ataqueAnunciado = new Ataque(this.getPosicion(),objetivo,dañoDeAtaque);
                     return true;
                 }
             }

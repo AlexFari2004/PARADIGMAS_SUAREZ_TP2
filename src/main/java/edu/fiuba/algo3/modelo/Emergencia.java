@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.casilla.Casilla;
 import edu.fiuba.algo3.modelo.errors.CasillaNoTransitableException;
 import edu.fiuba.algo3.modelo.unidad.Vek;
 

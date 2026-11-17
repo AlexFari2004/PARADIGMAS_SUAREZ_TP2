@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.modelo.unidad;
 
-import edu.fiuba.algo3.modelo.Casilla;
+import edu.fiuba.algo3.modelo.casilla.Casilla;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.TipoCasilla;
+import edu.fiuba.algo3.modelo.casilla.TipoCasilla;
 import edu.fiuba.algo3.modelo.errors.CasillaNoTransitableException;
 import edu.fiuba.algo3.modelo.unidad.errors.MovimientoEnPosicionOcupadaException;
 import edu.fiuba.algo3.modelo.unidad.errors.PosicionFueraDelTableroException;

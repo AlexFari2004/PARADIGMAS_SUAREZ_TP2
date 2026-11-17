@@ -15,7 +15,7 @@ public abstract class Casilla {
         aplicarEfecto(unidad);
     }
 
-    public void aplicaEfecto(Unidad unidad){}
+    protected void aplicarEfecto(Unidad unidad){}
 
     public boolean estaOcupada() {
         return this.unidad != null;
