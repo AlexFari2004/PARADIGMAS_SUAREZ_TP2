@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static edu.fiuba.algo3.modelo.tablero.casilla.TipoCasilla.*;
 
 public class TableroTest {
 

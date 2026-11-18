@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.tablero.casilla.TipoCasilla;
 import edu.fiuba.algo3.modelo.unidad.Unidad;
 import edu.fiuba.algo3.modelo.unidad.mech.Mech;
 import edu.fiuba.algo3.modelo.unidad.vek.Vek;
+import static edu.fiuba.algo3.modelo.tablero.casilla.TipoCasilla.*;
 
 import java.util.ArrayList;
 import java.util.List;
