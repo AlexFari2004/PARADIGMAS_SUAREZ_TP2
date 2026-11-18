@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.entrega_1.unidades;
 
 import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.unidad.MovimientoMech;
+import edu.fiuba.algo3.modelo.unidad.movimientos.MovimientoMech;
 import edu.fiuba.algo3.modelo.unidad.Unidad;
 import org.junit.jupiter.api.Test;
 

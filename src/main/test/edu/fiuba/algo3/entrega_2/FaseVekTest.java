@@ -1,13 +1,13 @@
 package edu.fiuba.algo3.entrega_2;
 
 
-import edu.fiuba.algo3.modelo.FaseResolucion;
-import edu.fiuba.algo3.modelo.FaseVek;
+import edu.fiuba.algo3.modelo.fases.FaseResolucion;
+import edu.fiuba.algo3.modelo.fases.FaseVek;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.unidad.Mech;
 import edu.fiuba.algo3.modelo.unidad.Vek;
-import edu.fiuba.algo3.modelo.unidad.VekAvispon;
+import edu.fiuba.algo3.modelo.unidad.vek.VekAvispon;
 import edu.fiuba.algo3.modelo.unidad.arma.Puno;
 import edu.fiuba.algo3.modelo.unidad.mech.MechCombate;
 import org.junit.jupiter.api.Test;

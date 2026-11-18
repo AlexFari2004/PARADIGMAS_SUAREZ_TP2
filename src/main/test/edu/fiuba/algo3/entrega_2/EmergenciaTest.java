@@ -3,9 +3,9 @@ package edu.fiuba.algo3.entrega_2;
 import edu.fiuba.algo3.modelo.Emergencia;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.errors.CasillaNoTransitableException;
+import edu.fiuba.algo3.modelo.errors.casillas.CasillaNoTransitableException;
 import edu.fiuba.algo3.modelo.unidad.Vek;
-import edu.fiuba.algo3.modelo.unidad.VekSaltador;
+import edu.fiuba.algo3.modelo.unidad.vek.VekSaltador;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

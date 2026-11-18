@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.casilla;
 
 import edu.fiuba.algo3.modelo.RedElectrica;
+import edu.fiuba.algo3.modelo.casilla.tipos.*;
 
 import java.util.function.Supplier;
 

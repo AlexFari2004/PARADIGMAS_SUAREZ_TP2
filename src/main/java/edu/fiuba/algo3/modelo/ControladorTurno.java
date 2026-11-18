@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.fases.FabricaFase;
+import edu.fiuba.algo3.modelo.fases.Fase;
+
 import java.util.ArrayList;
 import java.util.List;
 

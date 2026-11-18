@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.casilla.Casilla;
 import edu.fiuba.algo3.modelo.casilla.TipoCasilla;
-import edu.fiuba.algo3.modelo.errors.UnidadYaColocadaException;
+import edu.fiuba.algo3.modelo.errors.casillas.UnidadYaColocadaException;
 import edu.fiuba.algo3.modelo.unidad.Mech;
 import edu.fiuba.algo3.modelo.unidad.Unidad;
 import edu.fiuba.algo3.modelo.unidad.Vek;

@@ -2,10 +2,10 @@ package edu.fiuba.algo3.entrega_1.unidades;
 
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.errors.CasillaNoTransitableException;
-import edu.fiuba.algo3.modelo.errors.MovimientoFueraDeRangoException;
+import edu.fiuba.algo3.modelo.errors.casillas.CasillaNoTransitableException;
+import edu.fiuba.algo3.modelo.errors.casillas.MovimientoFueraDeRangoException;
 import edu.fiuba.algo3.modelo.unidad.Mech;
-import edu.fiuba.algo3.modelo.unidad.errors.MovimientoEnPosicionOcupadaException;
+import edu.fiuba.algo3.modelo.errors.unidad.MovimientoEnPosicionOcupadaException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

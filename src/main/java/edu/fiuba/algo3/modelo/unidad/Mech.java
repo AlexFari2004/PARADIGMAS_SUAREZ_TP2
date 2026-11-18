@@ -2,8 +2,10 @@ package edu.fiuba.algo3.modelo.unidad;
 
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.unidad.errors.AccionNoPermitidaException;
-import edu.fiuba.algo3.modelo.unidad.errors.SinMovimientoParaDeshacerException;
+import edu.fiuba.algo3.modelo.errors.unidad.AccionNoPermitidaException;
+import edu.fiuba.algo3.modelo.errors.unidad.SinMovimientoParaDeshacerException;
+import edu.fiuba.algo3.modelo.unidad.acciones.Accion;
+import edu.fiuba.algo3.modelo.unidad.acciones.AccionesDisponibles;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

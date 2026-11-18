@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.unidad.VekAvispon;
+import edu.fiuba.algo3.modelo.unidad.vek.VekAvispon;
 
 public class GestorEmergencia {
     public Emergencia generarEmergencia() {

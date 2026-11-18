@@ -3,8 +3,10 @@ package edu.fiuba.algo3.modelo.unidad;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
+import edu.fiuba.algo3.modelo.unidad.efectos.EfectoAtaque;
 import edu.fiuba.algo3.modelo.unidad.movilidad.Movilidad;
 import edu.fiuba.algo3.modelo.unidad.movilidad.Terrestre;
+import edu.fiuba.algo3.modelo.unidad.movimientos.MovimientoVek;
 
 import java.util.ArrayList;
 import java.util.HashSet;

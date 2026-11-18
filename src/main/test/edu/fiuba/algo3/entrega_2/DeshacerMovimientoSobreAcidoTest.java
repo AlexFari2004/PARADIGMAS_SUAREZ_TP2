@@ -4,7 +4,7 @@ import edu.fiuba.algo3.entrega_1.unidades.MechPrueba;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.unidad.Mech;
-import edu.fiuba.algo3.modelo.unidad.errors.SinMovimientoParaDeshacerException;
+import edu.fiuba.algo3.modelo.errors.unidad.SinMovimientoParaDeshacerException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;

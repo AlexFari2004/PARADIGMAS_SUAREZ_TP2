@@ -2,7 +2,7 @@ package edu.fiuba.algo3.entrega_1.unidades.ataque;
 
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.unidad.VekSaltador;
+import edu.fiuba.algo3.modelo.unidad.vek.VekSaltador;
 import edu.fiuba.algo3.modelo.unidad.arma.Puno;
 import edu.fiuba.algo3.modelo.unidad.mech.MechCombate;
 import org.junit.jupiter.api.BeforeEach;

@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 
 import edu.fiuba.algo3.modelo.casilla.Casilla;
-import edu.fiuba.algo3.modelo.unidad.EfectoAtaque;
+import edu.fiuba.algo3.modelo.unidad.efectos.EfectoAtaque;
 
 public class Ataque {
     private final Posicion destino;
