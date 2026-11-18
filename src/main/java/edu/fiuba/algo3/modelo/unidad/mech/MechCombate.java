@@ -3,8 +3,8 @@ package edu.fiuba.algo3.modelo.unidad.mech;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.unidad.Mech;
-import edu.fiuba.algo3.modelo.unidad.movimientos.MovimientoMech;
 import edu.fiuba.algo3.modelo.unidad.arma.Puno;
+import edu.fiuba.algo3.modelo.unidad.movimientos.MovimientoMech;
 
 public class MechCombate extends Mech {
     private final Puno puno;

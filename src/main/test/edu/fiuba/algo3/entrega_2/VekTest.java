@@ -2,10 +2,10 @@ package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.unidad.*;
+import edu.fiuba.algo3.modelo.unidad.Mech;
+import edu.fiuba.algo3.modelo.unidad.Vek;
 import edu.fiuba.algo3.modelo.unidad.arma.Puno;
 import edu.fiuba.algo3.modelo.unidad.mech.MechCombate;
-import edu.fiuba.algo3.modelo.unidad.Vek;
 import edu.fiuba.algo3.modelo.unidad.vek.VekAvispon;
 import edu.fiuba.algo3.modelo.unidad.vek.VekLuciernaga;
 import edu.fiuba.algo3.modelo.unidad.vek.VekSaltador;

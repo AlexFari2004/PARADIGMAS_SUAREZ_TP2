@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo.casilla;
 
-import edu.fiuba.algo3.modelo.unidad.efectos.EfectoAtaque;
-import edu.fiuba.algo3.modelo.unidad.Unidad;
 import edu.fiuba.algo3.modelo.errors.unidad.MovimientoEnPosicionOcupadaException;
+import edu.fiuba.algo3.modelo.unidad.Unidad;
+import edu.fiuba.algo3.modelo.unidad.efectos.EfectoAtaque;
 
 public abstract class Casilla {
 
