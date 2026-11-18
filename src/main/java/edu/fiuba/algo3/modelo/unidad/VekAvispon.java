@@ -6,10 +6,10 @@ import edu.fiuba.algo3.modelo.unidad.movilidad.Voladora;
 
 import java.util.List;
 
-public class VekAvispon extends Vek{
+public class VekAvispon extends Vek {
 
-    public VekAvispon(){
-        super(2,1, new SinEfecto(),new MovimientoAvispon(), new Voladora());
+    public VekAvispon() {
+        super(2, 1, new SinEfecto(), new MovimientoAvispon(), new Voladora());
     }
 
     @Override

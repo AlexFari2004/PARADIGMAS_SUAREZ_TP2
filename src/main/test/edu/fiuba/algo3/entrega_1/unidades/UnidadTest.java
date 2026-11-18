@@ -2,18 +2,23 @@ package edu.fiuba.algo3.entrega_1.unidades;
 
 import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.unidad.MovimientoMech;
-import  edu.fiuba.algo3.modelo.unidad.Unidad;
+import edu.fiuba.algo3.modelo.unidad.Unidad;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UnidadTest {
-    private static class UnidadATestear extends Unidad{
+    private static class UnidadATestear extends Unidad {
 
-        public UnidadATestear(int vida){
+        public UnidadATestear(int vida) {
             super(vida, new MovimientoMech());
         }
 
-        public void registrarEn(Tablero tablero) {};
+        public void registrarEn(Tablero tablero) {
+        }
+
+        ;
     }
 
     @Test

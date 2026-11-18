@@ -9,5 +9,6 @@ public abstract class Fase {
     public boolean estaFinalizada() {
         return finalizada;
     }
+
     public abstract Fase avanzar(FabricaFase fabrica);
 }

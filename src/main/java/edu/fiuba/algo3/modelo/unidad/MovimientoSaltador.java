@@ -7,7 +7,7 @@ import edu.fiuba.algo3.modelo.errors.MovimientoFueraDeRangoException;
 
 import java.util.EnumSet;
 
-public class MovimientoSaltador extends MovimientoVek{
+public class MovimientoSaltador extends MovimientoVek {
     public MovimientoSaltador() {
         super(3, EnumSet.of(TipoCasilla.SUELO, TipoCasilla.ACIDO));
     }

@@ -15,6 +15,8 @@ public class FaseEmergencia extends Fase {
     }
 
     @Override
-    public Fase avanzar(FabricaFase fabrica) { return fabrica.crearFaseVek(); }
+    public Fase avanzar(FabricaFase fabrica) {
+        return fabrica.crearFaseVek();
+    }
 
 }

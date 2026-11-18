@@ -13,13 +13,13 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public abstract class Vek extends Unidad{
+public abstract class Vek extends Unidad {
     private Ataque ataqueAnunciado;
     private final int dañoDeAtaque;
     private final MovimientoVek movimiento;
     private EfectoAtaque efectoAtaque;
 
-    protected Vek(int vida, int dañoDeAtaque, EfectoAtaque efecto,MovimientoVek movimiento) {
+    protected Vek(int vida, int dañoDeAtaque, EfectoAtaque efecto, MovimientoVek movimiento) {
         this(vida, dañoDeAtaque, efecto, movimiento, new Terrestre());
     }
 
@@ -29,6 +29,7 @@ public abstract class Vek extends Unidad{
         this.efectoAtaque = efecto;
         this.dañoDeAtaque = dañoDeAtaque;
     }
+
     protected abstract List<Posicion> posicionesAtacables(Posicion desde, Tablero tablero);
 
     public void planificarAccion(Tablero tablero) {
@@ -49,7 +50,6 @@ public abstract class Vek extends Unidad{
     }
 
 
-
     public void resolverAtaque(Tablero tablero) {
         if (ataqueAnunciado == null) return;
 
@@ -58,12 +58,14 @@ public abstract class Vek extends Unidad{
     }
 
     public void mover(Tablero tablero, Posicion destino) {
-        if (destino.equals(getPosicion())) { return; }
+        if (destino.equals(getPosicion())) {
+            return;
+        }
         movimiento.mover(this, destino, tablero);
     }
 
     public void atacarA(Posicion objetivo) {
-        ataqueAnunciado = new Ataque(this.getPosicion(),objetivo, dañoDeAtaque, efectoAtaque);
+        ataqueAnunciado = new Ataque(this.getPosicion(), objetivo, dañoDeAtaque, efectoAtaque);
     }
 
     private boolean intentarAtacar(List<Posicion> candidatas, Tablero tablero,
@@ -72,7 +74,7 @@ public abstract class Vek extends Unidad{
             for (Posicion objetivo : posicionesAtacables(desde, tablero)) {
                 if (esObjetivo.test(objetivo)) {
                     mover(tablero, desde);
-                    ataqueAnunciado = new Ataque(this.getPosicion(),objetivo,dañoDeAtaque, efectoAtaque);
+                    ataqueAnunciado = new Ataque(this.getPosicion(), objetivo, dañoDeAtaque, efectoAtaque);
                     return true;
                 }
             }
@@ -103,7 +105,9 @@ public abstract class Vek extends Unidad{
     }
 
     @Override
-    public void registrarEn(Tablero tablero) { tablero.registrarVek(this); }
+    public void registrarEn(Tablero tablero) {
+        tablero.registrarVek(this);
+    }
 }
 
 

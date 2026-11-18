@@ -14,7 +14,9 @@ public class VekTest {
     private Tablero tablero;
 
     @BeforeEach
-    void setUp() { tablero = new Tablero(); }
+    void setUp() {
+        tablero = new Tablero();
+    }
 
     @Test
     void saltadorMuerdeCasillaAdyacenteConDosDeDaño() {

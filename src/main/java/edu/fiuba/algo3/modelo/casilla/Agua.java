@@ -9,8 +9,9 @@ public class Agua extends Casilla {
     public TipoCasilla getTipo() {
         return TipoCasilla.AGUA;
     }
+
     @Override
-    protected void aplicarEfecto(Unidad unidad){
+    protected void aplicarEfecto(Unidad unidad) {
         unidad.caerAlAgua();
     }
 

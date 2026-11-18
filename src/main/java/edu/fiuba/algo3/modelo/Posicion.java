@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.modelo;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +17,7 @@ public class Posicion {
 
     public List<Posicion> obtenerPosicionesOrtogonales(int filas, int columnas) {
         Posicion[] direccionesOrtogonales = {
-                new Posicion(-1,0),
+                new Posicion(-1, 0),
                 new Posicion(1, 0),
                 new Posicion(0, -1),
                 new Posicion(0, 1),
@@ -70,6 +71,7 @@ public class Posicion {
         Posicion otra = (Posicion) o;
         return fila == otra.fila && columna == otra.columna;
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(fila, columna);

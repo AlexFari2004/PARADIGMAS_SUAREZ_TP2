@@ -1,15 +1,13 @@
 package edu.fiuba.algo3.entrega_1.unidades;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.unidad.Mech;
 import edu.fiuba.algo3.modelo.unidad.errors.AccionNoPermitidaException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class MechTurnoTest {
@@ -26,28 +24,28 @@ public class MechTurnoTest {
     }
 
     @Test
-    public void mechNoPuedeMoverseDosVecesEnMismoTurno () {
+    public void mechNoPuedeMoverseDosVecesEnMismoTurno() {
         Posicion destinoSiguiente1 = new Posicion(3, 3);
         Posicion destinoSiguiente2 = new Posicion(3, 4);
 
         mech.mover(destinoSiguiente1, tablero);
 
         assertThrows(
-            AccionNoPermitidaException.class,
-            () -> mech.mover(destinoSiguiente2, tablero)
+                AccionNoPermitidaException.class,
+                () -> mech.mover(destinoSiguiente2, tablero)
         );
         assertEquals(destinoSiguiente1, mech.getPosicion());
     }
 
     @Test
-    public void mechNoPuedeAtacarDosVecesEnMismoTurno () {
+    public void mechNoPuedeAtacarDosVecesEnMismoTurno() {
         Posicion posicionAtaque = new Posicion(4, 6);
 
         mech.atacar(posicionAtaque, tablero);
 
         assertThrows(
-            AccionNoPermitidaException.class,
-            () -> mech.atacar(posicionAtaque, tablero)
+                AccionNoPermitidaException.class,
+                () -> mech.atacar(posicionAtaque, tablero)
         );
     }
 
@@ -67,8 +65,8 @@ public class MechTurnoTest {
         mech.deshacerMovimiento(tablero);
 
         assertThrows(
-            AccionNoPermitidaException.class,
-            () -> mech.deshacerMovimiento(tablero)
+                AccionNoPermitidaException.class,
+                () -> mech.deshacerMovimiento(tablero)
         );
         assertEquals(ORIGEN, mech.getPosicion());
     }
@@ -81,8 +79,8 @@ public class MechTurnoTest {
         mech.atacar(posicionAtaque, tablero);
 
         assertThrows(
-            AccionNoPermitidaException.class,
-            () -> mech.deshacerMovimiento(tablero)
+                AccionNoPermitidaException.class,
+                () -> mech.deshacerMovimiento(tablero)
         );
         assertEquals(destinoSiguiente, mech.getPosicion());
     }

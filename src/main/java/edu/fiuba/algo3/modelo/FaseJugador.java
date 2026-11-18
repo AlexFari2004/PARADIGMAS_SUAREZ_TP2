@@ -9,6 +9,7 @@ public class FaseJugador extends Fase {
     private boolean deshacerAccion = false;
     private Tablero tablero;
     private List<Mech> mechDisponible;
+
     public FaseJugador(Tablero tablero) {
         this.tablero = tablero;
         mechDisponible = tablero.obtenerMechsVivos();
@@ -19,7 +20,7 @@ public class FaseJugador extends Fase {
         // Nada automático: espera las acciones del jugador.
     }
 
-    public void mover(Mech mech,Posicion destino, Tablero tablero) {
+    public void mover(Mech mech, Posicion destino, Tablero tablero) {
         //
     }
 
@@ -30,6 +31,7 @@ public class FaseJugador extends Fase {
     public void finalizarTurno() {
         finalizada = true;
     }
+
     public void deshacer() {
         //
     }
@@ -38,6 +40,8 @@ public class FaseJugador extends Fase {
     @Override
     public Fase avanzar(FabricaFase fabricaFase) {
         return fabricaFase.crearFaseResolucion();
-    };
+    }
+
+    ;
 
 }

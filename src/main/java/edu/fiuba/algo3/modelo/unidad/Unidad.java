@@ -17,13 +17,13 @@ public abstract class Unidad {
     protected final Movible movimiento;
     protected final Movilidad movilidad;
 
-    protected Unidad(int vida, Movible movimiento){
+    protected Unidad(int vida, Movible movimiento) {
         this(vida, movimiento, new Terrestre());
     }
 
-    protected Unidad(int vida, Movible movimiento, Movilidad movilidad){
+    protected Unidad(int vida, Movible movimiento, Movilidad movilidad) {
         this.vida = vida;
-        this.estado = new Operativa ();
+        this.estado = new Operativa();
         this.movimiento = movimiento;
         this.movilidad = movilidad;
     }
@@ -41,13 +41,13 @@ public abstract class Unidad {
     }
 
 
-    public void recibirDaño(int cantidadDaño){
+    public void recibirDaño(int cantidadDaño) {
         int dañoRecibido = estado.calcularDaño(cantidadDaño);
-        vida = Math.max(0,vida - dañoRecibido);
+        vida = Math.max(0, vida - dañoRecibido);
         estado = estado.actualizar(vida);
     }
 
-    public void contaminar(){
+    public void contaminar() {
         estado = estado.contaminar();
     }
 
@@ -55,15 +55,15 @@ public abstract class Unidad {
         estado = estado.destruir();
     }
 
-    public void caerAlAgua(){
+    public void caerAlAgua() {
         movilidad.caerAlAgua(this);
     }
 
-    public void pisarAcido(){
+    public void pisarAcido() {
         movilidad.pisarAcido(this);
     }
 
-    public boolean estaMuerta(){
+    public boolean estaMuerta() {
         return estado instanceof Destruida;
     }
 
@@ -71,11 +71,13 @@ public abstract class Unidad {
         destruir();
     }
 
-    public void mover(Posicion posicionDestino, Tablero tablero){
+    public void mover(Posicion posicionDestino, Tablero tablero) {
         movimiento.mover(this, posicionDestino, tablero);
     }
 
-    public boolean estaVivo() { return !estaMuerta(); }
+    public boolean estaVivo() {
+        return !estaMuerta();
+    }
 
     public abstract void registrarEn(Tablero tablero);
 

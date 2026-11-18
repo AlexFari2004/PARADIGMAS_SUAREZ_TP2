@@ -22,7 +22,7 @@ public class Tablero {
 
     private final Casilla[][] casillas;
 
-    private static final TipoCasilla [][] TABLERO = {
+    private static final TipoCasilla[][] TABLERO = {
             {SUELO, AGUA, SUELO, MONTAÑA, SUELO, SUELO, SUELO, SUELO},
             {SUELO, SUELO, SUELO, SUELO, SUELO, EDIFICIO, SUELO, SUELO},
             {SUELO, SUELO, ACIDO, SUELO, AGUA, AGUA, SUELO, SUELO},
@@ -34,21 +34,21 @@ public class Tablero {
 
     };
 
-    public Tablero(){
+    public Tablero() {
         this.casillas = new Casilla[FILAS][COLUMNAS];
         inicializarTablero();
     }
 
     private void inicializarTablero() {
-        for(int fila = 0; fila < FILAS; fila++){
-            for(int columna = 0; columna < COLUMNAS; columna++){
+        for (int fila = 0; fila < FILAS; fila++) {
+            for (int columna = 0; columna < COLUMNAS; columna++) {
                 casillas[fila][columna] = TABLERO[fila][columna].crearCasilla();
             }
         }
     }
 
     public Casilla obtenerCasilla(Posicion posicion) {
-        if(!posicion.estaEnElTablero(FILAS, COLUMNAS)){
+        if (!posicion.estaEnElTablero(FILAS, COLUMNAS)) {
             throw new IllegalArgumentException(
                     "La posición no está dentro de los limites del tablero");
         }
@@ -116,6 +116,9 @@ public class Tablero {
 
         return edificios;
     }
-    public TipoCasilla obtenerEdificio(Posicion posicion) {return EDIFICIO;}
+
+    public TipoCasilla obtenerEdificio(Posicion posicion) {
+        return EDIFICIO;
+    }
 
 }

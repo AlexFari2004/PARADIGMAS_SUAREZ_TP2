@@ -69,6 +69,7 @@ public abstract class MovimientoVek implements Movible {
         }
         return alcanzables;
     }
+
     protected boolean existeCaminoLibre(Unidad unidad, Posicion destino, Tablero tablero) {
         Set<Posicion> visitadas = new HashSet<>();
         Deque<Posicion> cola = new ArrayDeque<>();

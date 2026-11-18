@@ -66,13 +66,16 @@ abstract public class Mech extends Unidad {
         movimientosRealizados.clear();
     }
 
-    public void mover(Posicion posicionDestino, Tablero tablero){
+    public void mover(Posicion posicionDestino, Tablero tablero) {
         acciones.ejecutar(Accion.MOVERSE, () -> ejecutarMovimiento(posicionDestino, tablero));
     }
 
     @Override
-    public void registrarEn(Tablero tablero) { tablero.registrarMech(this); }
+    public void registrarEn(Tablero tablero) {
+        tablero.registrarMech(this);
+    }
 
     @Override
-    public void hundirse() {}
+    public void hundirse() {
+    }
 }

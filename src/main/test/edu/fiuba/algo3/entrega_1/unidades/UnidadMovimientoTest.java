@@ -7,98 +7,101 @@ import edu.fiuba.algo3.modelo.errors.MovimientoFueraDeRangoException;
 import edu.fiuba.algo3.modelo.unidad.MovimientoMech;
 import edu.fiuba.algo3.modelo.unidad.Unidad;
 import edu.fiuba.algo3.modelo.unidad.errors.MovimientoEnPosicionOcupadaException;
-
 import edu.fiuba.algo3.modelo.unidad.errors.PosicionFueraDelTableroException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class UnidadMovimientoTest {
 
-        private static final Posicion ORIGEN = new Posicion(4, 3);
+    private static final Posicion ORIGEN = new Posicion(4, 3);
 
-        private Tablero tablero;
-        private UnidadDePrueba unidad;
+    private Tablero tablero;
+    private UnidadDePrueba unidad;
 
-        private static class UnidadDePrueba extends Unidad {
+    private static class UnidadDePrueba extends Unidad {
 
-            public UnidadDePrueba() {
-                super(3, new MovimientoMech());
-            }
-
-            public void registrarEn(Tablero tablero) {};
+        public UnidadDePrueba() {
+            super(3, new MovimientoMech());
         }
 
-        @BeforeEach
-        void setUp() {
-            tablero = new Tablero();
-            unidad = new UnidadDePrueba();
-            tablero.colocar(unidad, ORIGEN);
+        public void registrarEn(Tablero tablero) {
         }
 
-        @Test
-        public void unidadNoPuedeMoverseFueraDeRango() {
+        ;
+    }
 
-            Posicion fueraDeRango = new Posicion(5, 7);
+    @BeforeEach
+    void setUp() {
+        tablero = new Tablero();
+        unidad = new UnidadDePrueba();
+        tablero.colocar(unidad, ORIGEN);
+    }
 
-            assertThrows(
-                    MovimientoFueraDeRangoException.class,
-                    () -> unidad.mover(fueraDeRango, tablero)
-            );
+    @Test
+    public void unidadNoPuedeMoverseFueraDeRango() {
 
-            assertEquals(ORIGEN, unidad.getPosicion());
-        }
+        Posicion fueraDeRango = new Posicion(5, 7);
 
-        @Test
-        public void unidadNoPuedeMoverseAUnaPosicionOcupadaPorOtraUnidad() {
+        assertThrows(
+                MovimientoFueraDeRangoException.class,
+                () -> unidad.mover(fueraDeRango, tablero)
+        );
 
-            UnidadDePrueba otraUnidad = new UnidadDePrueba();
-            Posicion posicionOtraUnidad = new Posicion(4, 4);
-            tablero.colocar(otraUnidad, posicionOtraUnidad);
+        assertEquals(ORIGEN, unidad.getPosicion());
+    }
 
-            assertThrows(
-                    MovimientoEnPosicionOcupadaException.class,
-                    () -> unidad.mover(posicionOtraUnidad, tablero)
-            );
+    @Test
+    public void unidadNoPuedeMoverseAUnaPosicionOcupadaPorOtraUnidad() {
 
-            assertEquals(ORIGEN, unidad.getPosicion());
-        }
+        UnidadDePrueba otraUnidad = new UnidadDePrueba();
+        Posicion posicionOtraUnidad = new Posicion(4, 4);
+        tablero.colocar(otraUnidad, posicionOtraUnidad);
 
-        @Test
-        public void unidadNoPuedeMoverseAUnaPosicionConUnTerrenoQueNoPuedeTransitar() {
+        assertThrows(
+                MovimientoEnPosicionOcupadaException.class,
+                () -> unidad.mover(posicionOtraUnidad, tablero)
+        );
 
-            Posicion posicionConObstaculo = new Posicion(5, 3);
+        assertEquals(ORIGEN, unidad.getPosicion());
+    }
 
-            assertThrows(
-                    CasillaNoTransitableException.class,
-                    () -> unidad.mover(posicionConObstaculo, tablero)
-            );
+    @Test
+    public void unidadNoPuedeMoverseAUnaPosicionConUnTerrenoQueNoPuedeTransitar() {
 
-            assertEquals(ORIGEN, unidad.getPosicion());
-        }
+        Posicion posicionConObstaculo = new Posicion(5, 3);
 
-        @Test
-        public void unidadPuedeMoverseAUnaPosicionValida() {
+        assertThrows(
+                CasillaNoTransitableException.class,
+                () -> unidad.mover(posicionConObstaculo, tablero)
+        );
 
-            Posicion posicionValida = new Posicion(3, 3);
+        assertEquals(ORIGEN, unidad.getPosicion());
+    }
 
-            unidad.mover(posicionValida, tablero);
+    @Test
+    public void unidadPuedeMoverseAUnaPosicionValida() {
 
-            assertEquals(posicionValida, unidad.getPosicion());
-            assertFalse(tablero.obtenerCasilla(ORIGEN).estaOcupada());
-            assertTrue(tablero.obtenerCasilla(posicionValida).estaOcupada());
-        }
+        Posicion posicionValida = new Posicion(3, 3);
 
-        @Test
-        public void unidadNoPuedeMoverseFueraDelTablero() {
+        unidad.mover(posicionValida, tablero);
 
-            Posicion posicionFueraDelTablero = new Posicion(8, 3);
+        assertEquals(posicionValida, unidad.getPosicion());
+        assertFalse(tablero.obtenerCasilla(ORIGEN).estaOcupada());
+        assertTrue(tablero.obtenerCasilla(posicionValida).estaOcupada());
+    }
 
-            assertThrows(
+    @Test
+    public void unidadNoPuedeMoverseFueraDelTablero() {
+
+        Posicion posicionFueraDelTablero = new Posicion(8, 3);
+
+        assertThrows(
                 PosicionFueraDelTableroException.class,
                 () -> unidad.mover(posicionFueraDelTablero, tablero)
-            );
-            assertEquals(ORIGEN, unidad.getPosicion());
-        }
+        );
+        assertEquals(ORIGEN, unidad.getPosicion());
     }
+}

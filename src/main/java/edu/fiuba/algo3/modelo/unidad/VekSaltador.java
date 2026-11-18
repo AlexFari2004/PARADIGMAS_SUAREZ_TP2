@@ -5,9 +5,11 @@ import edu.fiuba.algo3.modelo.Tablero;
 
 import java.util.List;
 
-public class VekSaltador extends Vek{
+public class VekSaltador extends Vek {
 
-    public VekSaltador() { super(2, 2,new SinEfecto(), new MovimientoSaltador()); }
+    public VekSaltador() {
+        super(2, 2, new SinEfecto(), new MovimientoSaltador());
+    }
 
     @Override
     protected List<Posicion> posicionesAtacables(Posicion actual, Tablero tablero) {

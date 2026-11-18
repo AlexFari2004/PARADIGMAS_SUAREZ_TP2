@@ -3,16 +3,12 @@ package edu.fiuba.algo3.entrega_2;
 import edu.fiuba.algo3.modelo.Emergencia;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.casilla.Casilla;
-import edu.fiuba.algo3.modelo.casilla.Suelo;
-
 import edu.fiuba.algo3.modelo.errors.CasillaNoTransitableException;
 import edu.fiuba.algo3.modelo.unidad.Vek;
 import edu.fiuba.algo3.modelo.unidad.VekSaltador;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class EmergenciaTest {
@@ -32,7 +28,6 @@ public class EmergenciaTest {
                 CasillaNoTransitableException.class,
                 () -> emergencia.emerger(tablero)
         );
-
 
 
     }

@@ -4,7 +4,7 @@ public class Logger {
     private static boolean enabled = true;
 
     public static void log(String mensaje) {
-        if  (enabled) {
+        if (enabled) {
             System.out.println(mensaje);
         }
     }

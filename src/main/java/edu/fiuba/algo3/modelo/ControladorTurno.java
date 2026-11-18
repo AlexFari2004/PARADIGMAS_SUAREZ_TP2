@@ -14,7 +14,7 @@ public class ControladorTurno {
     private final FabricaFase fabrica;
     private Fase faseActual;
 
-    public ControladorTurno(Tablero tablero, RedElectrica redElectrica,FabricaFase fabrica ,int turnoRestante) {
+    public ControladorTurno(Tablero tablero, RedElectrica redElectrica, FabricaFase fabrica, int turnoRestante) {
         this.tablero = tablero;
         this.fabrica = fabrica;
         this.redElectrica = redElectrica;
@@ -25,7 +25,9 @@ public class ControladorTurno {
     public Fase iniciarTurno(FabricaFase fabricaFase) {
         faseActual = fabricaFase.crearFaseVek();
         return faseActual;
-    };
+    }
+
+    ;
 
     public void ejecutarFaseActual() {
 
@@ -36,7 +38,8 @@ public class ControladorTurno {
         turnoActual++;
 
     }
-    public void finalizarTurnos(){
+
+    public void finalizarTurnos() {
         turnoRestante = turnoRestante - 1;
     }
 }

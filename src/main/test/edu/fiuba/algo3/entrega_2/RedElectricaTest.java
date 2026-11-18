@@ -3,7 +3,8 @@ package edu.fiuba.algo3.entrega_2;
 import edu.fiuba.algo3.modelo.RedElectrica;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class RedElectricaTest {
 

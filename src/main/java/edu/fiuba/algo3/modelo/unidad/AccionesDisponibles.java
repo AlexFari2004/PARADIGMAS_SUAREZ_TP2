@@ -6,17 +6,18 @@ import java.util.*;
 
 public class AccionesDisponibles {
     private final Map<Accion, Integer> permitidas = new EnumMap<>(Accion.class);
-    private final Map<Accion, Integer> restantes  = new EnumMap<>(Accion.class);
+    private final Map<Accion, Integer> restantes = new EnumMap<>(Accion.class);
     private final Map<Accion, Set<Accion>> bloqueos = new EnumMap<>(Accion.class);
 
-    public AccionesDisponibles() {}
+    public AccionesDisponibles() {
+    }
 
     public void permitirAccion(Accion accion, int cantidad) {
         permitidas.put(accion, cantidad);
         restantes.put(accion, cantidad);
     }
 
-    public void bloquear(Accion causante, Collection<Accion> bloqueadas ) {
+    public void bloquear(Accion causante, Collection<Accion> bloqueadas) {
         bloqueos.put(causante, EnumSet.copyOf(bloqueadas));
     }
 

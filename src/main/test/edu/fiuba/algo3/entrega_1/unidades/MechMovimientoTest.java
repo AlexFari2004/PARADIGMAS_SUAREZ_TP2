@@ -1,17 +1,15 @@
 package edu.fiuba.algo3.entrega_1.unidades;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.errors.CasillaNoTransitableException;
 import edu.fiuba.algo3.modelo.errors.MovimientoFueraDeRangoException;
 import edu.fiuba.algo3.modelo.unidad.Mech;
 import edu.fiuba.algo3.modelo.unidad.errors.MovimientoEnPosicionOcupadaException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class MechMovimientoTest {
@@ -32,7 +30,7 @@ public class MechMovimientoTest {
         Posicion fueraDeRango = new Posicion(5, 7);
 
         assertThrows(MovimientoFueraDeRangoException.class,
-            () -> mech1.mover(fueraDeRango, tablero));
+                () -> mech1.mover(fueraDeRango, tablero));
         assertEquals(ORIGEN, mech1.getPosicion());
     }
 
@@ -43,16 +41,16 @@ public class MechMovimientoTest {
         tablero.colocar(mech2, posicionMech2);
 
         assertThrows(MovimientoEnPosicionOcupadaException.class,
-            () -> mech1.mover(posicionMech2, tablero));
+                () -> mech1.mover(posicionMech2, tablero));
         assertEquals(ORIGEN, mech1.getPosicion());
     }
 
     @Test
     public void mechNoPuedeMoverseEnPosicionConObstaculo() {
         Posicion posicionConObstaculo = new Posicion(5, 3);
-        
+
         assertThrows(CasillaNoTransitableException.class,
-            () -> mech1.mover(posicionConObstaculo, tablero));
+                () -> mech1.mover(posicionConObstaculo, tablero));
         assertEquals(ORIGEN, mech1.getPosicion());
     }
 

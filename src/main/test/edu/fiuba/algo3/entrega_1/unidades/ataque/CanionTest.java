@@ -1,14 +1,15 @@
 package edu.fiuba.algo3.entrega_1.unidades.ataque;
 
-import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.casilla.TipoCasilla;
-import edu.fiuba.algo3.modelo.unidad.mech.MechCanion;
 import edu.fiuba.algo3.modelo.unidad.VekSaltador;
 import edu.fiuba.algo3.modelo.unidad.arma.Canion;
-
+import edu.fiuba.algo3.modelo.unidad.mech.MechCanion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CanionTest {
 
