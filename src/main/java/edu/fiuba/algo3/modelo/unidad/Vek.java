@@ -1,17 +1,17 @@
 package edu.fiuba.algo3.modelo.unidad;
 
+import edu.fiuba.algo3.modelo.Ataque;
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Tablero;
+import edu.fiuba.algo3.modelo.unidad.movilidad.Movilidad;
+import edu.fiuba.algo3.modelo.unidad.movilidad.Terrestre;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
-import edu.fiuba.algo3.modelo.Ataque;
-import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.unidad.movilidad.Movilidad;
-import edu.fiuba.algo3.modelo.unidad.movilidad.Terrestre;
 
 public abstract class Vek extends Unidad{
     private Ataque ataqueAnunciado;

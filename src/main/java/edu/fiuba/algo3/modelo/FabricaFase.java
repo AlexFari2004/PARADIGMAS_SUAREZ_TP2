@@ -1,8 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.List;
-import edu.fiuba.algo3.modelo.Tablero;
-
 public class FabricaFase {
 
     private final Tablero tablero;

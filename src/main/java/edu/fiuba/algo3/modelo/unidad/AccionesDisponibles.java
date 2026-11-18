@@ -1,12 +1,8 @@
 package edu.fiuba.algo3.modelo.unidad;
 
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.EnumSet;
-import java.util.Map;
-import java.util.Set;
-
 import edu.fiuba.algo3.modelo.unidad.errors.AccionNoPermitidaException;
+
+import java.util.*;
 
 public class AccionesDisponibles {
     private final Map<Accion, Integer> permitidas = new EnumMap<>(Accion.class);

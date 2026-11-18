@@ -1,19 +1,16 @@
 package edu.fiuba.algo3.modelo;
-import java.util.ArrayList;
-import java.util.List;
 
-import static edu.fiuba.algo3.modelo.casilla.TipoCasilla.ACIDO;
-import static edu.fiuba.algo3.modelo.casilla.TipoCasilla.AGUA;
-import static edu.fiuba.algo3.modelo.casilla.TipoCasilla.EDIFICIO;
-import static edu.fiuba.algo3.modelo.casilla.TipoCasilla.MONTAÑA;
-import static edu.fiuba.algo3.modelo.casilla.TipoCasilla.SUELO;
-import static java.util.stream.Collectors.toList;
-
-import edu.fiuba.algo3.modelo.casilla.*;
+import edu.fiuba.algo3.modelo.casilla.Casilla;
+import edu.fiuba.algo3.modelo.casilla.TipoCasilla;
 import edu.fiuba.algo3.modelo.errors.UnidadYaColocadaException;
 import edu.fiuba.algo3.modelo.unidad.Mech;
 import edu.fiuba.algo3.modelo.unidad.Unidad;
 import edu.fiuba.algo3.modelo.unidad.Vek;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static edu.fiuba.algo3.modelo.casilla.TipoCasilla.*;
 
 
 public class Tablero {

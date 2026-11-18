@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
 
-import edu.fiuba.algo3.modelo.unidad.Mech;
 import edu.fiuba.algo3.modelo.unidad.Vek;
 
 public class FaseResolucion extends Fase {

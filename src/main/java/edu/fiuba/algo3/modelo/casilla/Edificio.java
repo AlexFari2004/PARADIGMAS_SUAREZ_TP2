@@ -2,7 +2,6 @@ package edu.fiuba.algo3.modelo.casilla;
 
 import edu.fiuba.algo3.modelo.RedElectrica;
 import edu.fiuba.algo3.modelo.unidad.EfectoAtaque;
-import edu.fiuba.algo3.modelo.unidad.SinEfecto;
 
 public class Edificio extends Casilla {
     private final RedElectrica red;
