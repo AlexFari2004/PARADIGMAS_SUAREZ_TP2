@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo.unidad.arma;
 
-import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.casilla.Casilla;
+import edu.fiuba.algo3.modelo.tablero.Posicion;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.tablero.casilla.Casilla;
 import edu.fiuba.algo3.modelo.unidad.Unidad;
 
 public class Artilleria {

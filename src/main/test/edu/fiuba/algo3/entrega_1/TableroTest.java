@@ -1,11 +1,10 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.casilla.TipoCasilla;
+import edu.fiuba.algo3.modelo.tablero.Posicion;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.tablero.casilla.TipoCasilla;
 import org.junit.jupiter.api.Test;
 
-import static edu.fiuba.algo3.modelo.casilla.TipoCasilla.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

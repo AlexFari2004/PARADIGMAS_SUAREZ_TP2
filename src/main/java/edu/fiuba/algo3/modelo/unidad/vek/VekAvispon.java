@@ -1,11 +1,10 @@
 package edu.fiuba.algo3.modelo.unidad.vek;
 
-import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.unidad.Vek;
-import edu.fiuba.algo3.modelo.unidad.efectos.SinEfecto;
+import edu.fiuba.algo3.modelo.tablero.Posicion;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.unidad.efecto.SinEfecto;
 import edu.fiuba.algo3.modelo.unidad.movilidad.Voladora;
-import edu.fiuba.algo3.modelo.unidad.movimientos.MovimientoAvispon;
+import edu.fiuba.algo3.modelo.unidad.movimiento.MovimientoAvispon;
 
 import java.util.List;
 

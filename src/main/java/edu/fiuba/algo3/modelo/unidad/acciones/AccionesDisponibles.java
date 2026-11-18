@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.unidad.acciones;
 
-import edu.fiuba.algo3.modelo.errors.unidad.AccionNoPermitidaException;
+import edu.fiuba.algo3.modelo.errores.unidad.AccionNoPermitidaException;
 
 import java.util.*;
 

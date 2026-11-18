@@ -1,11 +1,11 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.entrega_1.unidades.MechPrueba;
-import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.errors.unidad.AtaqueDesdeAguaException;
-import edu.fiuba.algo3.modelo.unidad.Mech;
+import edu.fiuba.algo3.modelo.errores.unidad.AtaqueDesdeAguaException;
+import edu.fiuba.algo3.modelo.tablero.Posicion;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.unidad.arma.Puno;
+import edu.fiuba.algo3.modelo.unidad.mech.Mech;
 import edu.fiuba.algo3.modelo.unidad.vek.VekAvispon;
 import edu.fiuba.algo3.modelo.unidad.vek.VekLuciernaga;
 import org.junit.jupiter.api.BeforeEach;

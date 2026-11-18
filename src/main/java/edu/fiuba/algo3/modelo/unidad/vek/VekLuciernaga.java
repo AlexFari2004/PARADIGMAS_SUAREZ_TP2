@@ -1,10 +1,9 @@
 package edu.fiuba.algo3.modelo.unidad.vek;
 
-import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.unidad.Vek;
-import edu.fiuba.algo3.modelo.unidad.efectos.EfectoAcido;
-import edu.fiuba.algo3.modelo.unidad.movimientos.MovimientoLuciernaga;
+import edu.fiuba.algo3.modelo.tablero.Posicion;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.unidad.efecto.EfectoAcido;
+import edu.fiuba.algo3.modelo.unidad.movimiento.MovimientoLuciernaga;
 
 import java.util.List;
 

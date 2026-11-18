@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.entrega_1.unidades;
 
-import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.errors.unidad.AccionNoPermitidaException;
-import edu.fiuba.algo3.modelo.unidad.Mech;
+import edu.fiuba.algo3.modelo.errores.unidad.AccionNoPermitidaException;
+import edu.fiuba.algo3.modelo.tablero.Posicion;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.unidad.mech.Mech;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

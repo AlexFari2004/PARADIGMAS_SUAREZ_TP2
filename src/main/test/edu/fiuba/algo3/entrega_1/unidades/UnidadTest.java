@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.entrega_1.unidades;
 
-import edu.fiuba.algo3.modelo.Tablero;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.unidad.Unidad;
-import edu.fiuba.algo3.modelo.unidad.movimientos.MovimientoMech;
+import edu.fiuba.algo3.modelo.unidad.movimiento.MovimientoMech;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
