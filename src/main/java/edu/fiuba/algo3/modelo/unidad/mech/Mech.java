@@ -5,8 +5,8 @@ import edu.fiuba.algo3.modelo.errores.unidad.SinMovimientoParaDeshacerException;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.unidad.Unidad;
-import edu.fiuba.algo3.modelo.unidad.acciones.Accion;
-import edu.fiuba.algo3.modelo.unidad.acciones.AccionesDisponibles;
+import edu.fiuba.algo3.modelo.unidad.mech.acciones.Accion;
+import edu.fiuba.algo3.modelo.unidad.mech.acciones.AccionesDisponibles;
 import edu.fiuba.algo3.modelo.unidad.movimiento.Movible;
 
 import java.util.ArrayDeque;

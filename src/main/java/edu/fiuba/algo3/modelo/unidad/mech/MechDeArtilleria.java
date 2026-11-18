@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.unidad.mech;
 
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
-import edu.fiuba.algo3.modelo.unidad.arma.Artilleria;
+import edu.fiuba.algo3.modelo.unidad.mech.arma.Artilleria;
 import edu.fiuba.algo3.modelo.unidad.movimiento.MovimientoMech;
 
 public class MechDeArtilleria extends Mech {

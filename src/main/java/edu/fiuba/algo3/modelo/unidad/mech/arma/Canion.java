@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.unidad.arma;
+package edu.fiuba.algo3.modelo.unidad.mech.arma;
 
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;

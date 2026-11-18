@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.unidad.acciones;
+package edu.fiuba.algo3.modelo.unidad.mech.acciones;
 
 import edu.fiuba.algo3.modelo.errores.unidad.AccionNoPermitidaException;
 

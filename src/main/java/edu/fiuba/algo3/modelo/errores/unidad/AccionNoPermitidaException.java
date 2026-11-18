@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.errores.unidad;
 
-import edu.fiuba.algo3.modelo.unidad.acciones.Accion;
+import edu.fiuba.algo3.modelo.unidad.mech.acciones.Accion;
 
 public class AccionNoPermitidaException extends RuntimeException {
     public AccionNoPermitidaException(Accion accion) {
