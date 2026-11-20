@@ -76,4 +76,12 @@ public class Posicion {
     public int hashCode() {
         return Objects.hash(fila, columna);
     }
+
+    public Direccion direccionHacia(Posicion destino) {
+        return Direccion.entre(this, destino);
+    }
+
+    public Posicion siguienteEn(Direccion direccion) {
+        return direccion.aplicarA(this);
+    }
 }
