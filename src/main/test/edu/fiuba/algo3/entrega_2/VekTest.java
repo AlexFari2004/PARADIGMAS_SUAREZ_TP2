@@ -1,14 +1,14 @@
 package edu.fiuba.algo3.entrega_2;
 
+import edu.fiuba.algo3.modelo.mech.Punio;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
-import edu.fiuba.algo3.modelo.unidad.arma.Puno;
-import edu.fiuba.algo3.modelo.unidad.mech.Mech;
-import edu.fiuba.algo3.modelo.unidad.mech.MechCombate;
-import edu.fiuba.algo3.modelo.unidad.vek.Vek;
-import edu.fiuba.algo3.modelo.unidad.vek.VekAvispon;
-import edu.fiuba.algo3.modelo.unidad.vek.VekLuciernaga;
-import edu.fiuba.algo3.modelo.unidad.vek.VekSaltador;
+import edu.fiuba.algo3.modelo.mech.Mech;
+import edu.fiuba.algo3.modelo.mech.MechCombate;
+import edu.fiuba.algo3.modelo.vek.Vek;
+import edu.fiuba.algo3.modelo.vek.VekAvispon;
+import edu.fiuba.algo3.modelo.vek.VekLuciernaga;
+import edu.fiuba.algo3.modelo.vek.VekSaltador;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +25,7 @@ public class VekTest {
     @Test
     void saltadorMuerdeCasillaAdyacenteConDosDeDaño() {
         Vek saltador = new VekSaltador();
-        Mech mech = new MechCombate(new Puno());
+        Mech mech = new MechCombate(new Punio());
         tablero.colocar(saltador, new Posicion(4, 3));
         tablero.colocar(mech, new Posicion(4, 4));
         int vidaInicial = mech.obtenerVida();
@@ -39,7 +39,7 @@ public class VekTest {
     @Test
     void avisponPicaCasillaAdyacenteConUnoDeDaño() {
         Vek avispon = new VekAvispon();
-        Mech mech = new MechCombate(new Puno());
+        Mech mech = new MechCombate(new Punio());
         tablero.colocar(avispon, new Posicion(4, 3));
         tablero.colocar(mech, new Posicion(4, 4));
         int vidaInicial = mech.obtenerVida();
@@ -53,7 +53,7 @@ public class VekTest {
     @Test
     void luciernagaAtacaEnLineaRectaConUnoDeDaño() {
         Vek luciernaga = new VekLuciernaga();
-        Mech mech = new MechCombate(new Puno());
+        Mech mech = new MechCombate(new Punio());
         tablero.colocar(luciernaga, new Posicion(3, 1));
         //falta implementar la logica de ataque linea recta, hardcodeado
         tablero.colocar(mech, new Posicion(3, 2));

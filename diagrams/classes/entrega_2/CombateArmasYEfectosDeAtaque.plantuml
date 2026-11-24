@@ -45,7 +45,7 @@ interface EfectoAtaque {
 class SinEfecto implements EfectoAtaque
 class EfectoAcido implements EfectoAtaque
 
-MechCombate --> "1" Puno : puno
+MechCombate --> "1" Puno : punio
 MechCanion --> "1" Canion : canion
 MechDeArtilleria --> "1" Artilleria : arma
 

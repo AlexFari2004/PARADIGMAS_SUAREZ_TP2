@@ -1,0 +1,20 @@
+package edu.fiuba.algo3.modelo.vek;
+
+import edu.fiuba.algo3.modelo.tablero.Posicion;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.unidad.efecto.EfectoAcido;
+import edu.fiuba.algo3.modelo.unidad.movimiento.MovimientoLuciernaga;
+
+import java.util.List;
+
+public class VekLuciernaga extends Vek {
+
+    public VekLuciernaga() {
+        super(3, 1, new edu.fiuba.algo3.modelo.vek.EfectoAcido(), new edu.fiuba.algo3.modelo.vek.MovimientoLuciernaga());
+    }
+
+    @Override
+    protected List<Posicion> posicionesAtacables(Posicion actual, Tablero tablero) {
+        return tablero.obtenerPosicionesOrtogonales(actual);
+    }
+}

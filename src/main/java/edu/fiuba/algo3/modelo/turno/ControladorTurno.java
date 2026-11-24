@@ -2,9 +2,6 @@ package edu.fiuba.algo3.modelo.turno;
 
 import edu.fiuba.algo3.modelo.RedElectrica;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
-import edu.fiuba.algo3.modelo.turno.fases.FabricaFase;
-import edu.fiuba.algo3.modelo.turno.fases.Fase;
-import edu.fiuba.algo3.modelo.unidad.vek.Ataque;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +10,7 @@ public class ControladorTurno {
 
     private final Tablero tablero;
     private final RedElectrica redElectrica;
-    private final List<Ataque> ataques = new ArrayList<>();
+    private final List<Ataquevek> ataques = new ArrayList<>();
     private final List<Emergencia> emergencias = new ArrayList<>();
     private int turnoRestante;
     private int turnoActual = 1;

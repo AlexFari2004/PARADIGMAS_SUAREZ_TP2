@@ -72,8 +72,11 @@ public class Posicion {
         return fila == otra.fila && columna == otra.columna;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(fila, columna);
+    public boolean estaAlineadaCon(Posicion otra) {
+        return fila == otra.getFila() ^ columna == otra.getColumna();  // XOR: misma fila o misma columna, pero no ambas
     }
+    //@Override
+    //public int hashCode() {
+    //    return Objects.hash(fila, columna);
+    //}
 }

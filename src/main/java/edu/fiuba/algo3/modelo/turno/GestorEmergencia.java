@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.turno;
 
 import edu.fiuba.algo3.modelo.tablero.Posicion;
-import edu.fiuba.algo3.modelo.unidad.vek.VekAvispon;
+import edu.fiuba.algo3.modelo.vek.VekAvispon;
 
 public class GestorEmergencia {
     public Emergencia generarEmergencia() {

@@ -1,13 +1,13 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.entrega_1.unidades.MechPrueba;
-import edu.fiuba.algo3.modelo.errores.unidad.AtaqueDesdeAguaException;
+import edu.fiuba.algo3.entrega_1.MechPrueba;
+import edu.fiuba.algo3.modelo.errores.AtaqueDesdeAguaException;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
-import edu.fiuba.algo3.modelo.unidad.arma.Puno;
-import edu.fiuba.algo3.modelo.unidad.mech.Mech;
-import edu.fiuba.algo3.modelo.unidad.vek.VekAvispon;
-import edu.fiuba.algo3.modelo.unidad.vek.VekLuciernaga;
+import edu.fiuba.algo3.modelo.mech.Punio;
+import edu.fiuba.algo3.modelo.mech.Mech;
+import edu.fiuba.algo3.modelo.vek.VekAvispon;
+import edu.fiuba.algo3.modelo.vek.VekLuciernaga;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -35,10 +35,10 @@ public class AguaTest {
 
         VekLuciernaga luciernaga = new VekLuciernaga();
         tablero.colocar(luciernaga, AL_LADO_DEL_AGUA);
-        Puno puno = new Puno();
+        Punio punio = new Punio();
 
 
-        puno.atacar(DESDE_DONDE_SE_GOLPEA, AL_LADO_DEL_AGUA, tablero);
+        punio.atacar(DESDE_DONDE_SE_GOLPEA, AL_LADO_DEL_AGUA, tablero);
 
 
         assertEquals(AGUA, luciernaga.getPosicion());
@@ -50,10 +50,10 @@ public class AguaTest {
 
         VekLuciernaga luciernaga = new VekLuciernaga();
         tablero.colocar(luciernaga, SUELO);
-        Puno puno = new Puno();
+        Punio punio = new Punio();
 
 
-        puno.atacar(DEBAJO_DEL_SUELO, SUELO, tablero);
+        punio.atacar(DEBAJO_DEL_SUELO, SUELO, tablero);
 
 
         assertFalse(luciernaga.estaMuerta());

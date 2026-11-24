@@ -1,15 +1,14 @@
 package edu.fiuba.algo3.modelo.tablero;
 
-import edu.fiuba.algo3.modelo.errores.casillas.UnidadYaColocadaException;
-import edu.fiuba.algo3.modelo.tablero.casilla.Casilla;
-import edu.fiuba.algo3.modelo.tablero.casilla.TipoCasilla;
-import edu.fiuba.algo3.modelo.unidad.Unidad;
-import edu.fiuba.algo3.modelo.unidad.mech.Mech;
-import edu.fiuba.algo3.modelo.unidad.vek.Vek;
-import static edu.fiuba.algo3.modelo.tablero.casilla.TipoCasilla.*;
+import edu.fiuba.algo3.modelo.errores.UnidadYaColocadaException;
+import edu.fiuba.algo3.modelo.Unidad;
+import edu.fiuba.algo3.modelo.mech.Mech;
+import edu.fiuba.algo3.modelo.vek.Vek;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static edu.fiuba.algo3.modelo.tablero.TipoCasilla.*;
 
 
 public class Tablero {

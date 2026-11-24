@@ -71,72 +71,7 @@ class Juego {
 }
 
 
-class ControladorTurnos {
-    - turnoActual: int
-    - maxTurnos: int
-    - faseActual: Fase
-   
-    + ControladorTurnos(maxTurnos: int)
-    + ejecutarFaseActual(tablero: Tablero)
-    - avanzarFase(tablero: Tablero)
-    + finalizarTurno()
-   
-}
 
-interface FaseTurno {
-    + ejecutar()
-    + finalizar()
-    + estaFinalizada(): boolean
-}
-class FaseEmergencia {
-    + emerger(tablero: Tablero): Emergencia
-}
-class FaseJugador {
-    - tablero: Tablero
-
-    + FaseJugador(tablero: Tablero)
-
-    + moverMech(mech: Mech, destino: Posicion)
-    + atacarCon(mech: Mech, objetivo: Posicion)
-}
-class FaseVek {
-    - tablero: Tablero
-    + FaseVek(tablero: Tablero)
-    + moverVeks()
-    + anunciarAtaques(): List<Ataque>
-    + marcarEmergencia(): List<Emergencia>
-}
-class FaseResolucion {
-    - condicionVictoria: CondicionVictoria
-    - condicionDerrota: CondicionDerrota
-    - tablero: Tablero
-
-    + FaseResolucion(cv: CondicionVictoria, cd: CondicionDerrota, t: Tablero)
-    + verificarFinPartida():
-    + resolverAtaques()
-}
-class Emergencia {
-    - posicion: Posicion
-    - vek: Vek
-    + Emergencia(posicion: Posicion, vek: Vek)
-    + ejecutar(tablero: Tablero)
-}
-
-interface Verificable {
-    + verificar(tablero: Tablero): boolean
-}
-
-class CondicionVictoria {
-    + verificar(tablero: Tablero): boolean
-}
-
-class CondicionDerrota {
-    - tablero: Tablero
-    - red: RedElectrica
-    + CondicionDerrota(tablero: Tablero, red: RedElectrica)
-    + verificar(tablero: Tablero): boolean
-
-}
 
 class EstadisticasFinal {
     + calcularEstadisticas()

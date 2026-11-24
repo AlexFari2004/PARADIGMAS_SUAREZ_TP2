@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.entrega_1.unidades.MechPrueba;
-import edu.fiuba.algo3.modelo.errores.unidad.SinMovimientoParaDeshacerException;
+import edu.fiuba.algo3.entrega_1.MechPrueba;
+import edu.fiuba.algo3.modelo.errores.SinMovimientoParaDeshacerException;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
-import edu.fiuba.algo3.modelo.unidad.mech.Mech;
+import edu.fiuba.algo3.modelo.mech.Mech;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
