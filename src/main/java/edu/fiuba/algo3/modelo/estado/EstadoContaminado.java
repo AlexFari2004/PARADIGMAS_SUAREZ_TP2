@@ -1,25 +1,26 @@
 package edu.fiuba.algo3.modelo.estado;
 
-public class Contaminada implements EstadoUnidad {
-    private static final int MULTIPLICADOR_CONTAMINACION = 2;
+import edu.fiuba.algo3.modelo.Unidad;
 
+public class EstadoContaminado implements EstadoUnidad {
     @Override
-    public int calcularDaño(int daño) {
-        return daño * MULTIPLICADOR_CONTAMINACION;
+    public EstadoUnidad recibirDanio(Unidad unidad, int danio) {
+        unidad.restarVida(danio * 2);
+        return unidad.sinVida() ? new EstadoDestruido() : this;
     }
 
     @Override
     public EstadoUnidad contaminar() {
-        return this;
+        return this; // Regla 3.4: no se acumula
     }
 
     @Override
     public EstadoUnidad destruir() {
-        return new Destruida();
+        return new EstadoDestruido();
     }
 
     @Override
-    public EstadoUnidad actualizar(int vidaRestante) {
-        return vidaRestante <= 0 ? destruir() : this;
+    public boolean estaVivo() {
+        return true;
     }
 }

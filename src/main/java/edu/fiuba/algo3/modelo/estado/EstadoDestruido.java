@@ -1,9 +1,11 @@
 package edu.fiuba.algo3.modelo.estado;
 
-public class Destruida implements EstadoUnidad {
+import edu.fiuba.algo3.modelo.Unidad;
+
+public class EstadoDestruido implements EstadoUnidad {
     @Override
-    public int calcularDaño(int daño) {
-        return 0;
+    public EstadoUnidad recibirDanio(Unidad unidad, int danio) {
+        return this;
     }
 
     @Override
@@ -17,7 +19,7 @@ public class Destruida implements EstadoUnidad {
     }
 
     @Override
-    public EstadoUnidad actualizar(int vidaRestante) {
-        return this;
+    public boolean estaVivo() {
+        return false;
     }
 }

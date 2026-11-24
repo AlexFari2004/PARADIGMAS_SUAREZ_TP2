@@ -1,12 +1,14 @@
-package edu.fiuba.algo3.modelo.mech;
+package edu.fiuba.algo3.modelo.estado;
+
+import edu.fiuba.algo3.modelo.Unidad;
 
 public interface EstadoUnidad {
 
-    int calcularDaño(int daño);
+    EstadoUnidad recibirDanio(Unidad unidad, int danio);
 
     EstadoUnidad contaminar();
 
     EstadoUnidad destruir();
 
-    EstadoUnidad actualizar(int vidaRestante);
+    boolean estaVivo();
 }
