@@ -34,7 +34,7 @@ public class MechTurnoTest {
                 AccionNoPermitidaException.class,
                 () -> mech.mover(destinoSiguiente2, tablero)
         );
-        assertEquals(destinoSiguiente1, mech.getPosicion());
+        assertEquals(destinoSiguiente1, mech.obtenerPosicion());
     }
 
     @Test
@@ -55,7 +55,7 @@ public class MechTurnoTest {
         mech.mover(destinoSiguiente, tablero);
 
         assertDoesNotThrow(() -> mech.deshacerMovimiento(tablero));
-        assertEquals(ORIGEN, mech.getPosicion());
+        assertEquals(ORIGEN, mech.obtenerPosicion());
     }
 
     @Test
@@ -68,7 +68,7 @@ public class MechTurnoTest {
                 AccionNoPermitidaException.class,
                 () -> mech.deshacerMovimiento(tablero)
         );
-        assertEquals(ORIGEN, mech.getPosicion());
+        assertEquals(ORIGEN, mech.obtenerPosicion());
     }
 
     @Test
@@ -82,6 +82,6 @@ public class MechTurnoTest {
                 AccionNoPermitidaException.class,
                 () -> mech.deshacerMovimiento(tablero)
         );
-        assertEquals(destinoSiguiente, mech.getPosicion());
+        assertEquals(destinoSiguiente, mech.obtenerPosicion());
     }
 }

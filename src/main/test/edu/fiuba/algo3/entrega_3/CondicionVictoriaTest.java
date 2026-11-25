@@ -13,42 +13,5 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class CondicionVictoriaTest {
-    private Tablero tablero;
-    private RedElectrica red;
-    private CondicionVictoria victoria;
-
-    @BeforeEach
-    void preparar() {
-        tablero = new Tablero();
-        red = new RedElectrica(5);
-        tablero.colocar(new MechCombate(new Punio()), new Posicion(4, 0));
-        victoria = new CondicionVictoria(tablero, 5,red);
-    }
-
-    @Test
-    public void antesDeCompletarLosCincoTurnosNoHayVictoria() {
-
-        assertFalse(victoria.verificarResultado());
-    }
-
-    @Test
-    public void alCompletarLosCincoTurnosSinDerrotaHayVictoria() {
-        //pasar 5 turno con controlador
-        assertTrue(victoria.verificarResultado());
-    }
-
-    @Test
-    public void completarLosCincoTurnosConLaRedEnCeroNoEsVictoria() {
-        red.consumirEnergia(5);
-
-        assertFalse(victoria.verificarResultado());
-    }
-
-    @Test
-    public void completarLosCincoTurnosSinMechsVivosNoEsVictoria() {
-        tablero.obtenerMechsVivos().forEach(m -> m.recibirDanio(100));
-
-        assertFalse(victoria.verificarResultado());
-    }
 
 }

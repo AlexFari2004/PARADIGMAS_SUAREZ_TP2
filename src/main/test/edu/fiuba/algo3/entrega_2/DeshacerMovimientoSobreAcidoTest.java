@@ -36,7 +36,7 @@ public class DeshacerMovimientoSobreAcidoTest {
         mech.deshacerMovimiento(tablero);
 
 
-        assertEquals(SUELO, mech.getPosicion());
+        assertEquals(SUELO, mech.obtenerPosicion());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class DeshacerMovimientoSobreAcidoTest {
         mech.deshacerMovimiento(tablero);
 
 
-        mech.recibirDaño(1);
+        mech.recibirDanio(1);
 
 
         assertEquals(2, mech.obtenerVida());
@@ -73,7 +73,7 @@ public class DeshacerMovimientoSobreAcidoTest {
         mech.deshacerMovimiento(tablero);
 
 
-        mech.recibirDaño(1);
+        mech.recibirDanio(1);
 
 
         assertEquals(1, mech.obtenerVida());

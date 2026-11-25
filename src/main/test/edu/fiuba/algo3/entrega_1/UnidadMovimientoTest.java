@@ -7,7 +7,7 @@ import edu.fiuba.algo3.modelo.errores.PosicionFueraDelTableroException;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.Unidad;
-import edu.fiuba.algo3.modelo.vek.MovimientoMech;
+import edu.fiuba.algo3.modelo.movimiento.MovimientoMech;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -50,7 +50,7 @@ public class UnidadMovimientoTest {
                 () -> unidad.mover(fueraDeRango, tablero)
         );
 
-        assertEquals(ORIGEN, unidad.getPosicion());
+        assertEquals(ORIGEN, unidad.obtenerPosicion());
     }
 
     @Test
@@ -65,7 +65,7 @@ public class UnidadMovimientoTest {
                 () -> unidad.mover(posicionOtraUnidad, tablero)
         );
 
-        assertEquals(ORIGEN, unidad.getPosicion());
+        assertEquals(ORIGEN, unidad.obtenerPosicion());
     }
 
     @Test
@@ -78,7 +78,7 @@ public class UnidadMovimientoTest {
                 () -> unidad.mover(posicionConObstaculo, tablero)
         );
 
-        assertEquals(ORIGEN, unidad.getPosicion());
+        assertEquals(ORIGEN, unidad.obtenerPosicion());
     }
 
     @Test
@@ -88,7 +88,7 @@ public class UnidadMovimientoTest {
 
         unidad.mover(posicionValida, tablero);
 
-        assertEquals(posicionValida, unidad.getPosicion());
+        assertEquals(posicionValida, unidad.obtenerPosicion());
         assertFalse(tablero.obtenerCasilla(ORIGEN).estaOcupada());
         assertTrue(tablero.obtenerCasilla(posicionValida).estaOcupada());
     }
@@ -102,6 +102,6 @@ public class UnidadMovimientoTest {
                 PosicionFueraDelTableroException.class,
                 () -> unidad.mover(posicionFueraDelTablero, tablero)
         );
-        assertEquals(ORIGEN, unidad.getPosicion());
+        assertEquals(ORIGEN, unidad.obtenerPosicion());
     }
 }

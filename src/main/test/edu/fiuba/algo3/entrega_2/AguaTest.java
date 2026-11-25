@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.entrega_1.MechPrueba;
+import edu.fiuba.algo3.modelo.ataque.EfectoEmpuje;
 import edu.fiuba.algo3.modelo.errores.AtaqueDesdeAguaException;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
@@ -35,13 +36,13 @@ public class AguaTest {
 
         VekLuciernaga luciernaga = new VekLuciernaga();
         tablero.colocar(luciernaga, AL_LADO_DEL_AGUA);
-        Punio punio = new Punio();
+        Punio punio = new Punio(2, new EfectoEmpuje());
 
 
         punio.atacar(DESDE_DONDE_SE_GOLPEA, AL_LADO_DEL_AGUA, tablero);
 
 
-        assertEquals(AGUA, luciernaga.getPosicion());
+        assertEquals(AGUA, luciernaga.obtenerPosicion());
         assertTrue(luciernaga.estaMuerta());
     }
 
@@ -50,7 +51,7 @@ public class AguaTest {
 
         VekLuciernaga luciernaga = new VekLuciernaga();
         tablero.colocar(luciernaga, SUELO);
-        Punio punio = new Punio();
+        Punio punio = new Punio(2,new EfectoEmpuje());
 
 
         punio.atacar(DEBAJO_DEL_SUELO, SUELO, tablero);
@@ -69,7 +70,7 @@ public class AguaTest {
         avispon.mover(AGUA, tablero);
 
 
-        assertEquals(AGUA, avispon.getPosicion());
+        assertEquals(AGUA, avispon.obtenerPosicion());
         assertFalse(avispon.estaMuerta());
     }
 

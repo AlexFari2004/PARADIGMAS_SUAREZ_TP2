@@ -20,7 +20,7 @@ public class RedElectricaTest {
         RedElectrica red = new RedElectrica(1);
         red.consumirEnergia(5);
         assertEquals(0, red.obtenerEnergia());
-        assertFalse(red.energiaDisponible());
+        assertFalse(red.estaAgotada());
     }
 
 }

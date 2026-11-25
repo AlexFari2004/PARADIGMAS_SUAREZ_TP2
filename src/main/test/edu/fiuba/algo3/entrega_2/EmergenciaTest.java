@@ -18,7 +18,7 @@ public class EmergenciaTest {
         Posicion posicion = new Posicion(2, 2);
 
         Vek vek = new VekSaltador();
-        vek.recibirDaño(4);
+        vek.recibirDanio(4);
         tablero.obtenerCasilla(posicion).ocupar(vek);
 
         Emergencia emergencia =

@@ -2,7 +2,7 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.Unidad;
-import edu.fiuba.algo3.modelo.vek.MovimientoMech;
+import edu.fiuba.algo3.modelo.movimiento.MovimientoMech;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -34,11 +34,11 @@ public class UnidadTest {
 
         Unidad unidad = new UnidadATestear(3);
 
-        unidad.recibirDaño(2);
+        unidad.recibirDanio(2);
 
         assertFalse(unidad.estaMuerta());
 
-        unidad.recibirDaño(1);
+        unidad.recibirDanio(1);
 
         assertTrue(unidad.estaMuerta());
     }
@@ -49,7 +49,7 @@ public class UnidadTest {
         Unidad unidad = new UnidadATestear(3);
 
         unidad.contaminar();
-        unidad.recibirDaño(2);
+        unidad.recibirDanio(2);
 
         assertTrue(unidad.estaMuerta());
     }

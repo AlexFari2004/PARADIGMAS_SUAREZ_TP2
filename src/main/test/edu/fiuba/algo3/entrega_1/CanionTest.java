@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.ataque.EfectoEmpuje;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.tablero.TipoCasilla;
@@ -22,7 +23,7 @@ public class CanionTest {
 
     @Test
     public void test01CanionImpactaSoloALaPrimeraUnidadEnLineaRectaYNoALasDetras() {
-        Canion canion = new Canion();
+        Canion canion = new Canion(1,new EfectoEmpuje());
         MechCanion mech = new MechCanion(canion);
 
         VekSaltador vekDelante = new VekSaltador();
@@ -45,7 +46,7 @@ public class CanionTest {
 
     @Test
     public void test02CanionSeDetieneEnObstaculo() {
-        MechCanion mech = new MechCanion(new Canion());
+        MechCanion mech = new MechCanion(new Canion(1,new EfectoEmpuje()));
         VekSaltador vekDetras = new VekSaltador();
         Posicion posMech = new Posicion(0, 2);
         Posicion posObstaculo = new Posicion(0, 3);

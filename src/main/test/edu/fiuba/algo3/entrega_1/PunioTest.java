@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.ataque.SinEfecto;
 import edu.fiuba.algo3.modelo.mech.Punio;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
@@ -22,7 +23,7 @@ public class PunioTest {
 
     @Test
     public void testPunoCausa2DeDanioAUnidadAdyacente() {
-        Punio punio = new Punio();
+        Punio punio = new Punio(1,new SinEfecto());
         MechCombate mech = new MechCombate(punio);
         VekSaltador vek = new VekSaltador();
 
@@ -39,7 +40,7 @@ public class PunioTest {
 
     @Test
     public void testPunoEmpujaUnaCasillaAUnidadAdyacente() {
-        Punio punio = new Punio();
+        Punio punio = new Punio(1,new SinEfecto());
         MechCombate mech = new MechCombate(punio);
         VekSaltador vek = new VekSaltador();
 
@@ -54,7 +55,7 @@ public class PunioTest {
 
         assertFalse(tablero.obtenerCasilla(posVek).estaOcupada());
         assertEquals(vek, tablero.obtenerCasilla(posEmpujado).getUnidad());
-        assertEquals(posEmpujado.getFila(), vek.getPosicion().getFila());
-        assertEquals(posEmpujado.getColumna(), vek.getPosicion().getColumna());
+        assertEquals(posEmpujado.getFila(), vek.obtenerPosicion().getFila());
+        assertEquals(posEmpujado.getColumna(), vek.obtenerPosicion().getColumna());
     }
 }

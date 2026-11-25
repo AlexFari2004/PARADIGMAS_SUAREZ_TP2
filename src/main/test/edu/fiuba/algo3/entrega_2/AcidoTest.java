@@ -33,7 +33,7 @@ public class AcidoTest {
         mech.mover(ACIDO, tablero);
 
 
-        mech.recibirDaño(1);
+        mech.recibirDanio(1);
 
 
         assertEquals(1, mech.obtenerVida());
@@ -47,7 +47,7 @@ public class AcidoTest {
         saltador.mover(ACIDO, tablero);
 
 
-        saltador.recibirDaño(1);
+        saltador.recibirDanio(1);
 
 
         assertTrue(saltador.estaMuerta());
@@ -60,7 +60,7 @@ public class AcidoTest {
         tablero.colocar(mech, SUELO);
 
 
-        mech.recibirDaño(1);
+        mech.recibirDanio(1);
 
 
         assertEquals(2, mech.obtenerVida());
@@ -76,7 +76,7 @@ public class AcidoTest {
         mech.mover(SUELO, tablero);
 
 
-        mech.recibirDaño(1);
+        mech.recibirDanio(1);
 
 
         assertEquals(1, mech.obtenerVida());
@@ -90,7 +90,7 @@ public class AcidoTest {
         avispon.mover(ACIDO, tablero);
 
 
-        avispon.recibirDaño(1);
+        avispon.recibirDanio(1);
 
 
         assertEquals(1, avispon.obtenerVida());

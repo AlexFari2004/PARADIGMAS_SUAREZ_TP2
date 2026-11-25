@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.ataque.EfectoEmpujeOrtogonal;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.tablero.TipoCasilla;
@@ -22,7 +23,7 @@ public class ArtilleriaTest {
 
     @Test
     public void test01ArtilleriaNoPuedeAtacarCasillasAdyacentes() {
-        Artilleria artilleria = new Artilleria();
+        Artilleria artilleria = new Artilleria(1,new EfectoEmpujeOrtogonal());
         MechDeArtilleria mech = new MechDeArtilleria(artilleria);
 
         Posicion posMech = new Posicion(3, 3);
@@ -37,7 +38,7 @@ public class ArtilleriaTest {
 
     @Test
     public void test02ArtilleriaEmpujaHaciaArribaLaUnidadAdyacenteHaciaArribaYHace2DeDanioAlObjetivo() {
-        Artilleria artilleria = new Artilleria();
+        Artilleria artilleria = new Artilleria(1, new EfectoEmpujeOrtogonal());
         MechDeArtilleria mech = new MechDeArtilleria(artilleria);
 
         VekSaltador vekObjetivo = new VekSaltador();
@@ -60,7 +61,7 @@ public class ArtilleriaTest {
 
     @Test
     public void test03ArtilleriaEmpujaHaciaAbajoLaUnidadAdyacenteHaciaAbajoYHace2DeDanioAlObjetivo() {
-        Artilleria artilleria = new Artilleria();
+        Artilleria artilleria = new Artilleria(1, new EfectoEmpujeOrtogonal());
         MechDeArtilleria mech = new MechDeArtilleria(artilleria);
 
         VekSaltador vekObjetivo = new VekSaltador();
@@ -83,7 +84,7 @@ public class ArtilleriaTest {
 
     @Test
     public void test04ArtilleriaEmpujaHaciaLaIzquierdaLaUnidadAdyacenteALaIzquierdaYHace2DeDanioAlObjetivo() {
-        Artilleria artilleria = new Artilleria();
+        Artilleria artilleria = new Artilleria(1, new EfectoEmpujeOrtogonal());
         MechDeArtilleria mech = new MechDeArtilleria(artilleria);
 
         VekSaltador vekObjetivo = new VekSaltador();
@@ -106,7 +107,7 @@ public class ArtilleriaTest {
 
     @Test
     public void test05ArtilleriaEmpujaHaciaLaDerechaLaUnidadAdyacenteALaDerechaYHace2DeDanioAlObjetivo() {
-        Artilleria artilleria = new Artilleria();
+        Artilleria artilleria = new Artilleria(1, new EfectoEmpujeOrtogonal());
         MechDeArtilleria mech = new MechDeArtilleria(artilleria);
 
         VekSaltador vekObjetivo = new VekSaltador();
@@ -129,7 +130,7 @@ public class ArtilleriaTest {
 
     @Test
     public void test06ArtilleriaAtacaPorEncimaDeObstaculos() {
-        MechDeArtilleria mech = new MechDeArtilleria(new Artilleria());
+        MechDeArtilleria mech = new MechDeArtilleria(new Artilleria(1, new EfectoEmpujeOrtogonal()));
         VekSaltador vekObjetivo = new VekSaltador();
         Posicion posMech = new Posicion(0, 2);
         Posicion posObjetivo = new Posicion(0, 4);

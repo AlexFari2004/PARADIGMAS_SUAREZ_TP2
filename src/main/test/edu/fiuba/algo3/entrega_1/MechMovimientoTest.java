@@ -31,7 +31,7 @@ public class MechMovimientoTest {
 
         assertThrows(MovimientoFueraDeRangoException.class,
                 () -> mech1.mover(fueraDeRango, tablero));
-        assertEquals(ORIGEN, mech1.getPosicion());
+        assertEquals(ORIGEN, mech1.obtenerPosicion());
     }
 
     @Test
@@ -42,7 +42,7 @@ public class MechMovimientoTest {
 
         assertThrows(MovimientoEnPosicionOcupadaException.class,
                 () -> mech1.mover(posicionMech2, tablero));
-        assertEquals(ORIGEN, mech1.getPosicion());
+        assertEquals(ORIGEN, mech1.obtenerPosicion());
     }
 
     @Test
@@ -51,7 +51,7 @@ public class MechMovimientoTest {
 
         assertThrows(CasillaNoTransitableException.class,
                 () -> mech1.mover(posicionConObstaculo, tablero));
-        assertEquals(ORIGEN, mech1.getPosicion());
+        assertEquals(ORIGEN, mech1.obtenerPosicion());
     }
 
     @Test
@@ -59,6 +59,6 @@ public class MechMovimientoTest {
         Posicion posicionValida = new Posicion(3, 3);
 
         assertDoesNotThrow(() -> mech1.mover(posicionValida, tablero));
-        assertEquals(posicionValida, mech1.getPosicion());
+        assertEquals(posicionValida, mech1.obtenerPosicion());
     }
 }
