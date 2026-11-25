@@ -11,7 +11,7 @@ public class Acido extends Casilla {
 
     @Override
     protected void aplicarEfecto(Unidad unidad) {
-        unidad.pisarAcido();
+        unidad.corroer();
     }
 
 }

@@ -12,7 +12,7 @@ public class AtaqueRectilineo extends AtaqueBase {
             throw new IllegalArgumentException("El objetivo debe estar en línea recta.");
         }
     }
-    
+
     @Override
     public Posicion calcularImpacto(Posicion atacante, Direccion direccion, Tablero tablero) {
         return calcularImpactoDesdeSimulacion(atacante, atacante, direccion, tablero);

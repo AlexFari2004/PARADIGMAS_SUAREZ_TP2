@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.tablero;
 
+import edu.fiuba.algo3.modelo.RedElectrica;
+import edu.fiuba.algo3.modelo.ataque.Direccion;
 import edu.fiuba.algo3.modelo.errores.UnidadYaColocadaException;
 import edu.fiuba.algo3.modelo.Unidad;
 import edu.fiuba.algo3.modelo.mech.Mech;
@@ -19,7 +21,7 @@ public class Tablero {
     private final List<Vek> veks = new ArrayList<>();
 
     private final Casilla[][] casillas;
-
+    private final RedElectrica redElectrica;
     private static final TipoCasilla[][] TABLERO = {
             {SUELO, AGUA, SUELO, MONTAÑA, SUELO, SUELO, SUELO, SUELO},
             {SUELO, SUELO, SUELO, SUELO, SUELO, EDIFICIO, SUELO, SUELO},
@@ -31,8 +33,12 @@ public class Tablero {
             {ACIDO, SUELO, SUELO, ACIDO, SUELO, SUELO, SUELO, EDIFICIO}
 
     };
-
     public Tablero() {
+        this(new RedElectrica());
+    }
+
+    public Tablero(RedElectrica redElectrica) {
+        this.redElectrica = redElectrica;
         this.casillas = new Casilla[FILAS][COLUMNAS];
         inicializarTablero();
     }
@@ -74,7 +80,7 @@ public class Tablero {
 
     public void colocar(Unidad unidad, Posicion posicion) {
 
-        if (unidad.getPosicion() != null) {
+        if (unidad.obtenerPosicion() != null) {
             throw new UnidadYaColocadaException();
         }
 
@@ -115,8 +121,63 @@ public class Tablero {
         return edificios;
     }
 
-    public TipoCasilla obtenerEdificio(Posicion posicion) {
-        return EDIFICIO;
+    //public TipoCasilla obtenerEdificio(Posicion posicion) {
+        //return EDIFICIO;
+    //}
+
+    public boolean estaDentro(Posicion p) { return p.estaEnElTablero(FILAS, COLUMNAS); }
+
+    public void empujar(Unidad unidad, Direccion direccion) {
+        if (unidad == null || !unidad.estaVivo()) {
+            return;
+        }
+
+        Posicion origen = unidad.obtenerPosicion();
+        Posicion destino = direccion.desde(origen);
+
+        // Regla 3.5.3: si sale del tablero, no se mueve ni recibe daño de choque
+        if (!estaDentro(destino)) {
+            return;
+        }
+
+        Casilla casillaDestino = obtenerCasilla(destino);
+
+        // Regla 3.5.1: casilla libre (Suelo, Agua o Ácido sin unidad)
+        if (casillaDestino.puedeSerOcupada()) {
+            obtenerCasilla(origen).liberar();
+            unidad.actualizarPosicion(destino);
+            casillaDestino.ocupar(unidad);
+            return;
+        }
+
+        // Regla 3.5.2: casilla ocupada por otra unidad u obstáculo (Edificio o Montaña)
+        unidad.recibirDanio(1);
+        if (!unidad.estaVivo()) {
+            obtenerCasilla(origen).liberar();
+        }
+
+        casillaDestino.recibirDanio(1, this, destino);
     }
 
+    public void destruirEdificioEn(Posicion posicion) {
+        reemplazarCasilla(posicion, TipoCasilla.SUELO.crearCasilla());
+        consumirRedElectrica(1);
+    }
+    public void consumirRedElectrica(int cantidad) {
+        redElectrica.consumirEnergia(cantidad);
+    }
+    public int obtenerEnergiaRedElectrica() {
+        return redElectrica.obtenerEnergia();
+    }
+
+    public boolean redElectricaAgotada() {
+        return redElectrica.estaAgotada();
+    }
+    public void reemplazarCasilla(Posicion posicion, Casilla nuevaCasilla) {
+        if (!estaDentro(posicion)) {
+            throw new IllegalArgumentException(
+                    "La posición no está dentro de los limites del tablero");
+        }
+        casillas[posicion.getFila()][posicion.getColumna()] = nuevaCasilla;
+    }
 }

@@ -12,7 +12,10 @@ public class Agua extends Casilla {
 
     @Override
     protected void aplicarEfecto(Unidad unidad) {
-        unidad.caerAlAgua();
+        unidad.sumergir();
+        if (!unidad.estaVivo()) {
+            liberar();
+        }
     }
 
     @Override

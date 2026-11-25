@@ -2,10 +2,9 @@ package edu.fiuba.algo3.modelo.tablero;
 
 import edu.fiuba.algo3.modelo.errores.MovimientoEnPosicionOcupadaException;
 import edu.fiuba.algo3.modelo.Unidad;
-import edu.fiuba.algo3.modelo.vek.EfectoAtaque;
+import edu.fiuba.algo3.modelo.ataque.EfectoAtaque;
 
 public abstract class Casilla {
-    private Ocupante ocupante = new SinOcupante();
     private Unidad unidad;
 
     public void ocupar(Unidad unidad) {
@@ -25,7 +24,12 @@ public abstract class Casilla {
     }
 
     public boolean estaOcupada() {
+
         return this.unidad != null;
+    }
+
+    public boolean puedeSerOcupada() {
+        return !estaOcupada();
     }
 
     public void liberar() {
@@ -38,17 +42,17 @@ public abstract class Casilla {
 
     public abstract TipoCasilla getTipo();
 
-    public void recibirDanio(int danio) {
+    public void recibirDanio(int danio, Tablero tablero, Posicion posicion) {
+        if (!estaOcupada()) {
+            return;
+        }
         this.unidad.recibirDanio(danio);
-    }
-
-    public void recibirAtaque(int danio, EfectoAtaque efecto) {
-        if (!estaOcupada()) return;
-
-        Unidad ocupante = this.unidad;
-        recibirDanio(danio);
-        if (ocupante != null) {
-            efecto.aplicar(ocupante);
+        if (!this.unidad.estaVivo()) {
+            liberar();
         }
     }
+    public boolean detieneDisparo() {
+        return estaOcupada();
+    }
+
 }

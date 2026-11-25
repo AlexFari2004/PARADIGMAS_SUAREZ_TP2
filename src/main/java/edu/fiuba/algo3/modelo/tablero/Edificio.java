@@ -1,23 +1,29 @@
 package edu.fiuba.algo3.modelo.tablero;
 
 import edu.fiuba.algo3.modelo.RedElectrica;
-import edu.fiuba.algo3.modelo.vek.EfectoAtaque;
+import edu.fiuba.algo3.modelo.ataque.EfectoAtaque;
 
 public class Edificio extends Casilla {
-    private final RedElectrica red;
+    private static final int DANIO_RED_POR_DESTRUCCION = 1;
 
-    public Edificio(RedElectrica red) {
-        this.red = red;
+
+    @Override
+    public void recibirDanio(int danio, Tablero tablero, Posicion posicion) {
+        if (danio > 0) {
+            tablero.consumirRedElectrica(DANIO_RED_POR_DESTRUCCION);
+            tablero.reemplazarCasilla(posicion, TipoCasilla.SUELO.crearCasilla());
+        }
+
     }
 
     @Override
-    public void recibirDaño(int daño) {
-        red.consumirEnergia(1);
+    public boolean puedeSerOcupada() {
+        return false;
     }
 
     @Override
-    public void recibirAtaque(int daño, EfectoAtaque efecto) {
-        red.consumirEnergia(1);
+    public boolean detieneDisparo() {
+        return true;
     }
 
     @Override

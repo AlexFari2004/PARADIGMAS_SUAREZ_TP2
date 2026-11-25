@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 
 public enum TipoCasilla {
     SUELO(Suelo::new),
-    EDIFICIO(() -> new Edificio(new RedElectrica(5))),
+    EDIFICIO(() -> new Edificio()),
     MONTAÑA(Montaña::new),
     AGUA(Agua::new),
     ACIDO(Acido::new);
