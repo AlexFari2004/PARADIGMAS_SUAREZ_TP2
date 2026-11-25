@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.turno;
 
+import edu.fiuba.algo3.modelo.CondicionVictoria;
 import edu.fiuba.algo3.modelo.RedElectrica;
+import edu.fiuba.algo3.modelo.ataque.AtaqueAnunciado;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 
 import java.util.ArrayList;
@@ -8,41 +10,36 @@ import java.util.List;
 
 public class ControladorTurno {
 
-    private final Tablero tablero;
-    private final RedElectrica redElectrica;
-    private final List<Ataquevek> ataques = new ArrayList<>();
-    private final List<Emergencia> emergencias = new ArrayList<>();
-    private int turnoRestante;
-    private int turnoActual = 1;
-    private final FabricaFase fabrica;
-    private Fase faseActual;
+    private static final int TURNOS_MISION = 5;
 
-    public ControladorTurno(Tablero tablero, RedElectrica redElectrica, FabricaFase fabrica, int turnoRestante) {
-        this.tablero = tablero;
+    private final FabricaFase fabrica;
+    private final CondicionVictoria condicionVictoria;
+    private Fase faseActual;
+    private int turnosCompletados = 0;
+
+    public ControladorTurno(FabricaFase fabrica, CondicionVictoria condicionVictoria) {
         this.fabrica = fabrica;
-        this.redElectrica = redElectrica;
-        this.turnoRestante = turnoRestante;
+        this.condicionVictoria = condicionVictoria;
         this.faseActual = fabrica.crearFaseVek();
     }
 
-    public Fase iniciarTurno(FabricaFase fabricaFase) {
-        faseActual = fabricaFase.crearFaseVek();
+    public Fase obtenerFaseActual() {
         return faseActual;
     }
 
-    ;
-
-    public void ejecutarFaseActual() {
-
-        faseActual.ejecutar();
-
-        faseActual = faseActual.avanzar(fabrica);
-
-        turnoActual++;
-
+    public int obtenerTurnoActual() {
+        return Math.min(turnosCompletados + 1, TURNOS_MISION);
     }
 
-    public void finalizarTurnos() {
-        turnoRestante = turnoRestante - 1;
+    public void ejecutarFaseActual() {
+        faseActual.ejecutar();
+        if (faseActual.estaFinalizada()) {
+            faseActual = faseActual.avanzar(fabrica, this);
+        }
+    }
+
+    public void completarTurno() {
+        turnosCompletados++;
+        condicionVictoria.registrarTurnoCompletado();
     }
 }

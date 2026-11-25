@@ -10,5 +10,5 @@ public abstract class Fase {
         return finalizada;
     }
 
-    public abstract Fase avanzar(FabricaFase fabrica);
+    public abstract Fase avanzar(FabricaFase fabrica, ControladorTurno controlador);
 }

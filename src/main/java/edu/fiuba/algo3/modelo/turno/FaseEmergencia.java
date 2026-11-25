@@ -3,21 +3,23 @@ package edu.fiuba.algo3.modelo.turno;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 
 public class FaseEmergencia extends Fase {
-    private final Emergencia emergencia;
+    private final GestorEmergencia gestor;
     private final Tablero tablero;
 
-    public FaseEmergencia(Tablero tablero, Emergencia emergencia) {
+    public FaseEmergencia(Tablero tablero, GestorEmergencia gestor) {
         this.tablero = tablero;
-        this.emergencia = emergencia;
+        this.gestor = gestor;
     }
 
     @Override
     public void ejecutar() {
-        emergencia.emerger(tablero);
+        gestor.resolverEmergencia(tablero);
+        finalizada = true;
     }
 
     @Override
-    public Fase avanzar(FabricaFase fabrica) {
+    public Fase avanzar(FabricaFase fabrica, ControladorTurno controlador) {
+        controlador.completarTurno();
         return fabrica.crearFaseVek();
     }
 

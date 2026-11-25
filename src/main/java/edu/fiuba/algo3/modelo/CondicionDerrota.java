@@ -6,16 +6,14 @@ import edu.fiuba.algo3.modelo.tablero.Tablero;
 import java.util.List;
 
 public class CondicionDerrota implements Verificable {
-    private final Tablero tablero;
     private final RedElectrica redElectrica;
 
-    public CondicionDerrota(Tablero tablero, RedElectrica redElectrica) {
-        this.tablero = tablero;
+    public CondicionDerrota(RedElectrica redElectrica) {
         this.redElectrica = redElectrica;
     }
     @Override
     public boolean verificarResultado() {
-        return redElectrica.energiaDisponible() || tablero.obtenerMechsVivos().isEmpty();
+        return redElectrica.estaAgotada();
     }
 
 

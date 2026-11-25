@@ -1,13 +1,10 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.estado.EstadoNormal;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
-import edu.fiuba.algo3.modelo.mech.Destruida;
-import edu.fiuba.algo3.modelo.mech.EstadoUnidad;
-import edu.fiuba.algo3.modelo.mech.Operativa;
-import edu.fiuba.algo3.modelo.unidad.movilidad.Movilidad;
-import edu.fiuba.algo3.modelo.unidad.movilidad.Terrestre;
-import edu.fiuba.algo3.modelo.vek.Movible;
+import edu.fiuba.algo3.modelo.estado.EstadoUnidad;
+import edu.fiuba.algo3.modelo.movimiento.Movible;
 
 
 public abstract class Unidad {
@@ -16,20 +13,14 @@ public abstract class Unidad {
     private EstadoUnidad estado;
     protected Posicion posicion;
     protected final Movible movimiento;
-    protected final Movilidad movilidad;
 
     protected Unidad(int vida, Movible movimiento) {
-        this(vida, movimiento, new Terrestre());
-    }
-
-    protected Unidad(int vida, Movible movimiento, Movilidad movilidad) {
         this.vida = vida;
-        this.estado = new Operativa();
+        this.estado = new EstadoNormal();
         this.movimiento = movimiento;
-        this.movilidad = movilidad;
     }
 
-    public Posicion getPosicion() {
+    public Posicion obtenerPosicion() {
         return posicion;
     }
 
@@ -43,9 +34,7 @@ public abstract class Unidad {
 
 
     public void recibirDanio(int cantidadDanio) {
-        int danioRecibido = estado.calcularDanio(cantidadDanio);
-        vida = Math.max(0, vida - danioRecibido);
-        estado = estado.actualizar(vida);
+        this.estado = estado.recibirDanio(this, cantidadDanio);
     }
 
     public void contaminar() {
@@ -56,28 +45,32 @@ public abstract class Unidad {
         estado = estado.destruir();
     }
 
-    public void caerAlAgua() {
-        movilidad.caerAlAgua(this);
+    public void restarVida(int cantidad) {
+        this.vida = Math.max(0, this.vida - cantidad);
     }
 
-    public void pisarAcido() {
-        movilidad.pisarAcido(this);
+    public boolean sinVida() {
+        return this.vida == 0;
+    }
+
+    public boolean estaVivo() {
+        return estado.estaVivo();
     }
 
     public boolean estaMuerta() {
-        return estado instanceof Destruida;
+        return !estaVivo();
     }
 
-    public void hundirse() {
-        destruir();
+    public void sumergir() {
+        movimiento.sumergir(this);
+    }
+
+    public void corroer() {
+        movimiento.corroer(this);
     }
 
     public void mover(Posicion posicionDestino, Tablero tablero) {
         movimiento.mover(this, posicionDestino, tablero);
-    }
-
-    public boolean estaVivo() {
-        return !estaMuerta();
     }
 
     public abstract void registrarEn(Tablero tablero);

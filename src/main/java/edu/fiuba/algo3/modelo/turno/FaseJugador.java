@@ -8,13 +8,12 @@ import java.util.List;
 
 
 public class FaseJugador extends Fase {
-    private boolean deshacerAccion = false;
-    private Tablero tablero;
-    private List<Mech> mechDisponible;
+    private final Tablero tablero;
+    private boolean deshacerUsadoEnTurno = false;
+    private Mech ultimoMechMovido;
 
     public FaseJugador(Tablero tablero) {
         this.tablero = tablero;
-        mechDisponible = tablero.obtenerMechsVivos();
     }
 
     @Override
@@ -22,12 +21,13 @@ public class FaseJugador extends Fase {
         // Nada automático: espera las acciones del jugador.
     }
 
-    public void mover(Mech mech, Posicion destino, Tablero tablero) {
-        //
+    public void mover(Mech mech, Posicion destino) {
+        mech.mover(destino, tablero);
+        this.ultimoMechMovido = mech;
     }
 
     public void atacar(Mech mech, Posicion objetivo) {
-        //
+        mech.atacar(objetivo, tablero);
     }
 
     public void finalizarTurno() {
@@ -35,15 +35,18 @@ public class FaseJugador extends Fase {
     }
 
     public void deshacer() {
-        //
+        if (deshacerUsadoEnTurno || ultimoMechMovido == null) {
+            throw new IllegalStateException("No se puede deshacer el movimiento en este turno.");
+        }
+        ultimoMechMovido.deshacerMovimiento(tablero);
+        deshacerUsadoEnTurno = true;
+        ultimoMechMovido = null;
     }
 
 
     @Override
-    public Fase avanzar(FabricaFase fabricaFase) {
+    public Fase avanzar(FabricaFase fabricaFase, ControladorTurno controlador) {
         return fabricaFase.crearFaseResolucion();
     }
-
-    ;
 
 }
