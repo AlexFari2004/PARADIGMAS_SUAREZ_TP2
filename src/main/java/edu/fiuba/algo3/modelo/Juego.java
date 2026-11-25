@@ -4,7 +4,11 @@ import edu.fiuba.algo3.modelo.ataque.RegistroAtaque;
 import edu.fiuba.algo3.modelo.mech.Mech;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
-import edu.fiuba.algo3.modelo.turno.*;
+import edu.fiuba.algo3.modelo.turno.Fase;
+import edu.fiuba.algo3.modelo.turno.GestorEmergencia;
+import edu.fiuba.algo3.modelo.turno.FabricaFase;
+import edu.fiuba.algo3.modelo.turno.ControladorTurno;
+import edu.fiuba.algo3.modelo.turno.Emergencia;
 import edu.fiuba.algo3.modelo.vek.CriterioMenorFila;
 import edu.fiuba.algo3.modelo.vek.VekIA;
 
@@ -30,8 +34,8 @@ public class Juego {
 
         this.redElectrica = new RedElectrica();
         this.tablero = new Tablero(redElectrica);
-        this.condicionVictoria = new CondicionVictoria(TURNOS_MISION, redElectrica);
-        this.condicionDerrota = new CondicionDerrota(redElectrica);
+        this.condicionVictoria = new CondicionVictoria(TURNOS_MISION);
+        this.condicionDerrota = new CondicionDerrota();
 
         for (int i = 0; i < CANTIDAD_MECHS; i++) {
             tablero.colocar(mechsElegidos.get(i), posicionesIniciales.get(i));
@@ -69,11 +73,11 @@ public class Juego {
     }
 
     public boolean gano() {
-        return !condicionDerrota.verificarResultado() && condicionVictoria.verificarResultado();
+        return !condicionDerrota.verificarResultado(redElectrica) && condicionVictoria.verificarResultado(redElectrica);
     }
 
     public boolean perdio() {
-        return condicionDerrota.verificarResultado();
+        return condicionDerrota.verificarResultado(redElectrica);
     }
 
     public boolean terminoPartida() {
