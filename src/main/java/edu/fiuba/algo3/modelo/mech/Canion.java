@@ -2,9 +2,9 @@ package edu.fiuba.algo3.modelo.mech;
 
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
-import edu.fiuba.algo3.modelo.vek.Ataque;
-import edu.fiuba.algo3.modelo.vek.AtaqueRectilineo;
-import edu.fiuba.algo3.modelo.vek.EfectoAtaque;
+import edu.fiuba.algo3.modelo.ataque.Ataque;
+import edu.fiuba.algo3.modelo.ataque.AtaqueRectilineo;
+import edu.fiuba.algo3.modelo.ataque.EfectoAtaque;
 
 public class Canion implements Arma {
     private final int danio;

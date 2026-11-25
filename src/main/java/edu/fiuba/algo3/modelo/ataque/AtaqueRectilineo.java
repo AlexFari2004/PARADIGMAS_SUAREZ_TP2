@@ -1,6 +1,5 @@
-package edu.fiuba.algo3.modelo.vek;
+package edu.fiuba.algo3.modelo.ataque;
 
-import edu.fiuba.algo3.modelo.mech.Direccion;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 
@@ -9,27 +8,26 @@ public class AtaqueRectilineo extends AtaqueBase {
     protected void validarAlcance(Posicion atacante, Posicion objetivo, Tablero tablero) {
         boolean mismaFila = atacante.getFila() == objetivo.getFila();
         boolean mismaColumna = atacante.getColumna() == objetivo.getColumna();
-        boolean esElMismo = mismaFila && mismaColumna;
-
-        if (!tablero.estaDentro(objetivo) || esElMismo || (!mismaFila && !mismaColumna)) {
-            throw new IllegalArgumentException("Fuera de alcance");
+        if (!tablero.estaDentro(objetivo) || atacante.equals(objetivo) || (!mismaFila && !mismaColumna)) {
+            throw new IllegalArgumentException("El objetivo debe estar en línea recta.");
         }
+    }
+    
+    @Override
+    public Posicion calcularImpacto(Posicion atacante, Direccion direccion, Tablero tablero) {
+        return calcularImpactoDesdeSimulacion(atacante, atacante, direccion, tablero);
     }
 
     @Override
-    protected Posicion calcularImpacto(Posicion atacante, Posicion objetivo, Tablero tablero) {
-        Direccion direccion = Direccion.entre(atacante, objetivo);
-
-        Posicion actual = direccion.desde(atacante);
-        Posicion ultimaDentro = actual;
-
+    public Posicion calcularImpactoDesdeSimulacion(Posicion origen, Posicion posicionAIgnorar,
+                                                   Direccion direccion, Tablero tablero) {
+        Posicion actual = direccion.desde(origen);
         while (tablero.estaDentro(actual)) {
-            if (tablero.obtenerCasilla(actual).bloqueaMovimiento()) {
+            if (!actual.equals(posicionAIgnorar) && tablero.obtenerCasilla(actual).detieneDisparo()) {
                 return actual;
             }
-            ultimaDentro = actual;
             actual = direccion.desde(actual);
         }
-        return ultimaDentro;
+        return actual;
     }
 }

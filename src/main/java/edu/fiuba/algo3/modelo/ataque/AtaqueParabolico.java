@@ -1,26 +1,35 @@
-package edu.fiuba.algo3.modelo.vek;
+package edu.fiuba.algo3.modelo.ataque;
 
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 
 public class AtaqueParabolico extends AtaqueBase {
-    private final int distanciaMinima;
-
-    public AtaqueParabolico(int distanciaMinima) {
-        this.distanciaMinima = distanciaMinima;
-    }
+    private static final int RANGO_MINIMO = 2;
 
     @Override
     protected void validarAlcance(Posicion atacante, Posicion objetivo, Tablero tablero) {
+        boolean mismaFila = atacante.getFila() == objetivo.getFila();
+        boolean mismaColumna = atacante.getColumna() == objetivo.getColumna();
+        int distancia = atacante.distanciaA(objetivo);
+
         if (!tablero.estaDentro(objetivo)
-                || !atacante.estaAlineadaCon(objetivo)
-                || atacante.distanciaA(objetivo) < distanciaMinima) {
-            throw new IllegalArgumentException("Fuera de alcance");
+                || (!mismaFila && !mismaColumna)
+                || distancia < RANGO_MINIMO) {
+            throw new IllegalArgumentException(
+                    "La artillería requiere un objetivo en línea recta a 2 o más casillas.");
         }
     }
 
     @Override
-    protected Posicion calcularImpacto(Posicion atacante, Posicion objetivo, Tablero tablero) {
+    protected Posicion resolverPuntoImpacto(Posicion atacante, Posicion objetivo,
+                                            Direccion direccion, Tablero tablero) {
         return objetivo;
     }
+
+    @Override
+    public Posicion calcularImpacto(Posicion atacante, Direccion direccion, Tablero tablero) {
+        throw new UnsupportedOperationException(
+                "El ataque parabólico requiere una casilla objetivo específica.");
+    }
 }
+

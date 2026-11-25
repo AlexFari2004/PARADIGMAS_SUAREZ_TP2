@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.errores.SinMovimientoParaDeshacerException;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.Unidad;
-import edu.fiuba.algo3.modelo.vek.Movible;
+import edu.fiuba.algo3.modelo.movimiento.Movible;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -77,7 +77,4 @@ abstract public class Mech extends Unidad {
         tablero.registrarMech(this);
     }
 
-    @Override
-    public void hundirse() {
-    }
 }
