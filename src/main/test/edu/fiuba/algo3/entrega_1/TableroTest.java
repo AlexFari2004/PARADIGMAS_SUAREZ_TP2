@@ -18,11 +18,11 @@ public class TableroTest {
         Tablero tablero = new Tablero();
 
         TipoCasilla[][] tableroPredefinido = {
-                {SUELO, AGUA, SUELO, MONTAÑA, SUELO, SUELO, SUELO, SUELO},
+                {SUELO, AGUA, SUELO, MONTANIA, SUELO, SUELO, SUELO, SUELO},
                 {SUELO, SUELO, SUELO, SUELO, SUELO, EDIFICIO, SUELO, SUELO},
                 {SUELO, SUELO, ACIDO, SUELO, AGUA, AGUA, SUELO, SUELO},
                 {AGUA, SUELO, SUELO, SUELO, SUELO, SUELO, ACIDO, SUELO},
-                {SUELO, SUELO, MONTAÑA, SUELO, SUELO, SUELO, SUELO, MONTAÑA},
+                {SUELO, SUELO, MONTANIA, SUELO, SUELO, SUELO, SUELO, MONTANIA},
                 {SUELO, AGUA, SUELO, EDIFICIO, SUELO, SUELO, SUELO, SUELO},
                 {SUELO, SUELO, AGUA, SUELO, SUELO, AGUA, SUELO, SUELO},
                 {ACIDO, SUELO, SUELO, ACIDO, SUELO, SUELO, SUELO, EDIFICIO}

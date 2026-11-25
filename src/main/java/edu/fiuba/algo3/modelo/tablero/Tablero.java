@@ -22,12 +22,14 @@ public class Tablero {
 
     private final Casilla[][] casillas;
     private final RedElectrica redElectrica;
+    private final GestorEmpuje gestorEmpuje;
+
     private static final TipoCasilla[][] TABLERO = {
-            {SUELO, AGUA, SUELO, MONTAÑA, SUELO, SUELO, SUELO, SUELO},
+            {SUELO, AGUA, SUELO, MONTANIA, SUELO, SUELO, SUELO, SUELO},
             {SUELO, SUELO, SUELO, SUELO, SUELO, EDIFICIO, SUELO, SUELO},
             {SUELO, SUELO, ACIDO, SUELO, AGUA, AGUA, SUELO, SUELO},
             {AGUA, SUELO, SUELO, SUELO, SUELO, SUELO, ACIDO, SUELO},
-            {SUELO, SUELO, MONTAÑA, SUELO, SUELO, SUELO, SUELO, MONTAÑA},
+            {SUELO, SUELO, MONTANIA, SUELO, SUELO, SUELO, SUELO, MONTANIA},
             {SUELO, AGUA, SUELO, EDIFICIO, SUELO, SUELO, SUELO, SUELO},
             {SUELO, SUELO, AGUA, SUELO, SUELO, AGUA, SUELO, SUELO},
             {ACIDO, SUELO, SUELO, ACIDO, SUELO, SUELO, SUELO, EDIFICIO}
@@ -41,6 +43,7 @@ public class Tablero {
         this.redElectrica = redElectrica;
         this.casillas = new Casilla[FILAS][COLUMNAS];
         inicializarTablero();
+        this.gestorEmpuje = new GestorEmpuje(this);
     }
 
     private void inicializarTablero() {
@@ -121,42 +124,10 @@ public class Tablero {
         return edificios;
     }
 
-    //public TipoCasilla obtenerEdificio(Posicion posicion) {
-        //return EDIFICIO;
-    //}
-
     public boolean estaDentro(Posicion p) { return p.estaEnElTablero(FILAS, COLUMNAS); }
 
     public void empujar(Unidad unidad, Direccion direccion) {
-        if (unidad == null || !unidad.estaVivo()) {
-            return;
-        }
-
-        Posicion origen = unidad.obtenerPosicion();
-        Posicion destino = direccion.desde(origen);
-
-        // Regla 3.5.3: si sale del tablero, no se mueve ni recibe daño de choque
-        if (!estaDentro(destino)) {
-            return;
-        }
-
-        Casilla casillaDestino = obtenerCasilla(destino);
-
-        // Regla 3.5.1: casilla libre (Suelo, Agua o Ácido sin unidad)
-        if (casillaDestino.puedeSerOcupada()) {
-            obtenerCasilla(origen).liberar();
-            unidad.actualizarPosicion(destino);
-            casillaDestino.ocupar(unidad);
-            return;
-        }
-
-        // Regla 3.5.2: casilla ocupada por otra unidad u obstáculo (Edificio o Montaña)
-        unidad.recibirDanio(1);
-        if (!unidad.estaVivo()) {
-            obtenerCasilla(origen).liberar();
-        }
-
-        casillaDestino.recibirDanio(1, this, destino);
+        gestorEmpuje.empujar(unidad, direccion);
     }
 
     public void destruirEdificioEn(Posicion posicion) {
@@ -178,6 +149,8 @@ public class Tablero {
             throw new IllegalArgumentException(
                     "La posición no está dentro de los limites del tablero");
         }
-        casillas[posicion.getFila()][posicion.getColumna()] = nuevaCasilla;
+        int fila = posicion.getFila();
+        int columna = posicion.getColumna();
+        casillas[fila][columna] = nuevaCasilla;
     }
 }

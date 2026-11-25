@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.turno;
 
-import edu.fiuba.algo3.modelo.ataque.AtaqueRegistrado;
+import edu.fiuba.algo3.modelo.ataque.RegistroAtaque;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.vek.VekIA;
 
@@ -9,9 +9,9 @@ public class FabricaFase {
     private final Tablero tablero;
     private final GestorEmergencia gestor;
     private final VekIA vekIA;
-    private final AtaqueRegistrado registrado;
+    private final RegistroAtaque registrado;
 
-    public FabricaFase(Tablero tablero, GestorEmergencia gestor, AtaqueRegistrado registrado, VekIA vekIA) {
+    public FabricaFase(Tablero tablero, GestorEmergencia gestor, RegistroAtaque registrado, VekIA vekIA) {
         this.tablero = tablero;
         this.gestor = gestor;
         this.registrado = registrado;

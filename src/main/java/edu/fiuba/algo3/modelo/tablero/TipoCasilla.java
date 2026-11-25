@@ -1,13 +1,11 @@
 package edu.fiuba.algo3.modelo.tablero;
 
-import edu.fiuba.algo3.modelo.RedElectrica;
-
 import java.util.function.Supplier;
 
 public enum TipoCasilla {
     SUELO(Suelo::new),
     EDIFICIO(() -> new Edificio()),
-    MONTAÑA(Montaña::new),
+    MONTANIA(Montania::new),
     AGUA(Agua::new),
     ACIDO(Acido::new);
 

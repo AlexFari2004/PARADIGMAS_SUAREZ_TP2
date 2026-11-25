@@ -1,15 +1,14 @@
 package edu.fiuba.algo3.modelo.turno;
 
 
-import edu.fiuba.algo3.modelo.ataque.AtaqueRegistrado;
+import edu.fiuba.algo3.modelo.ataque.RegistroAtaque;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
-import edu.fiuba.algo3.modelo.vek.Vek;
 
 public class FaseResolucion extends Fase {
     private final Tablero tablero;
-    private final AtaqueRegistrado registrado;
+    private final RegistroAtaque registrado;
 
-    public FaseResolucion(Tablero tablero, AtaqueRegistrado registrado) {
+    public FaseResolucion(Tablero tablero, RegistroAtaque registrado) {
 
         this.tablero = tablero;
         this.registrado = registrado;

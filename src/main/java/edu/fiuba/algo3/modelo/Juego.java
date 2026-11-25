@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.ataque.AtaqueRegistrado;
+import edu.fiuba.algo3.modelo.ataque.RegistroAtaque;
 import edu.fiuba.algo3.modelo.mech.Mech;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
@@ -38,7 +38,7 @@ public class Juego {
         }
 
         VekIA vekIA = new VekIA(new CriterioMenorFila());
-        AtaqueRegistrado registrado = new AtaqueRegistrado();
+        RegistroAtaque registrado = new RegistroAtaque();
         GestorEmergencia gestorEmergencia = new GestorEmergencia(emergenciasPredefinidas);
         FabricaFase fabricaFase = new FabricaFase(tablero, gestorEmergencia, registrado, vekIA);
 

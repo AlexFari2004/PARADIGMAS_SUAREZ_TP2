@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AtaqueRegistrado {
+public class RegistroAtaque {
     private final List<AtaqueAnunciado> anuncios = new ArrayList<>();
 
     public void registrar(AtaqueAnunciado anuncio) {

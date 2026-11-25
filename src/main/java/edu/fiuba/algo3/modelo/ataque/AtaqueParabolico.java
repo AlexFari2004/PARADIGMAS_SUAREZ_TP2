@@ -21,13 +21,13 @@ public class AtaqueParabolico extends AtaqueBase {
     }
 
     @Override
-    protected Posicion resolverPuntoImpacto(Posicion atacante, Posicion objetivo,
-                                            Direccion direccion, Tablero tablero) {
+    protected Posicion resolverPuntoCaida(Posicion atacante, Posicion objetivo,
+                                          Direccion direccion, Tablero tablero) {
         return objetivo;
     }
 
     @Override
-    public Posicion calcularImpacto(Posicion atacante, Direccion direccion, Tablero tablero) {
+    public Posicion obtenerCasillaAfectada(Posicion atacante, Direccion direccion, Tablero tablero) {
         throw new UnsupportedOperationException(
                 "El ataque parabólico requiere una casilla objetivo específica.");
     }

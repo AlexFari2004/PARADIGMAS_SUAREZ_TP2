@@ -42,7 +42,7 @@ public abstract class Vek extends Unidad {
 
     public Posicion previsualizarImpactoDesde(Posicion origenCandidato,
                                               Direccion direccion, Tablero tablero) {
-        return ataque.calcularImpactoDesdeSimulacion(
+        return ataque.estimarCasillaAfectada(
                 origenCandidato, obtenerPosicion(), direccion, tablero);
     }
 

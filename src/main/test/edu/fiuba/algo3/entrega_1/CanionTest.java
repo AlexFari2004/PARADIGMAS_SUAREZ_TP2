@@ -57,7 +57,7 @@ public class CanionTest {
 
         mech.atacar(new Posicion(0, 5), tablero);
 
-        assertEquals(TipoCasilla.MONTAÑA, tablero.obtenerCasilla(posObstaculo).getTipo());
+        assertEquals(TipoCasilla.MONTANIA, tablero.obtenerCasilla(posObstaculo).getTipo());
         assertEquals(2, vekDetras.obtenerVida());
     }
 }

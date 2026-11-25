@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.vek;
 
-import edu.fiuba.algo3.modelo.ataque.AtaqueAnunciado;
-import edu.fiuba.algo3.modelo.ataque.AtaqueRegistrado;
+import edu.fiuba.algo3.modelo.ataque.RegistroAtaque;
 import edu.fiuba.algo3.modelo.ataque.Direccion;
 import edu.fiuba.algo3.modelo.mech.Mech;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
@@ -22,7 +21,7 @@ public class VekIA {
         this.criterio = criterio;
     }
 
-    public void jugarTurno(Vek vek, Tablero tablero, AtaqueRegistrado anuncios) {
+    public void tomarDecision(Vek vek, Tablero tablero, RegistroAtaque registroAtaque) {
         List<Posicion> candidatas = obtenerCandidatasOrdenadas(vek, tablero);
 
         Set<Posicion> posicionesEdificios = new HashSet<>(tablero.obtenerPosicionEdificios());
@@ -30,17 +29,17 @@ public class VekIA {
                 .map(Mech::obtenerPosicion)
                 .collect(Collectors.toSet());
 
-        // Prioridad 1: moverse a una posición desde la que pueda atacar un Edificio
-        if (intentarAtacarObjetivo(vek, candidatas, posicionesEdificios, tablero, anuncios)) {
+        // intenta atacar un Edificio
+        if (intentarAtacarObjetivo(vek, candidatas, posicionesEdificios, tablero, registroAtaque)) {
             return;
         }
 
-        // Prioridad 2: moverse a una posición desde la que pueda atacar un Mech
-        if (intentarAtacarObjetivo(vek, candidatas, posicionesMechs, tablero, anuncios)) {
+        // intenta atacar un Mech
+        if (intentarAtacarObjetivo(vek, candidatas, posicionesMechs, tablero, registroAtaque)) {
             return;
         }
 
-        // Prioridad 3: acercarse al edificio más cercano, sin anunciar ataque
+        // se acerca a los edificios
         acercarseAEdificioMasCercano(vek, candidatas, posicionesEdificios, tablero);
     }
 
@@ -54,13 +53,13 @@ public class VekIA {
 
     private boolean intentarAtacarObjetivo(Vek vek, List<Posicion> candidatas,
                                            Set<Posicion> objetivos, Tablero tablero,
-                                           AtaqueRegistrado anuncios) {
+                                           RegistroAtaque anuncios) {
         if (objetivos.isEmpty()) {
             return false;
         }
 
         for (Posicion candidata : candidatas) {
-            for (Direccion direccion : Direccion.todas()) {
+            for (Direccion direccion : Direccion.obtenerDirecciones()) {
                 Posicion impacto = vek.previsualizarImpactoDesde(candidata, direccion, tablero);
                 if (tablero.estaDentro(impacto) && objetivos.contains(impacto)) {
                     vek.mover(tablero, candidata);

@@ -14,19 +14,19 @@ public class AtaqueRectilineo extends AtaqueBase {
     }
 
     @Override
-    public Posicion calcularImpacto(Posicion atacante, Direccion direccion, Tablero tablero) {
-        return calcularImpactoDesdeSimulacion(atacante, atacante, direccion, tablero);
+    public Posicion obtenerCasillaAfectada(Posicion atacante, Direccion direccion, Tablero tablero) {
+        return estimarCasillaAfectada(atacante, atacante, direccion, tablero);
     }
 
     @Override
-    public Posicion calcularImpactoDesdeSimulacion(Posicion origen, Posicion posicionAIgnorar,
-                                                   Direccion direccion, Tablero tablero) {
-        Posicion actual = direccion.desde(origen);
+    public Posicion estimarCasillaAfectada(Posicion origen, Posicion posicionAIgnorar,
+                                           Direccion direccion, Tablero tablero) {
+        Posicion actual = direccion.desplazarHacia(origen);
         while (tablero.estaDentro(actual)) {
             if (!actual.equals(posicionAIgnorar) && tablero.obtenerCasilla(actual).detieneDisparo()) {
                 return actual;
             }
-            actual = direccion.desde(actual);
+            actual = direccion.desplazarHacia(actual);
         }
         return actual;
     }

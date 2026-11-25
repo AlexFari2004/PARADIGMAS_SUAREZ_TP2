@@ -28,6 +28,6 @@ public class AtaqueAnunciado {
     }
 
     public Posicion obtenerPosicionImpactoActual(Tablero tablero) {
-        return ataque.calcularImpacto(atacante.obtenerPosicion(), direccion, tablero);
+        return ataque.obtenerCasillaAfectada(atacante.obtenerPosicion(), direccion, tablero);
     }
 }

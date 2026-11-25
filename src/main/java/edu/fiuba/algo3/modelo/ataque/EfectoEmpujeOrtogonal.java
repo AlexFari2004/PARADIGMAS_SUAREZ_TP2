@@ -8,8 +8,8 @@ public class EfectoEmpujeOrtogonal implements EfectoAtaque{
     @Override
     public void aplicarEfecto(Direccion direccion, Posicion impacto, Tablero tablero) {
 
-        for (Direccion dirHaciaAfuera : Direccion.todas()) {
-            Posicion adyacente = dirHaciaAfuera.desde(impacto);
+        for (Direccion dirHaciaAfuera : Direccion.obtenerDirecciones()) {
+            Posicion adyacente = dirHaciaAfuera.desplazarHacia(impacto);
             if (tablero.estaDentro(adyacente)) {
                 Casilla casillaAdyacente = tablero.obtenerCasilla(adyacente);
                 if (casillaAdyacente.estaOcupada()) {

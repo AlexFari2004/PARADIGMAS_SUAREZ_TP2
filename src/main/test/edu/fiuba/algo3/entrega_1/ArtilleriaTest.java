@@ -140,7 +140,7 @@ public class ArtilleriaTest {
 
         mech.atacar(posObjetivo, tablero);
 
-        assertEquals(TipoCasilla.MONTAÑA, tablero.obtenerCasilla(new Posicion(0, 3)).getTipo());
+        assertEquals(TipoCasilla.MONTANIA, tablero.obtenerCasilla(new Posicion(0, 3)).getTipo());
         assertEquals(1, vekObjetivo.obtenerVida());
     }
 }

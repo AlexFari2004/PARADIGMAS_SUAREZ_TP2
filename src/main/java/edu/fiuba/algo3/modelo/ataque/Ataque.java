@@ -10,10 +10,10 @@ public interface Ataque {
     void generarAtaqueEnDireccion(Posicion atacante, Direccion direccion, Tablero tablero,
                                   int danio, EfectoAtaque efecto);
 
-    Posicion calcularImpacto(Posicion atacante, Direccion direccion, Tablero tablero);
+    Posicion obtenerCasillaAfectada(Posicion atacante, Direccion direccion, Tablero tablero);
 
-    Posicion calcularImpactoDesdeSimulacion(Posicion origen, Posicion posicionAIgnorar,
-                                            Direccion direccion, Tablero tablero);
+    Posicion estimarCasillaAfectada(Posicion origen, Posicion posicionAIgnorar,
+                                    Direccion direccion, Tablero tablero);
 }
 
 

@@ -12,7 +12,7 @@ public class AtaqueAdyacente extends AtaqueBase {
     }
 
     @Override
-    public Posicion calcularImpacto(Posicion atacante, Direccion direccion, Tablero tablero) {
-        return direccion.desde(atacante);
+    public Posicion obtenerCasillaAfectada(Posicion atacante, Direccion direccion, Tablero tablero) {
+        return direccion.desplazarHacia(atacante);
     }
 }
