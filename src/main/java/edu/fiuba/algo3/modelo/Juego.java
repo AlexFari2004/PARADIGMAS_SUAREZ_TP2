@@ -11,6 +11,7 @@ import edu.fiuba.algo3.modelo.turno.ControladorTurno;
 import edu.fiuba.algo3.modelo.turno.Emergencia;
 import edu.fiuba.algo3.modelo.vek.CriterioMenorFila;
 import edu.fiuba.algo3.modelo.vek.VekIA;
+import edu.fiuba.algo3.modelo.turno.FaseJugador;
 
 import java.util.List;
 
@@ -77,11 +78,11 @@ public class Juego {
     }
 
     public boolean gano() {
-        return !condicionDerrota.verificarResultado(redElectrica) && condicionVictoria.verificarResultado(redElectrica);
+        return !condicionDerrota.verificarResultado(tablero) && condicionVictoria.verificarResultado(tablero);
     }
 
     public boolean perdio() {
-        return condicionDerrota.verificarResultado(redElectrica);
+        return condicionDerrota.verificarResultado(tablero);
     }
 
     public boolean terminoPartida() {

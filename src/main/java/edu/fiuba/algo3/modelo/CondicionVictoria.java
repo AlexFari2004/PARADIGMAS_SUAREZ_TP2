@@ -13,8 +13,8 @@ public class CondicionVictoria implements Verificable{
     }
 
     @Override
-    public boolean verificarResultado(RedElectrica redElectrico) {
-        return !redElectrico.estaAgotada() && turnosCompletados >= totalTurnosMision;
+    public boolean verificarResultado(Tablero tablero) {
+        return !tablero.redElectricaAgotada() && turnosCompletados >= totalTurnosMision;
     }
 
 }
