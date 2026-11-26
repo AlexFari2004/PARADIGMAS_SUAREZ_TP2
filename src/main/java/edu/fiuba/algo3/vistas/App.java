@@ -1,41 +1,32 @@
 package edu.fiuba.algo3.vistas;
 
-import edu.fiuba.algo3.SystemInfo;
-import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.controllers.InicioControlador;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-/**
- * JavaFX App
- */
 public class App extends Application {
-    private Stage stage;
-    private Scene escenaPrincipal;
-    private Juego juego;
+
+    private static final int ANCHO = 1366;
+    private static final int ALTO = 768;
 
     @Override
     public void start(Stage stage) {
-        this.stage = stage;
-        stage.setTitle("TP2: Into the breach");
 
-        stage.setResizable(true);
-        stage.setResizable(true);
+        stage.setTitle("Into the Breach");
 
-        stage.setMinWidth(1200);
-        stage.setMinHeight(700);
+        InicioVista inicioVista = new InicioVista();
 
+        Scene escenaPrincipal = new Scene(inicioVista.getRoot(), ANCHO, ALTO);
+
+        new InicioControlador(inicioVista, stage);
+
+        stage.setScene(escenaPrincipal);
+        stage.setResizable(false);
         stage.show();
     }
 
     public static void main(String[] args) {
         launch();
     }
-
 }
