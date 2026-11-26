@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_4;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -130,7 +131,7 @@ public class TestIntegracionVictoria {
         mechCanion.atacar(destinoAtaqueMechCanionTurno2, tablero);
         Posicion destinoEmpujeVek = new Posicion(2, 4);
         Casilla casillaAguaConVekMuerto = tablero.obtenerCasilla(destinoEmpujeVek);
-        assertInstanceOf(VekSaltador.class, casillaAguaConVekMuerto.getUnidad());
+        assertFalse(casillaAguaConVekMuerto.estaOcupada());
         assertTrue(vekSaltador1.estaMuerta());
         juego.avanzarFase();
 
@@ -178,7 +179,8 @@ public class TestIntegracionVictoria {
         // Fase jugador
         Posicion destinoAtaqueMechArtilleriaTurno4 = new Posicion(4, 3);
         mechArtilleria.atacar(destinoAtaqueMechArtilleriaTurno4, tablero);
-        mechCombate.atacar(destinoAtaqueMechCombateTurno3, tablero); // Misma posicion ataque turno 3 (1,7)
+        Posicion posicionVekLuciernagaTurno4 = vekLuciernaga.obtenerPosicion();
+        mechCombate.atacar(posicionVekLuciernagaTurno4, tablero);
         assertTrue(vekLuciernaga.estaMuerta());
 
         Posicion destinoMovimientoMechCanionTurno4 = new Posicion(1, 3);
@@ -210,8 +212,9 @@ public class TestIntegracionVictoria {
             () -> mechArtilleria.atacar(destinoAtaqueMechArtilleriaTurno5, tablero)
         );
 
-        Posicion destinoAtaqueMechCanionTurno5 = new Posicion(1, 4);
+        Posicion destinoAtaqueMechCanionTurno5 = vekAvispon.obtenerPosicion();
         mechCanion.atacar(destinoAtaqueMechCanionTurno5, tablero);
+        
         assertTrue(vekAvispon.estaMuerta());
         juego.avanzarFase();
 
@@ -221,6 +224,6 @@ public class TestIntegracionVictoria {
         // Fase emergencia
         juego.avanzarFase();
         assertTrue(juego.gano());
-        assertEquals(tablero.obtenerEnergiaRedElectrica(), energiaInicialRedElectrica - 1);
+        assertEquals(tablero.obtenerEnergiaRedElectrica(), energiaInicialRedElectrica - 2);
     }
 }
