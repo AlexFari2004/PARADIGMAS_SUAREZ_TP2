@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_4;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -26,6 +27,7 @@ import edu.fiuba.algo3.modelo.tablero.Casilla;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.turno.Emergencia;
+import edu.fiuba.algo3.modelo.vek.Vek;
 import edu.fiuba.algo3.modelo.vek.VekAvispon;
 import edu.fiuba.algo3.modelo.vek.VekLuciernaga;
 import edu.fiuba.algo3.modelo.vek.VekSaltador;
@@ -71,11 +73,16 @@ public class TestIntegracionVictoria {
         Posicion posicionEmergenciaVekAvispon = new Posicion(4, 4);
         Posicion posicionEmergenciaVekSaltador2 = new Posicion(1, 3);
 
+        Vek vekSaltador1 = new VekSaltador();
+        Vek vekLuciernaga =  new VekLuciernaga();
+        Vek vekAvispon = new VekAvispon();
+        Vek vekSaltador2 = new VekSaltador();
+
         List<Emergencia> emergencias = List.of(
-                new Emergencia(new VekSaltador(), posicionEmergenciaVekSaltador1),
-                new Emergencia(new VekLuciernaga(), posicionEmergenciaVekLuciernaga),
-                new Emergencia(new VekAvispon(), posicionEmergenciaVekAvispon),
-                new Emergencia(new VekSaltador(), posicionEmergenciaVekSaltador2)
+                new Emergencia(vekSaltador1, posicionEmergenciaVekSaltador1),
+                new Emergencia(vekLuciernaga, posicionEmergenciaVekLuciernaga),
+                new Emergencia(vekAvispon, posicionEmergenciaVekAvispon),
+                new Emergencia(vekSaltador2, posicionEmergenciaVekSaltador2)
         );
 
         Juego juego = new Juego(mechs, posicionesIniciales, emergencias);
@@ -88,7 +95,7 @@ public class TestIntegracionVictoria {
 
         // Fase jugador
         Posicion destinoMovimiento1MechCanionTurno1 = new Posicion(2, 2);
-        
+
         mechCanion.mover(destinoMovimiento1MechCanionTurno1, tablero);
         assertInstanceOf(EstadoContaminado.class, mechCanion.obtenerEstado());
 
@@ -120,6 +127,10 @@ public class TestIntegracionVictoria {
         // Fase jugador
         Posicion destinoAtaqueMechCanionTurno2 = new Posicion(1, 4);
         mechCanion.atacar(destinoAtaqueMechCanionTurno2, tablero);
+        Posicion destinoEmpujeVek = new Posicion(2, 4);
+        Casilla casillaAguaConVekMuerto = tablero.obtenerCasilla(destinoEmpujeVek);
+        assertInstanceOf(VekSaltador.class, casillaAguaConVekMuerto.getUnidad());
+        assertTrue(vekSaltador1.estaMuerta());
 
         // Fase resolución
         juego.avanzarFase();
@@ -134,13 +145,19 @@ public class TestIntegracionVictoria {
         juego.avanzarFase();
 
         // Fase jugador
-        Posicion destinoMovimientoMechCombateTurno3 = new Posicion(1, 6);
-        Posicion destinoAtaqueMechCombateTurno3 = new Posicion(1, 7);
+        // mechCombate se interpone entre edificio (1, 5) y ataque vek desde (1, 7)
+        Posicion destinoMovimientoMechCombateTurno3 = new Posicion(1, 6); 
         mechCombate.mover(destinoMovimientoMechCombateTurno3, tablero);
+        
+        Posicion destinoAtaqueMechCombateTurno3 = new Posicion(1, 7);
         mechCombate.atacar(destinoAtaqueMechCombateTurno3, tablero);
+        assertEquals(vekLuciernaga.obtenerPosicion(), destinoAtaqueMechCombateTurno3); // No hubo empuje
 
         // Fase resolución
+        int vidaMechCombateTurno3 = mechCombate.obtenerVida();
         juego.avanzarFase();
+        assertInstanceOf(EstadoContaminado.class, mechCombate.obtenerEstado());
+        assertEquals(mechCombate.obtenerVida(), vidaMechCombateTurno3 - 1);
 
         // Fase emergencia
         juego.avanzarFase();
