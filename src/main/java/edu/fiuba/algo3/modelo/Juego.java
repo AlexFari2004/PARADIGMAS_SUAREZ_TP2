@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.turno.Fase;
 import edu.fiuba.algo3.modelo.turno.GestorEmergencia;
 import edu.fiuba.algo3.modelo.turno.FabricaFase;
 import edu.fiuba.algo3.modelo.turno.ControladorTurno;
+import edu.fiuba.algo3.modelo.turno.FaseJugador;
 import edu.fiuba.algo3.modelo.turno.Emergencia;
 import edu.fiuba.algo3.modelo.vek.CriterioMenorFila;
 import edu.fiuba.algo3.modelo.vek.VekIA;
@@ -69,10 +70,6 @@ public class Juego {
     public void avanzarFase() {
         if (terminoPartida()) {
             return;
-        }
-        Fase faseActual = controladorTurno.obtenerFaseActual();
-        if (faseActual instanceof FaseJugador faseJugador) {
-            faseJugador.finalizarTurno();
         }
         controladorTurno.ejecutarFaseActual();
     }

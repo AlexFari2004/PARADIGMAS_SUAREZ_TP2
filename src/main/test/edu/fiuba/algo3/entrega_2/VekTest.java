@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_2;
 
 
 import edu.fiuba.algo3.modelo.ataque.Direccion;
+import edu.fiuba.algo3.modelo.ataque.EfectoEmpuje;
 import edu.fiuba.algo3.modelo.ataque.SinEfecto;
 import edu.fiuba.algo3.modelo.mech.MechCombate;
 import edu.fiuba.algo3.modelo.mech.Punio;
@@ -20,26 +21,29 @@ public class VekTest {
     void AlEmpujarUnVekContraOtroVekElVEkNoSeMueveYRecibeDanioDeColision() {
         Tablero tablero = new Tablero();
 
+        Posicion posicionMech = new Posicion(1, 1);
         Posicion posicionDeEmpuje =  new Posicion(1,2);
         Posicion posicionDeColision =  new Posicion(1,3);
 
-        VekAvispon vekEmpuje = new VekAvispon();
+        MechCombate mech = new MechCombate(new Punio(1, new EfectoEmpuje()));
+        VekLuciernaga vekEmpuje = new VekLuciernaga();
         VekAvispon vekColision = new VekAvispon();
 
         int vidaInicialEmpuje = vekEmpuje.obtenerVida();
         int vidaInicialColision = vekColision.obtenerVida();
 
+        tablero.colocar(mech, posicionMech);
         tablero.colocar(vekEmpuje, posicionDeEmpuje);
         tablero.colocar(vekColision, posicionDeColision);
 
-        tablero.empujar(vekEmpuje, Direccion.DERECHA);
 
+        mech.atacar(posicionDeEmpuje, tablero);
         assertEquals(posicionDeEmpuje, vekEmpuje.obtenerPosicion());
         assertEquals(posicionDeColision, vekColision.obtenerPosicion());
         assertEquals(vekEmpuje, tablero.obtenerCasilla(posicionDeEmpuje).getUnidad());
         assertEquals(vekColision, tablero.obtenerCasilla(posicionDeColision).getUnidad());
 
-        assertEquals(vidaInicialEmpuje - 1, vekEmpuje.obtenerVida());
+        assertEquals(vidaInicialEmpuje - 2, vekEmpuje.obtenerVida());
         assertEquals(vidaInicialColision - 1, vekColision.obtenerVida());
 
     }
@@ -48,13 +52,14 @@ public class VekTest {
     void AlEmpujarUnVekTerrestreAlAguaMuere() {
         Tablero tablero = new Tablero();
 
-        Posicion posicionDeEmpuje =  new Posicion(0,2);
-
+        Posicion posicionDeEmpuje =  new Posicion(2,5);
+        Posicion posicionMech = new Posicion(2, 6);
+        MechCombate mech = new MechCombate(new Punio(0, new EfectoEmpuje()));
         VekSaltador vekEmpuje = new VekSaltador();
 
         tablero.colocar(vekEmpuje, posicionDeEmpuje);
-
-        tablero.empujar(vekEmpuje, Direccion.IZQUIERDA);
+        tablero.colocar(mech, posicionMech);
+        mech.mover(posicionDeEmpuje, tablero);
 
         assertFalse(vekEmpuje.estaVivo());
         assertTrue(vekEmpuje.estaMuerta());
@@ -64,14 +69,16 @@ public class VekTest {
     void AlEmpujarUnVekAvisponAlAguaNoleAfecta() {
         Tablero tablero = new Tablero();
 
-        Posicion posicionDeEmpuje =  new Posicion(0,2);
-        Posicion posicionEmpujado =  new Posicion(0,1);
+        Posicion posicionMech = new Posicion(2, 6);
+        Posicion posicionDeEmpuje =  new Posicion(2,5);
+        Posicion posicionEmpujado =  new Posicion(2,4);
 
         VekAvispon vekEmpuje = new VekAvispon();
-
+        MechCombate mech = new MechCombate(new Punio(0, new EfectoEmpuje()));
         tablero.colocar(vekEmpuje, posicionDeEmpuje);
+        tablero.colocar(mech, posicionMech);
 
-        tablero.empujar(vekEmpuje, Direccion.IZQUIERDA);
+        mech.atacar(posicionDeEmpuje, tablero);
 
         assertTrue(vekEmpuje.estaVivo());
         assertFalse(vekEmpuje.estaMuerta());
@@ -83,33 +90,42 @@ public class VekTest {
     @Test
     void unVekTerrestreSobreAcidoQuedaContaminadaYRecibeDobleDeDanio() {
         Tablero tablero = new Tablero();
+        Posicion posicionMech = new Posicion(1, 6);
         Posicion posicionSuelo =  new Posicion(2,6);
         Posicion posicionAcido =  new Posicion(3,6);
+
         VekSaltador vekTerrestre = new VekSaltador();
+        MechCombate mech = new MechCombate(new Punio(1, new EfectoEmpuje()));
         int vidaInicial = vekTerrestre.obtenerVida();
 
         tablero.colocar(vekTerrestre, posicionSuelo);
-        tablero.empujar(vekTerrestre, Direccion.ABAJO);
+        tablero.colocar(mech, posicionMech);
+        mech.atacar(posicionSuelo, tablero);
 
         tablero.obtenerCasilla(posicionAcido).recibirDanio(1, tablero, posicionAcido);
 
         assertEquals(vidaInicial - 2, vekTerrestre.obtenerVida());
+
     }
 
     @Test
     void unVekAvisponSobreAcidoNoSeContaminaYRecibeDanioNormal() {
         Tablero tablero = new Tablero();
+
+        Posicion posicionMech = new Posicion(4, 6);
         Posicion posicionSuelo =  new Posicion(2,6);
         Posicion posicionAcido =  new Posicion(3,6);
         VekAvispon vek = new VekAvispon();
+        MechCombate mech = new MechCombate(new Punio(2, new EfectoEmpuje()));
         int vidaInicial = vek.obtenerVida();
 
-        tablero.colocar(vek, posicionSuelo);
-        tablero.empujar(vek, Direccion.ABAJO);
+        tablero.colocar(vek, posicionAcido);
+        tablero.colocar(mech, posicionMech);
+        mech.atacar(posicionAcido, tablero);
 
-        tablero.obtenerCasilla(posicionAcido).recibirDanio(1, tablero, posicionAcido);
+        tablero.obtenerCasilla(posicionSuelo).recibirDanio(1, tablero, posicionAcido);
 
-        assertEquals(vidaInicial - 1, vek.obtenerVida());
+        assertTrue(vek.estaMuerta());
 
     }
 

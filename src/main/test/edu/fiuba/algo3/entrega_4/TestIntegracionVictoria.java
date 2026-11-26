@@ -93,7 +93,7 @@ public class TestIntegracionVictoria {
         // TURNO 1: mover mech a casilla contaminada y deshacer
         // Fase vek
         // No hay Veks en tablero, no deberia pasar nada
-        juego.avanzarFase();
+        juego.avanzarFase(); 
         assertTrue(tablero.obtenerVeks().isEmpty());
 
         // Fase jugador
@@ -108,8 +108,8 @@ public class TestIntegracionVictoria {
         Posicion destinoMovimiento2MechCanionTurno1 = new Posicion(0, 4);
         mechCanion.mover(destinoMovimiento2MechCanionTurno1, tablero);
         assertThrows(
-                AccionNoPermitidaException.class,
-                () -> mechCanion.mover(new Posicion(0, 5), tablero)
+            AccionNoPermitidaException.class,
+            () -> mechCanion.mover(new Posicion(0, 5), tablero)
         );
 
         juego.avanzarFase();
@@ -155,9 +155,9 @@ public class TestIntegracionVictoria {
 
         // Fase jugador
         // mechCombate se interpone en (1, 6) entre el Vek y el edificio, el ataque debería impactarlo.
-        Posicion destinoMovimientoMechCombateTurno3 = new Posicion(1, 6);
+        Posicion destinoMovimientoMechCombateTurno3 = new Posicion(1, 6); 
         mechCombate.mover(destinoMovimientoMechCombateTurno3, tablero);
-
+        
         int vidaVekLuciernagaTurno4 = vekLuciernaga.obtenerVida();
         Posicion destinoAtaqueMechCombateTurno3 = new Posicion(1, 7);
         mechCombate.atacar(destinoAtaqueMechCombateTurno3, tablero);
@@ -217,8 +217,8 @@ public class TestIntegracionVictoria {
 
         Posicion destinoAtaqueMechArtilleriaTurno5 = new Posicion(5, 3);
         assertThrows(
-                AtaqueDesdeAguaException.class,
-                () -> mechArtilleria.atacar(destinoAtaqueMechArtilleriaTurno5, tablero)
+            AtaqueDesdeAguaException.class,
+            () -> mechArtilleria.atacar(destinoAtaqueMechArtilleriaTurno5, tablero)
         );
 
         Posicion destinoAtaqueMechCanionTurno5 = vekAvispon.obtenerPosicion();

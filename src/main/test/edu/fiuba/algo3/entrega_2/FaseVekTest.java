@@ -13,10 +13,7 @@ import edu.fiuba.algo3.modelo.mech.Punio;
 import edu.fiuba.algo3.modelo.mech.Mech;
 import edu.fiuba.algo3.modelo.mech.MechCombate;
 import edu.fiuba.algo3.modelo.turno.GestorEmergencia;
-import edu.fiuba.algo3.modelo.vek.CriterioMenorFila;
-import edu.fiuba.algo3.modelo.vek.Vek;
-import edu.fiuba.algo3.modelo.vek.VekAvispon;
-import edu.fiuba.algo3.modelo.vek.VekIA;
+import edu.fiuba.algo3.modelo.vek.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -34,22 +31,23 @@ public class FaseVekTest {
         VekIA vekIA = new VekIA(criterio);
         List<Emergencia> emergencias = new ArrayList<>();
         GestorEmergencia gestor = new GestorEmergencia(emergencias);
-        VekAvispon vek1 = new VekAvispon();
-        VekAvispon vek2 = new VekAvispon();
-        Mech mech = new MechCombate(new Punio(1,new SinEfecto()));
 
-        tablero.colocar(vek1, new Posicion(4, 3));
-        tablero.colocar(vek2, new Posicion(4, 5));
-        tablero.colocar(mech, new Posicion(4, 4));
+        VekAvispon vek1 = new VekAvispon();
+        Mech mech = new MechCombate(new Punio(1,new SinEfecto()));
+        VekSaltador vek2 = new VekSaltador();
+        tablero.colocar(vek1, new Posicion(0, 0));
+        tablero.colocar(mech, new Posicion(1, 0));
+        tablero.colocar(vek2, new Posicion(2, 0));
         int vidaInicial = mech.obtenerVida();
 
         assertEquals(2, tablero.obtenerVeks().size());
 
         new FaseVek(tablero, vekIA, registroAtaque,gestor).ejecutar();
         assertEquals(vidaInicial, mech.obtenerVida());
-
+        assertEquals(new Posicion(0, 0),vek1.obtenerPosicion());
+        assertEquals(new Posicion(1, 1),vek2.obtenerPosicion());
         new FaseResolucion(tablero, registroAtaque).ejecutar();
-        assertEquals(1, mech.obtenerVida());
+        assertEquals(0, mech.obtenerVida());
     }
     private TipoCasilla[][] mapaSinEdificios() {
         TipoCasilla[][] mapa = new TipoCasilla[8][8];

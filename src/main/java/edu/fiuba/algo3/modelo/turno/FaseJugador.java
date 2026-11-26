@@ -18,7 +18,8 @@ public class FaseJugador extends Fase {
 
     @Override
     public void ejecutar() {
-        // Nada automático: espera las acciones del jugador.
+        // Nada automatico: espera las acciones del jugador.
+        finalizarTurno();
     }
 
     public void mover(Mech mech, Posicion destino) {
