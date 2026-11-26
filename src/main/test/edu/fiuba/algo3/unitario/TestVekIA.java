@@ -31,12 +31,9 @@ public class TestVekIA {
         CriterioMenorFila criterio = new CriterioMenorFila();
         VekIA vekIA = new VekIA(criterio);
 
-        Posicion posicionEdificio1 = new Posicion(1, 5);
-        Posicion posicionEdificio2 = new Posicion(5, 3);
-        Posicion posicionEdificio3 = new Posicion(7, 7);
-        tablero.destruirEdificioEn(posicionEdificio1);
-        tablero.destruirEdificioEn(posicionEdificio2);
-        tablero.destruirEdificioEn(posicionEdificio3);
+        for (Posicion posicionEdificio : tablero.obtenerPosicionEdificios()) {
+            tablero.destruirEdificioEn(posicionEdificio);
+        }
 
         VekSaltador vek = new VekSaltador();
         Posicion posicionVek = new Posicion(3, 3);
