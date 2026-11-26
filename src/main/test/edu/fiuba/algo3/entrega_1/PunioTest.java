@@ -1,10 +1,12 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.ataque.EfectoEmpuje;
 import edu.fiuba.algo3.modelo.ataque.SinEfecto;
 import edu.fiuba.algo3.modelo.mech.Punio;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.mech.MechCombate;
+import edu.fiuba.algo3.modelo.vek.VekLuciernaga;
 import edu.fiuba.algo3.modelo.vek.VekSaltador;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +25,7 @@ public class PunioTest {
 
     @Test
     public void testPunoCausa2DeDanioAUnidadAdyacente() {
-        Punio punio = new Punio(1,new SinEfecto());
+        Punio punio = new Punio(2,new EfectoEmpuje());
         MechCombate mech = new MechCombate(punio);
         VekSaltador vek = new VekSaltador();
 
@@ -40,9 +42,9 @@ public class PunioTest {
 
     @Test
     public void testPunoEmpujaUnaCasillaAUnidadAdyacente() {
-        Punio punio = new Punio(1,new SinEfecto());
+        Punio punio = new Punio(2,new EfectoEmpuje());
         MechCombate mech = new MechCombate(punio);
-        VekSaltador vek = new VekSaltador();
+        VekLuciernaga vek = new VekLuciernaga();
 
         Posicion posMech = new Posicion(3, 2);
         Posicion posVek = new Posicion(3, 3);

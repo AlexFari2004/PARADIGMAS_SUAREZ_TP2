@@ -43,9 +43,7 @@ public class AcidoTest {
     public void test02UnVekTerrestreQueTerminoSobreAcidoRecibeElDobleDeDaño() {
 
         VekSaltador saltador = new VekSaltador();
-        tablero.colocar(saltador, SUELO);
-        saltador.mover(ACIDO, tablero);
-
+        tablero.colocar(saltador, ACIDO);
 
         saltador.recibirDanio(1);
 
@@ -59,9 +57,7 @@ public class AcidoTest {
         Mech mech = new MechPrueba(3);
         tablero.colocar(mech, SUELO);
 
-
         mech.recibirDanio(1);
-
 
         assertEquals(2, mech.obtenerVida());
     }
@@ -75,9 +71,7 @@ public class AcidoTest {
         mech.reestablecerEstado();
         mech.mover(SUELO, tablero);
 
-
         mech.recibirDanio(1);
-
 
         assertEquals(1, mech.obtenerVida());
     }
@@ -89,9 +83,7 @@ public class AcidoTest {
         tablero.colocar(avispon, SUELO);
         avispon.mover(ACIDO, tablero);
 
-
         avispon.recibirDanio(1);
-
 
         assertEquals(1, avispon.obtenerVida());
     }

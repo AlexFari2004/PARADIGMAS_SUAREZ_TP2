@@ -22,7 +22,7 @@ public class Edificio extends Casilla {
     }
 
     @Override
-    public boolean detieneDisparo() {
+    public boolean detieneAtaque() {
         return true;
     }
 

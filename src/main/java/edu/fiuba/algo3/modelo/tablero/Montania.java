@@ -7,7 +7,7 @@ public class Montania extends Casilla {
     }
 
     @Override
-    public boolean detieneDisparo() {
+    public boolean detieneAtaque() {
         return true;
     }
 

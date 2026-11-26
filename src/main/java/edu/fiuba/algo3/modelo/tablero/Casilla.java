@@ -2,7 +2,6 @@ package edu.fiuba.algo3.modelo.tablero;
 
 import edu.fiuba.algo3.modelo.errores.MovimientoEnPosicionOcupadaException;
 import edu.fiuba.algo3.modelo.Unidad;
-import edu.fiuba.algo3.modelo.ataque.EfectoAtaque;
 
 public abstract class Casilla {
     private Unidad unidad;
@@ -51,7 +50,7 @@ public abstract class Casilla {
             liberar();
         }
     }
-    public boolean detieneDisparo() {
+    public boolean detieneAtaque() {
         return estaOcupada();
     }
 

@@ -3,8 +3,7 @@ package edu.fiuba.algo3.entrega_2;
 import edu.fiuba.algo3.modelo.RedElectrica;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class RedElectricaTest {
 
@@ -20,7 +19,7 @@ public class RedElectricaTest {
         RedElectrica red = new RedElectrica(1);
         red.consumirEnergia(5);
         assertEquals(0, red.obtenerEnergia());
-        assertFalse(red.estaAgotada());
+        assertTrue(red.estaAgotada());
     }
 
 }

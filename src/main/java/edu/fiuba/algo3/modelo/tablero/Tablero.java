@@ -46,6 +46,20 @@ public class Tablero {
         this.gestorEmpuje = new GestorEmpuje(this);
     }
 
+    public Tablero(TipoCasilla[][] tableroPersonalizado, RedElectrica redElectrica) {
+        if (tableroPersonalizado == null || tableroPersonalizado.length != FILAS || tableroPersonalizado[0].length != COLUMNAS) {
+            throw new IllegalArgumentException("El mapa debe tener tamanio de " + FILAS + "x" + COLUMNAS);
+        }
+        this.redElectrica = redElectrica;
+        this.casillas = new Casilla[FILAS][COLUMNAS];
+        for (int fila = 0; fila < FILAS; fila++) {
+            for (int columna = 0; columna < COLUMNAS; columna++) {
+                this.casillas[fila][columna] = tableroPersonalizado[fila][columna].crearCasilla();
+            }
+        }
+        this.gestorEmpuje = new GestorEmpuje(this);
+    }
+
     private void inicializarTablero() {
         for (int fila = 0; fila < FILAS; fila++) {
             for (int columna = 0; columna < COLUMNAS; columna++) {

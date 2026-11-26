@@ -23,7 +23,7 @@ public class AtaqueRectilineo extends AtaqueBase {
                                            Direccion direccion, Tablero tablero) {
         Posicion actual = direccion.desplazarHacia(origen);
         while (tablero.estaDentro(actual)) {
-            if (!actual.equals(posicionAIgnorar) && tablero.obtenerCasilla(actual).detieneDisparo()) {
+            if (!actual.equals(posicionAIgnorar) && tablero.obtenerCasilla(actual).detieneAtaque()) {
                 return actual;
             }
             actual = direccion.desplazarHacia(actual);
