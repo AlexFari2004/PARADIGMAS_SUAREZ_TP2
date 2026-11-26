@@ -99,7 +99,7 @@ public class TestIntegracionVictoria {
         mechCanion.mover(destinoMovimiento1MechCanionTurno1, tablero);
         assertInstanceOf(EstadoContaminado.class, mechCanion.obtenerEstado());
 
-        mechCombate.deshacerMovimiento(tablero);
+        mechCanion.deshacerMovimiento(tablero);;
         assertInstanceOf(EstadoNormal.class, mechCanion.obtenerEstado());
 
         Posicion destinoMovimiento2MechCanionTurno1 = new Posicion(0, 4);
@@ -132,6 +132,7 @@ public class TestIntegracionVictoria {
         Casilla casillaAguaConVekMuerto = tablero.obtenerCasilla(destinoEmpujeVek);
         assertInstanceOf(VekSaltador.class, casillaAguaConVekMuerto.getUnidad());
         assertTrue(vekSaltador1.estaMuerta());
+        juego.avanzarFase();
 
         // Fase resolución
         juego.avanzarFase();
@@ -154,8 +155,9 @@ public class TestIntegracionVictoria {
         int vidaVekLuciernagaTurno4 = vekLuciernaga.obtenerVida();
         Posicion destinoAtaqueMechCombateTurno3 = new Posicion(1, 7);
         mechCombate.atacar(destinoAtaqueMechCombateTurno3, tablero);
-        assertEquals(vekLuciernaga.obtenerVida(), vidaVekLuciernagaTurno4 - 1);
+        assertEquals(vekLuciernaga.obtenerVida(), vidaVekLuciernagaTurno4 - 2);
         assertEquals(vekLuciernaga.obtenerPosicion(), destinoAtaqueMechCombateTurno3); // No hubo empuje
+        juego.avanzarFase();
 
         // Fase resolución
         int vidaMechCombateTurno3 = mechCombate.obtenerVida();
@@ -181,6 +183,7 @@ public class TestIntegracionVictoria {
 
         Posicion destinoMovimientoMechCanionTurno4 = new Posicion(1, 3);
         mechCanion.mover(destinoMovimientoMechCanionTurno4, tablero);
+        juego.avanzarFase();
 
         // Fase resolución
         juego.avanzarFase();
@@ -190,7 +193,7 @@ public class TestIntegracionVictoria {
         int vidaMechCanionAntesEmergencia = mechCanion.obtenerVida();
         juego.avanzarFase(); //intenta emerger VekSaltador pero canion lo impide
         Casilla casillaConVekSaltador2 = tablero.obtenerCasilla(posicionEmergenciaVekSaltador2);
-        assertInstanceOf(MechCombate.class, casillaConVekSaltador2.getUnidad());
+        assertInstanceOf(MechCanion.class, casillaConVekSaltador2.getUnidad());
         assertEquals(mechCanion.obtenerVida(), vidaMechCanionAntesEmergencia - 1);
 
         // TURNO 5:
@@ -210,6 +213,7 @@ public class TestIntegracionVictoria {
         Posicion destinoAtaqueMechCanionTurno5 = new Posicion(1, 4);
         mechCanion.atacar(destinoAtaqueMechCanionTurno5, tablero);
         assertTrue(vekAvispon.estaMuerta());
+        juego.avanzarFase();
 
         // Fase resolución
         juego.avanzarFase();
