@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
 public interface Verificable {
-    boolean verificarResultado();
+    boolean verificarResultado(RedElectrica redElectrico);
 }
