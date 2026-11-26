@@ -75,7 +75,7 @@ public abstract class Unidad {
 
     public abstract void registrarEn(Tablero tablero);
 
-    protected EstadoUnidad obtenerEstado() {
+    public EstadoUnidad obtenerEstado() {
         return estado;
     }
 
