@@ -1,4 +1,8 @@
 package edu.fiuba.algo3.entrega_4;
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -7,6 +11,10 @@ import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Logger;
 import edu.fiuba.algo3.modelo.ataque.EfectoEmpuje;
 import edu.fiuba.algo3.modelo.ataque.EfectoEmpujeOrtogonal;
+import edu.fiuba.algo3.modelo.errores.AccionNoPermitidaException;
+import edu.fiuba.algo3.modelo.estado.EstadoContaminado;
+import edu.fiuba.algo3.modelo.estado.EstadoNormal;
+import edu.fiuba.algo3.modelo.estado.EstadoUnidad;
 import edu.fiuba.algo3.modelo.mech.Artilleria;
 import edu.fiuba.algo3.modelo.mech.Mech;
 import edu.fiuba.algo3.modelo.mech.MechCanion;
@@ -14,6 +22,7 @@ import edu.fiuba.algo3.modelo.mech.MechCombate;
 import edu.fiuba.algo3.modelo.mech.MechDeArtilleria;
 import edu.fiuba.algo3.modelo.mech.Punio;
 import edu.fiuba.algo3.modelo.mech.Canion;
+import edu.fiuba.algo3.modelo.tablero.Casilla;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.turno.Emergencia;
@@ -67,17 +76,24 @@ public class TestIntegracionVictoria {
 
         // TURNO 1: mover mech a casilla contaminada y deshacer
 
-        // Fase veks
-        juego.avanzarFase();
+        // Fase veks (No hay veks, no ocurre nada)
+        juego.avanzarFase(); 
 
         // Fase jugador
         Posicion destinoMovimiento1MechCanionTurno1 = new Posicion(2, 2);
         
         mechCanion.mover(destinoMovimiento1MechCanionTurno1, tablero);
+        assertInstanceOf(EstadoContaminado.class, mechCanion.obtenerEstado());
+
         mechCombate.deshacerMovimiento(tablero);
+        assertInstanceOf(EstadoNormal.class, mechCanion.obtenerEstado());
 
         Posicion destinoMovimiento2MechCanionTurno1 = new Posicion(0, 4);
         mechCanion.mover(destinoMovimiento2MechCanionTurno1, tablero);
+        assertThrows(
+            AccionNoPermitidaException.class,
+            () -> mechCanion.mover(new Posicion(0, 5), tablero)
+        );
 
         juego.avanzarFase();
 
@@ -86,6 +102,8 @@ public class TestIntegracionVictoria {
 
         // Fase emergencia
         juego.avanzarFase(); //Emerge vekSaltador
+        Casilla casillaConVekSaltador = tablero.obtenerCasilla(new Posicion(1, 4));
+        assertInstanceOf(VekSaltador.class, casillaConVekSaltador.getUnidad());
 
         // TURNO 2: lanzar vek saltador al agua
 
