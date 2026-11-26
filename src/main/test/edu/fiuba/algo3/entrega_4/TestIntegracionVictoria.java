@@ -16,7 +16,6 @@ import edu.fiuba.algo3.modelo.errores.AccionNoPermitidaException;
 import edu.fiuba.algo3.modelo.errores.AtaqueDesdeAguaException;
 import edu.fiuba.algo3.modelo.estado.EstadoContaminado;
 import edu.fiuba.algo3.modelo.estado.EstadoNormal;
-import edu.fiuba.algo3.modelo.estado.EstadoUnidad;
 import edu.fiuba.algo3.modelo.mech.Artilleria;
 import edu.fiuba.algo3.modelo.mech.Mech;
 import edu.fiuba.algo3.modelo.mech.MechCanion;
@@ -32,7 +31,6 @@ import edu.fiuba.algo3.modelo.vek.Vek;
 import edu.fiuba.algo3.modelo.vek.VekAvispon;
 import edu.fiuba.algo3.modelo.vek.VekLuciernaga;
 import edu.fiuba.algo3.modelo.vek.VekSaltador;
-import javafx.geometry.Pos;
 
 import org.junit.jupiter.api.Test;
 
@@ -88,6 +86,7 @@ public class TestIntegracionVictoria {
 
         Juego juego = new Juego(mechs, posicionesIniciales, emergencias);
         Tablero tablero = juego.obtenerTablero();
+        int energiaInicialRedElectrica = tablero.obtenerEnergiaRedElectrica();
 
         // TURNO 1: mover mech a casilla contaminada y deshacer
 
@@ -114,6 +113,7 @@ public class TestIntegracionVictoria {
 
         // Fase resolución
         juego.avanzarFase();
+        assertEquals(tablero.obtenerEnergiaRedElectrica(), energiaInicialRedElectrica);
 
         // Fase emergencia
         juego.avanzarFase();
@@ -135,6 +135,7 @@ public class TestIntegracionVictoria {
 
         // Fase resolución
         juego.avanzarFase();
+        assertEquals(tablero.obtenerEnergiaRedElectrica(), energiaInicialRedElectrica);
 
         // Fase emergencia
         juego.avanzarFase();
@@ -161,6 +162,7 @@ public class TestIntegracionVictoria {
         juego.avanzarFase();
         assertInstanceOf(EstadoContaminado.class, mechCombate.obtenerEstado());
         assertEquals(mechCombate.obtenerVida(), vidaMechCombateTurno3 - 1);
+        assertEquals(tablero.obtenerEnergiaRedElectrica(), energiaInicialRedElectrica);
 
         // Fase emergencia
         juego.avanzarFase();
@@ -182,6 +184,7 @@ public class TestIntegracionVictoria {
 
         // Fase resolución
         juego.avanzarFase();
+        assertEquals(tablero.obtenerEnergiaRedElectrica(), energiaInicialRedElectrica - 1);
 
         // Fase emergencia
         int vidaMechCanionAntesEmergencia = mechCanion.obtenerVida();
@@ -214,5 +217,6 @@ public class TestIntegracionVictoria {
         // Fase emergencia
         juego.avanzarFase();
         assertTrue(juego.gano());
+        assertEquals(tablero.obtenerEnergiaRedElectrica(), energiaInicialRedElectrica - 1);
     }
 }
