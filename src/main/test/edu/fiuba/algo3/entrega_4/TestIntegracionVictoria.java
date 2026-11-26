@@ -13,6 +13,7 @@ import edu.fiuba.algo3.modelo.Logger;
 import edu.fiuba.algo3.modelo.ataque.EfectoEmpuje;
 import edu.fiuba.algo3.modelo.ataque.EfectoEmpujeOrtogonal;
 import edu.fiuba.algo3.modelo.errores.AccionNoPermitidaException;
+import edu.fiuba.algo3.modelo.errores.AtaqueDesdeAguaException;
 import edu.fiuba.algo3.modelo.estado.EstadoContaminado;
 import edu.fiuba.algo3.modelo.estado.EstadoNormal;
 import edu.fiuba.algo3.modelo.estado.EstadoUnidad;
@@ -149,8 +150,10 @@ public class TestIntegracionVictoria {
         Posicion destinoMovimientoMechCombateTurno3 = new Posicion(1, 6); 
         mechCombate.mover(destinoMovimientoMechCombateTurno3, tablero);
         
+        int vidaVekLuciernagaTurno4 = vekLuciernaga.obtenerVida();
         Posicion destinoAtaqueMechCombateTurno3 = new Posicion(1, 7);
         mechCombate.atacar(destinoAtaqueMechCombateTurno3, tablero);
+        assertEquals(vekLuciernaga.obtenerVida(), vidaVekLuciernagaTurno4 - 1);
         assertEquals(vekLuciernaga.obtenerPosicion(), destinoAtaqueMechCombateTurno3); // No hubo empuje
 
         // Fase resolución
@@ -172,10 +175,10 @@ public class TestIntegracionVictoria {
         Posicion destinoAtaqueMechArtilleriaTurno4 = new Posicion(4, 3);
         mechArtilleria.atacar(destinoAtaqueMechArtilleriaTurno4, tablero);
         mechCombate.atacar(destinoAtaqueMechCombateTurno3, tablero); // Misma posicion ataque turno 3 (1,7)
+        assertTrue(vekLuciernaga.estaMuerta());
 
         Posicion destinoMovimientoMechCanionTurno4 = new Posicion(1, 3);
         mechCanion.mover(destinoMovimientoMechCanionTurno4, tablero);
-
 
         // Fase resolución
         juego.avanzarFase();
@@ -196,15 +199,20 @@ public class TestIntegracionVictoria {
         mechArtilleria.mover(destinoMovimientoMechArtilleriaTurno5, tablero);
 
         Posicion destinoAtaqueMechArtilleriaTurno5 = new Posicion(5, 3);
-        mechArtilleria.atacar(destinoAtaqueMechArtilleriaTurno5, tablero);
+        assertThrows(
+            AtaqueDesdeAguaException.class,
+            () -> mechArtilleria.atacar(destinoAtaqueMechArtilleriaTurno5, tablero)
+        );
 
         Posicion destinoAtaqueMechCanionTurno5 = new Posicion(1, 4);
         mechCanion.atacar(destinoAtaqueMechCanionTurno5, tablero);
+        assertTrue(vekAvispon.estaMuerta());
 
         // Fase resolución
         juego.avanzarFase();
 
         // Fase emergencia
         juego.avanzarFase();
+        assertTrue(juego.gano());
     }
 }
