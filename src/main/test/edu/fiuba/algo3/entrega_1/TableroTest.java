@@ -23,10 +23,11 @@ public class TableroTest {
                 {SUELO, SUELO, ACIDO, SUELO, AGUA, AGUA, SUELO, SUELO},
                 {AGUA, SUELO, SUELO, SUELO, SUELO, SUELO, ACIDO, SUELO},
                 {SUELO, SUELO, MONTANIA, SUELO, SUELO, SUELO, SUELO, MONTANIA},
-                {SUELO, AGUA, SUELO, EDIFICIO, SUELO, SUELO, SUELO, SUELO},
-                {SUELO, SUELO, AGUA, SUELO, SUELO, AGUA, SUELO, SUELO},
-                {ACIDO, SUELO, SUELO, ACIDO, SUELO, SUELO, SUELO, EDIFICIO}
+                {SUELO, AGUA, SUELO, EDIFICIO, EDIFICIO, SUELO, SUELO, SUELO},
+                {EDIFICIO, SUELO, AGUA, SUELO, SUELO, AGUA, SUELO, EDIFICIO},
+                {ACIDO, EDIFICIO, SUELO, ACIDO, SUELO, SUELO, EDIFICIO, EDIFICIO}
         };
+
 
 
         for (int fila = 0; fila < 8; fila++) {
