@@ -222,8 +222,11 @@ public class TestIntegracionVictoria {
         );
 
         Posicion destinoAtaqueMechCanionTurno5 = vekAvispon.obtenerPosicion();
+        assertEquals(tablero.obtenerEnergiaRedElectrica(), energiaInicialRedElectrica - 1);
+
         // mechCanion empuja al vek avispon contra (5, 3), destruye el edificio y lo mata antes de resolver su ataque.
         mechCanion.atacar(destinoAtaqueMechCanionTurno5, tablero);
+        assertEquals(tablero.obtenerEnergiaRedElectrica(), energiaInicialRedElectrica - 2);
 
         assertTrue(vekAvispon.estaMuerta());
         assertEquals(TipoCasilla.SUELO, tablero.obtenerCasilla(new Posicion(5, 3)).getTipo());
@@ -235,6 +238,5 @@ public class TestIntegracionVictoria {
         // Fase emergencia
         juego.avanzarFase();
         assertTrue(juego.gano());
-        assertEquals(tablero.obtenerEnergiaRedElectrica(), energiaInicialRedElectrica - 2);
     }
 }
