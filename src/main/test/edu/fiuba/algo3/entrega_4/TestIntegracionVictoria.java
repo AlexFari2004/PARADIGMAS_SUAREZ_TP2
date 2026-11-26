@@ -27,6 +27,7 @@ import edu.fiuba.algo3.modelo.mech.Canion;
 import edu.fiuba.algo3.modelo.tablero.Casilla;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.tablero.TipoCasilla;
 import edu.fiuba.algo3.modelo.turno.Emergencia;
 import edu.fiuba.algo3.modelo.vek.Vek;
 import edu.fiuba.algo3.modelo.vek.VekAvispon;
@@ -90,9 +91,10 @@ public class TestIntegracionVictoria {
         int energiaInicialRedElectrica = tablero.obtenerEnergiaRedElectrica();
 
         // TURNO 1: mover mech a casilla contaminada y deshacer
-
-        // Fase veks (No hay veks, no ocurre nada)
-        juego.avanzarFase(); 
+        // Fase vek
+        // No hay Veks en tablero, no deberia pasar nada
+        juego.avanzarFase();
+        assertTrue(tablero.obtenerVeks().isEmpty());
 
         // Fase jugador
         Posicion destinoMovimiento1MechCanionTurno1 = new Posicion(2, 2);
@@ -106,8 +108,8 @@ public class TestIntegracionVictoria {
         Posicion destinoMovimiento2MechCanionTurno1 = new Posicion(0, 4);
         mechCanion.mover(destinoMovimiento2MechCanionTurno1, tablero);
         assertThrows(
-            AccionNoPermitidaException.class,
-            () -> mechCanion.mover(new Posicion(0, 5), tablero)
+                AccionNoPermitidaException.class,
+                () -> mechCanion.mover(new Posicion(0, 5), tablero)
         );
 
         juego.avanzarFase();
@@ -122,9 +124,10 @@ public class TestIntegracionVictoria {
         assertInstanceOf(VekSaltador.class, casillaConVekSaltador1.getUnidad());
 
         // TURNO 2: lanzar vek saltador al agua
-
-        // Fase veks
+        // Fase vek
+        // El Saltador este al lado del edificio (1, 5), asi que deberia quedarse en (1, 4) para atacarlo.
         juego.avanzarFase();
+        assertEquals(new Posicion(1, 4), vekSaltador1.obtenerPosicion());
 
         // Fase jugador
         Posicion destinoAtaqueMechCanionTurno2 = new Posicion(1, 4);
@@ -145,14 +148,16 @@ public class TestIntegracionVictoria {
         assertInstanceOf(VekLuciernaga.class, casillaConVekLuciernaga.getUnidad());
 
         // TURNO 3: VekLuciernaga escupe acido en mech y lo contamina
-        // Fase veks
+        // Fase vek
+        // La luciernaga puede acercarse a edificio en (1, 5) yendo a (1, 7), deberia acercarse
         juego.avanzarFase();
+        assertEquals(new Posicion(1, 7), vekLuciernaga.obtenerPosicion());
 
         // Fase jugador
-        // mechCombate se interpone entre edificio (1, 5) y ataque vek desde (1, 7)
-        Posicion destinoMovimientoMechCombateTurno3 = new Posicion(1, 6); 
+        // mechCombate se interpone en (1, 6) entre el Vek y el edificio, el ataque debería impactarlo.
+        Posicion destinoMovimientoMechCombateTurno3 = new Posicion(1, 6);
         mechCombate.mover(destinoMovimientoMechCombateTurno3, tablero);
-        
+
         int vidaVekLuciernagaTurno4 = vekLuciernaga.obtenerVida();
         Posicion destinoAtaqueMechCombateTurno3 = new Posicion(1, 7);
         mechCombate.atacar(destinoAtaqueMechCombateTurno3, tablero);
@@ -173,8 +178,9 @@ public class TestIntegracionVictoria {
         assertInstanceOf(VekAvispon.class, casillaConVekAvispon.getUnidad());
 
         // TURNO 4:
-        // Fase veks
+        // El vek avispon puede atacar el edificio (1, 5) desde (1, 4), así que deberia ir moverse ahi.
         juego.avanzarFase();
+        assertEquals(new Posicion(1, 4), vekAvispon.obtenerPosicion());
 
         // Fase jugador
         Posicion destinoAtaqueMechArtilleriaTurno4 = new Posicion(4, 3);
@@ -190,6 +196,7 @@ public class TestIntegracionVictoria {
         // Fase resolución
         juego.avanzarFase();
         assertEquals(tablero.obtenerEnergiaRedElectrica(), energiaInicialRedElectrica - 1);
+        assertEquals(TipoCasilla.SUELO, tablero.obtenerCasilla(new Posicion(1, 5)).getTipo()); // Edificio destruido
 
         // Fase emergencia
         int vidaMechCanionAntesEmergencia = mechCanion.obtenerVida();
@@ -199,23 +206,30 @@ public class TestIntegracionVictoria {
         assertEquals(mechCanion.obtenerVida(), vidaMechCanionAntesEmergencia - 1);
 
         // TURNO 5:
-        // Fase veks
+        // Fase vek
+        // El edificio en (1, 5) ya fue destruido, el vek avispon se mueve a (4, 3) para atacar (5, 3).
         juego.avanzarFase();
+        assertEquals(new Posicion(4, 3), vekAvispon.obtenerPosicion());
 
-        //Fase jugador
+        // Fase jugador
         Posicion destinoMovimientoMechArtilleriaTurno5 = new Posicion(5, 1);
         mechArtilleria.mover(destinoMovimientoMechArtilleriaTurno5, tablero);
 
         Posicion destinoAtaqueMechArtilleriaTurno5 = new Posicion(5, 3);
         assertThrows(
-            AtaqueDesdeAguaException.class,
-            () -> mechArtilleria.atacar(destinoAtaqueMechArtilleriaTurno5, tablero)
+                AtaqueDesdeAguaException.class,
+                () -> mechArtilleria.atacar(destinoAtaqueMechArtilleriaTurno5, tablero)
         );
 
         Posicion destinoAtaqueMechCanionTurno5 = vekAvispon.obtenerPosicion();
+        assertEquals(tablero.obtenerEnergiaRedElectrica(), energiaInicialRedElectrica - 1);
+
+        // mechCanion empuja al vek avispon contra (5, 3), destruye el edificio y lo mata antes de resolver su ataque.
         mechCanion.atacar(destinoAtaqueMechCanionTurno5, tablero);
-        
+        assertEquals(tablero.obtenerEnergiaRedElectrica(), energiaInicialRedElectrica - 2);
+
         assertTrue(vekAvispon.estaMuerta());
+        assertEquals(TipoCasilla.SUELO, tablero.obtenerCasilla(new Posicion(5, 3)).getTipo());
         juego.avanzarFase();
 
         // Fase resolución
@@ -224,6 +238,5 @@ public class TestIntegracionVictoria {
         // Fase emergencia
         juego.avanzarFase();
         assertTrue(juego.gano());
-        assertEquals(tablero.obtenerEnergiaRedElectrica(), energiaInicialRedElectrica - 2);
     }
 }
