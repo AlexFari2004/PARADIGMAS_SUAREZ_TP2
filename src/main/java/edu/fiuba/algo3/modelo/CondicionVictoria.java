@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+
 public class CondicionVictoria implements Verificable{
     private final int totalTurnosMision;
     private int turnosCompletados;
