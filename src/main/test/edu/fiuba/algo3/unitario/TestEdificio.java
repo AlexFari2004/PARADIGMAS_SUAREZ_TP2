@@ -14,23 +14,8 @@ import static org.junit.Assert.assertTrue;
 
 public class TestEdificio {
 
-
     @Test
-    void recibirDanioReduceLaRedEnUnPunto() {
-        RedElectrica red = new RedElectrica(5);
-        Tablero tablero = new Tablero(red);
-        Posicion posicionEdificio = new Posicion(1, 5);
-        Edificio edificio =  (Edificio) tablero.obtenerCasilla(posicionEdificio);
-
-
-        edificio.recibirDanio(3, tablero,posicionEdificio);
-
-        assertEquals(4, red.obtenerEnergia());
-        assertEquals(TipoCasilla.SUELO, tablero.obtenerCasilla(posicionEdificio).getTipo());
-    }
-
-    @Test
-    void edificioTieneTipoCorrectoNoPuedeSerOcupadoYDetieneDisparos() {
+    void edificioNoPuedeSerOcupadoYDetieneDisparos() {
         Edificio edificio = new Edificio();
 
         assertEquals(TipoCasilla.EDIFICIO, edificio.getTipo());

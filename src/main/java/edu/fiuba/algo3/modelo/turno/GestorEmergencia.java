@@ -16,7 +16,7 @@ public class GestorEmergencia {
         this.colaEmergencias = new ArrayDeque<>(emergenciasPredefinidas);
     }
 
-    // Llamado en Fase 1: marca cuál es la próxima emergencia
+
     public void marcarProximaEmergencia() {
         this.emergenciaActual = colaEmergencias.poll();
     }
@@ -25,7 +25,6 @@ public class GestorEmergencia {
         return emergenciaActual;
     }
 
-    // Llamado en Fase 4: ejecuta la emergencia marcada
     public void resolverEmergencia(Tablero tablero) {
         if (emergenciaActual == null) {
             return;
