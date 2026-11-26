@@ -65,6 +65,10 @@ public class Juego {
         if (terminoPartida()) {
             return;
         }
+        Fase faseActual = controladorTurno.obtenerFaseActual();
+        if (faseActual instanceof FaseJugador faseJugador) {
+            faseJugador.finalizarTurno();
+        }
         controladorTurno.ejecutarFaseActual();
     }
 
