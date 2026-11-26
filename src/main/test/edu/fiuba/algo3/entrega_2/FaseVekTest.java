@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_2;
 
-
+import edu.fiuba.algo3.modelo.tablero.TipoCasilla;
+import edu.fiuba.algo3.modelo.RedElectrica;
 import edu.fiuba.algo3.modelo.ataque.RegistroAtaque;
 import edu.fiuba.algo3.modelo.ataque.SinEfecto;
 import edu.fiuba.algo3.modelo.tablero.Posicion;
@@ -27,7 +28,7 @@ public class FaseVekTest {
 
     @Test
     void vekAnunciaEnFaseVekYEjecutaEnFaseResolucion() {
-        Tablero tablero = new Tablero();
+        Tablero tablero = new Tablero(mapaSinEdificios(), new RedElectrica(5));
         RegistroAtaque registroAtaque = new RegistroAtaque();
         CriterioMenorFila criterio =  new CriterioMenorFila();
         VekIA vekIA = new VekIA(criterio);
@@ -50,7 +51,13 @@ public class FaseVekTest {
         new FaseResolucion(tablero, registroAtaque).ejecutar();
         assertEquals(1, mech.obtenerVida());
     }
-
+    private TipoCasilla[][] mapaSinEdificios() {
+        TipoCasilla[][] mapa = new TipoCasilla[8][8];
+        for (TipoCasilla[] fila : mapa) {
+            Arrays.fill(fila, TipoCasilla.SUELO);
+        }
+        return mapa;
+    }
 }
 
 
