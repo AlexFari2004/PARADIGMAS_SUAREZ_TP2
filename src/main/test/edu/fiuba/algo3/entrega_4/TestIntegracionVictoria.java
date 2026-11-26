@@ -29,6 +29,8 @@ import edu.fiuba.algo3.modelo.turno.Emergencia;
 import edu.fiuba.algo3.modelo.vek.VekAvispon;
 import edu.fiuba.algo3.modelo.vek.VekLuciernaga;
 import edu.fiuba.algo3.modelo.vek.VekSaltador;
+import javafx.geometry.Pos;
+
 import org.junit.jupiter.api.Test;
 
 
@@ -64,13 +66,18 @@ public class TestIntegracionVictoria {
                 new Posicion(2, 6)
         );
 
+        Posicion posicionEmergenciaVekSaltador1 = new Posicion(1, 4);
+        Posicion posicionEmergenciaVekLuciernaga = new Posicion(3, 7);
+        Posicion posicionEmergenciaVekAvispon = new Posicion(4, 4);
+        Posicion posicionEmergenciaVekSaltador2 = new Posicion(1, 3);
+
         List<Emergencia> emergencias = List.of(
-                new Emergencia(new VekSaltador(), new Posicion(1, 4)),
-                new Emergencia(new VekLuciernaga(), new Posicion(3, 7)),
-                new Emergencia(new VekAvispon(), new Posicion(4, 4)),
-                new Emergencia(new VekSaltador(), new Posicion(1, 3))
+                new Emergencia(new VekSaltador(), posicionEmergenciaVekSaltador1),
+                new Emergencia(new VekLuciernaga(), posicionEmergenciaVekLuciernaga),
+                new Emergencia(new VekAvispon(), posicionEmergenciaVekAvispon),
+                new Emergencia(new VekSaltador(), posicionEmergenciaVekSaltador2)
         );
-        
+
         Juego juego = new Juego(mechs, posicionesIniciales, emergencias);
         Tablero tablero = juego.obtenerTablero();
 
@@ -101,9 +108,9 @@ public class TestIntegracionVictoria {
         juego.avanzarFase();
 
         // Fase emergencia
-        juego.avanzarFase(); //Emerge vekSaltador
-        Casilla casillaConVekSaltador = tablero.obtenerCasilla(new Posicion(1, 4));
-        assertInstanceOf(VekSaltador.class, casillaConVekSaltador.getUnidad());
+        juego.avanzarFase();
+        Casilla casillaConVekSaltador1 = tablero.obtenerCasilla(posicionEmergenciaVekSaltador1);
+        assertInstanceOf(VekSaltador.class, casillaConVekSaltador1.getUnidad());
 
         // TURNO 2: lanzar vek saltador al agua
 
@@ -118,7 +125,9 @@ public class TestIntegracionVictoria {
         juego.avanzarFase();
 
         // Fase emergencia
-        juego.avanzarFase(); //Emerge VekLuciernaga
+        juego.avanzarFase();
+        Casilla casillaConVekLuciernaga = tablero.obtenerCasilla(posicionEmergenciaVekLuciernaga);
+        assertInstanceOf(VekLuciernaga.class, casillaConVekLuciernaga.getUnidad());
 
         // TURNO 3: VekLuciernaga escupe acido en mech y lo contamina
         // Fase veks
@@ -134,7 +143,9 @@ public class TestIntegracionVictoria {
         juego.avanzarFase();
 
         // Fase emergencia
-        juego.avanzarFase(); //Emerge VekAvispon
+        juego.avanzarFase();
+        Casilla casillaConVekAvispon = tablero.obtenerCasilla(posicionEmergenciaVekAvispon);
+        assertInstanceOf(VekAvispon.class, casillaConVekAvispon.getUnidad());
 
         // TURNO 4:
         // Fase veks
@@ -153,7 +164,11 @@ public class TestIntegracionVictoria {
         juego.avanzarFase();
 
         // Fase emergencia
+        int vidaMechCanionAntesEmergencia = mechCanion.obtenerVida();
         juego.avanzarFase(); //intenta emerger VekSaltador pero canion lo impide
+        Casilla casillaConVekSaltador2 = tablero.obtenerCasilla(posicionEmergenciaVekSaltador2);
+        assertInstanceOf(MechCombate.class, casillaConVekSaltador2.getUnidad());
+        assertEquals(mechCanion.obtenerVida(), vidaMechCanionAntesEmergencia - 1);
 
         // TURNO 5:
         // Fase veks
